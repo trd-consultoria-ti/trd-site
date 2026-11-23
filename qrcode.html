@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conectar WhatsApp · TRD EVOLUTION</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111726;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --wa-green: #25D366;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(37, 211, 102, 0.15);
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      color: #4ade80;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+    }
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    p.desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .qr-container {
+      background: #ffffff;
+      padding: 1rem;
+      border-radius: 12px;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .qr-container img {
+      width: 240px;
+      height: 240px;
+      display: block;
+    }
+    .steps {
+      text-align: left;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .step-item {
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      background: #1e293b;
+      color: #38bdf8;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .btn {
+      flex: 1;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--wa-green);
+      color: #0b141a;
+    }
+    .btn-primary:hover {
+      background: #1eb956;
+    }
+    .btn-secondary {
+      background: #1e293b;
+      color: var(--text);
+      border: 1px solid var(--card-border);
+    }
+    .btn-secondary:hover {
+      background: #334155;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="badge">TRD EVOLUTION · WHATSAPP BAILEYS</div>
+    <h1>Conectar WhatsApp do Robô</h1>
+    <p class="desc">Escolha como prefere conectar: Escanear o QR Code ou digitar o Código de Pareamento no WhatsApp.</p>
+
+    <!-- Pairing Code Box (Zero câmera necessária) -->
+    <div style="background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 1rem; margin-bottom: 1.25rem;">
+      <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #38bdf8; font-weight: 700; margin-bottom: 0.25rem;">Código de Pareamento Direto (Sem Câmera)</div>
+      <div id="pairing-code" style="font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 700; color: #ffffff; letter-spacing: 0.15em;">J9N2WL2Y</div>
+      <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 0.35rem;">No WhatsApp: Aparelhos Conectados &gt; Conectar com número de telefone &gt; digite este código.</div>
+    </div>
+
+    <div class="qr-container">
+      <img id="qr-img" src="qrcode.png?t=" alt="QR Code WhatsApp">
+    </div>
+
+    <div class="steps">
+      <div class="step-item">
+        <span class="step-num">1</span>
+        <span>Abra o <strong>WhatsApp</strong> no celular.</span>
+      </div>
+      <div class="step-item">
+        <span class="step-num">2</span>
+        <span>Vá em <strong>Aparelhos Conectados &gt; Conectar um aparelho</strong>.</span>
+      </div>
+      <div class="step-item">
+        <span class="step-num">3</span>
+        <span>Aponte para o QR Code ou clique em <em>"Conectar com número de telefone"</em> e use o código acima.</span>
+      </div>
+    </div>
+
+    <div class="btn-group" style="flex-direction: column;">
+      <a href="test-chat.html" class="btn btn-primary" style="padding: 0.9rem; font-size: 0.95rem;">💬 Testar no Simulador Web Agora (Instantâneo)</a>
+      <button class="btn btn-secondary" onclick="refreshQR()">🔄 Gerar Novo QR Code / Código</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('qr-img').src = 'qrcode.png?t=' + Date.now();
+
+    async function refreshQR() {
+      const codeEl = document.getElementById('pairing-code');
+      const imgEl = document.getElementById('qr-img');
+      codeEl.innerText = 'GERANDO...';
+      try {
+        const res = await fetch('http://localhost:8085/instance/connect/trd-bot-test?number=5561992078335', {
+          headers: { 'apikey': 'trd-evolution-key-2026' }
+        });
+        const data = await res.json();
+        if (data.base64) {
+          imgEl.src = data.base64;
+        }
+        if (data.pairingCode) {
+          codeEl.innerText = data.pairingCode;
+        } else {
+          codeEl.innerText = 'NOVO QR GERADO';
+        }
+      } catch (err) {
+        codeEl.innerText = 'ERRO CONEXÃO';
+      }
+    }
+  </script>
+</body>
+</html>

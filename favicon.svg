@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 231 231">
+  <rect width="231" height="231" rx="46" fill="#080D1A"/>
+  <defs>
+    <mask id="ks-fav">
+      <g transform="translate(15.5,0)">
+        <polygon points="100,0 200,57.75 200,173.25 100,231 0,173.25 0,57.75" fill="#fff"/>
+        <path d="M100 115.5V0 M100 115.5L0 173.25 M100 115.5L200 173.25" stroke="#000" stroke-width="13" fill="none"/>
+      </g>
+    </mask>
+  </defs>
+  <g mask="url(#ks-fav)" fill="#F8FAFC" transform="translate(15.5,0)">
+    <polygon points="100,115.5 0,173.25 0,57.75 100,0"/>
+    <polygon points="100,115.5 200,173.25 200,57.75 100,0"/>
+    <polygon points="100,115.5 0,173.25 100,231 200,173.25"/>
+  </g>
+</svg>

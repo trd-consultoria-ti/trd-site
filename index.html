@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRD Consultoria — Sistemas Sob Medida &amp; Sustentação com SLA | Brasília/DF</title>
+  <meta name="description" content="Criação de sistemas corporativos sob medida (CRM, Hub de Gestão, Portais) e sustentação com SLA contratual. Engenharia sênior com passagem pelo Ministério da Justiça, Serasa e CVM. Parcelamento em até 12x.">
+  <link rel="canonical" href="https://trdconsultoria.com.br/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="TRD Consultoria — Sistemas Sob Medida &amp; Sustentação com SLA">
+  <meta property="og:description" content="Criação de sistemas sob medida (CRM, Hub de Gestão) e sustentação de aplicações corporativas com SLA. Parcelamento em até 12x no cartão de crédito.">
+  <meta property="og:url" content="https://trdconsultoria.com.br/">
+  <meta property="og:image" content="https://trdconsultoria.com.br/assets/og-cover.png">
+  <meta property="og:image:alt" content="TRD Consultoria e Serviços de TI">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#080D1A">
+  <script>
+    (function() {
+      try {
+        var saved = localStorage.getItem('trd-theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.style.colorScheme = theme;
+        var metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) {
+          metaTheme.setAttribute('content', theme === 'dark' ? '#080D1A' : '#F8FAFC');
+        }
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+  <link rel="preload" href="fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:title" content="TRD Consultoria — Sistemas Sob Medida &amp; Sustentação com SLA">
+  <meta name="twitter:description" content="Criação de sistemas corporativos sob medida (CRM, Hub de Gestão, Portais) e sustentação com SLA contratual. Ministério da Justiça, Serasa, CVM."> 
+  <meta name="twitter:image" content="https://trdconsultoria.com.br/assets/og-cover.png">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"ProfessionalService","name":"TRD Consultoria e Serviços de TI",
+   "description":"Criação de sistemas corporativos sob medida e sustentação de softwares corporativos com SLA contratual",
+   "url":"https://trdconsultoria.com.br/",
+   "areaServed":"BR","address":{"@type":"PostalAddress","addressLocality":"Brasília","addressRegion":"DF","addressCountry":"BR"},
+   "taxID":"43.065.207/0001-57","email":"contato@trdconsultoria.com.br",
+   "hasOfferCatalog":{"@type":"OfferCatalog","name":"Serviços de Engenharia de Software TRD","itemListElement":[
+     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Criação de Sistemas Sob Medida (CRM, Hub de Gestão)"}},
+     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Sustentação e Confiabilidade de Sistemas com SLA"}}
+   ]}}
+  </script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo principal</a>
+
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav__inner">
+      <a href="./" class="nav__brand" aria-label="TRD Consultoria — início">
+        <!-- Keystone TRD — oficial. Canal 13/200 = 6,5%. Losango embaixo. -->
+        <svg width="35" height="40" viewBox="0 0 200 231" role="img" aria-label="Símbolo TRD" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="ks-nav">
+              <polygon points="100,0 200,57.75 200,173.25 100,231 0,173.25 0,57.75" fill="#fff"/>
+              <path d="M100 115.5V0 M100 115.5L0 173.25 M100 115.5L200 173.25" stroke="#000" stroke-width="13" fill="none"/>
+            </mask>
+          </defs>
+          <g mask="url(#ks-nav)" fill="var(--keystone-fill)">
+            <polygon points="100,115.5 0,173.25 0,57.75 100,0"/>
+            <polygon points="100,115.5 200,173.25 200,57.75 100,0"/>
+            <polygon points="100,115.5 0,173.25 100,231 200,173.25"/>
+          </g>
+        </svg>
+        <span class="nav__word">
+          <b>TRD</b>
+          <span>CONSULTORIA DE TI</span>
+        </span>
+      </a>
+
+      <nav class="nav__links" aria-label="Navegação principal">
+        <a href="#sistemas">Sistemas Sob Medida</a>
+        <a href="#solucoes">Diagnóstico</a>
+        <a href="#cases">Experiência</a>
+        <a href="#planos">Planos &amp; Preços</a>
+        <a href="#sobre">Equipe &amp; Governança</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <div class="nav__actions">
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Alternar para modo claro" title="Alternar tema (Atalho: Alt + T)">
+          <svg class="theme-toggle__icon theme-toggle__icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-toggle__icon theme-toggle__icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a class="btn btn--primary btn--sm nav__cta eng-console-trigger" href="#console-engenharia">Orçar meu sistema</a>
+        <button type="button" class="nav__burger" id="nav-toggle-btn" aria-expanded="false" aria-controls="nav-mobile" aria-label="Abrir menu de navegação">
+          <svg class="nav__icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <svg class="nav__icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display:none;"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav id="nav-mobile" class="nav__mobile" aria-label="Menu móvel">
+      <a href="#sistemas">Sistemas Sob Medida</a>
+      <a href="#solucoes">Diagnóstico</a>
+      <a href="#cases">Experiência</a>
+      <a href="#planos">Planos &amp; Preços</a>
+      <a href="#sobre">Equipe &amp; Governança</a>
+      <a href="#contato">Contato</a>
+      <div class="nav__mobile-actions">
+        <a class="btn btn--primary eng-console-trigger" href="#console-engenharia">Orçar meu sistema</a>
+      </div>
+    </nav>
+    <div class="nav__progress" aria-hidden="true">
+      <div class="nav__progress-bar" id="nav-progress-bar"></div>
+    </div>
+  </header>
+
+  <main id="main">
+
+  <!-- 1. HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="badge"><i aria-hidden="true"></i>Atendimento Nacional · Sistemas Sob Medida &amp; Sustentação de Missão Crítica</span>
+      <h1>Sistemas sob medida para a sua operação.<br>Sustentação sênior que mantém tudo no&nbsp;ar.</h1>
+      <p class="lead measure" style="margin: 1.5rem auto 0;">
+        A TRD desenvolve <strong>sistemas corporativos sob medida</strong> (CRM, Hubs de Gestão, Portais e Backoffices) para pequenas e médias empresas em todo o Brasil sem custo abusivo por usuário, e assume a <strong>sustentação e evolução contínua</strong> de aplicações com SLA contratual — com a bagagem de quem já operou no Ministério da Justiça, na Serasa Experian e na CVM.
+      </p>
+      <div class="hero__ctas">
+        <a class="btn btn--primary eng-console-trigger" href="#console-engenharia">Dimensionar meu sistema</a>
+        <a class="btn btn--ghost" href="#planos">Ver planos e preços</a>
+      </div>
+      <div class="hero__metrics">
+        <div class="metric"><b>CNPJ ativo</b><span>Formalizada desde 2021 · Contrato Digital Gov.br</span></div>
+        <div class="metric"><b>Entrega em 2 a 4 sem</b><span>Sistemas ágeis com até 3 módulos core</span></div>
+        <div class="metric"><b>Até 12x no cartão</b><span>Parcelamento corporativo facilitado</span></div>
+        <div class="metric"><b>Código 100% seu</b><span>Sem mensalidade por usuário de SaaS</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. BARRA DE CONFIANÇA -->
+  <section class="trustbar" aria-label="Aplicações corporativas e ecossistemas homologados">
+    <div class="container">
+      <p class="small muted" style="text-align:center; margin-bottom: 1.25rem;">Aplicações corporativas e ecossistemas de missão crítica suportados pela governança técnica da TRD:</p>
+    </div>
+    <div class="trustbar__marquee">
+      <div class="trustbar__track">
+        <!-- Track Set 1 -->
+        <div class="trustbar__badge trustbar__badge--dou">
+          <span class="trustbar__logo-chip"><img src="assets/logo-imprensa-nacional.png" alt="Imprensa Nacional DOU" class="trustbar__img" width="30" height="30" loading="lazy"></span>
+          <span>Imprensa Nacional (DOU)</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--inep">
+          <span class="trustbar__logo-chip"><img src="assets/logo-inep.svg" alt="INEP ENADE" class="trustbar__img" width="55" height="20" loading="lazy"></span>
+          <span>INEP · ENADE</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--mjsp">
+          <span class="trustbar__logo-chip"><img src="assets/logo-mjsp.svg" alt="Ministério da Justiça (MJSP)" class="trustbar__img" width="30" height="30" loading="lazy"></span>
+          <span>Ministério da Justiça (MJSP)</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--serasa">
+          <span class="trustbar__logo-chip"><img src="assets/logo-serasa.svg" alt="Serasa Experian" class="trustbar__img" width="70" height="22" loading="lazy"></span>
+          <span>Serasa Experian · eConsig</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--cvm">
+          <span class="trustbar__logo-chip"><img src="assets/logo-cvm.png" alt="Comissão de Valores Mobiliários (CVM)" class="trustbar__img" width="65" height="20" loading="lazy"></span>
+          <span>CVM · Mercado de Capitais</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--alergs">
+          <span class="trustbar__logo-chip"><img src="assets/logo-alergs.png" alt="ALERGS" class="trustbar__img" width="55" height="22" loading="lazy"></span>
+          <span>ALERGS · Poder Legislativo</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--alertaseg">
+          <span class="trustbar__logo-chip"><img src="assets/logo-alertaseg-dark.png" alt="AlertaSeg SST" class="trustbar__img" width="55" height="22" loading="lazy"></span>
+          <span>AlertaSeg · Gestão SST</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--animalworld">
+          <span class="trustbar__logo-chip"><img src="assets/logo-animal-world.png" alt="Animal World Pet ERP" class="trustbar__img" width="30" height="30" loading="lazy"></span>
+          <span>Animal World · Hub Pet</span>
+        </div>
+
+        <!-- Track Set 2 (Duplicado para loop infinito fluído estilo Kimi/Linear) -->
+        <div class="trustbar__badge trustbar__badge--dou" aria-hidden="true">
+          <span class="trustbar__logo-chip"><img src="assets/logo-imprensa-nacional.png" alt="" class="trustbar__img" width="30" height="30" loading="lazy"></span>
+          <span>Imprensa Nacional (DOU)</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--inep" aria-hidden="true">
+          <span class="trustbar__logo-chip"><img src="assets/logo-inep.svg" alt="" class="trustbar__img" width="55" height="20" loading="lazy"></span>
+          <span>INEP · ENADE</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--mjsp" aria-hidden="true">
+          <span class="trustbar__logo-chip"><img src="assets/logo-mjsp.svg" alt="" class="trustbar__img" width="30" height="30" loading="lazy"></span>
+          <span>Ministério da Justiça (MJSP)</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--serasa" aria-hidden="true">
+          <span class="trustbar__logo-chip"><img src="assets/logo-serasa.svg" alt="" class="trustbar__img" width="70" height="22" loading="lazy"></span>
+          <span>Serasa Experian · eConsig</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--cvm" aria-hidden="true">
+          <span class="trustbar__logo-chip"><img src="assets/logo-cvm.png" alt="" class="trustbar__img" width="65" height="20" loading="lazy"></span>
+          <span>CVM · Mercado de Capitais</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--alergs" aria-hidden="true">
+          <span class="trustbar__logo-chip"><img src="assets/logo-alergs.png" alt="" class="trustbar__img" width="55" height="22" loading="lazy"></span>
+          <span>ALERGS · Poder Legislativo</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--alertaseg" aria-hidden="true">
+          <span class="trustbar__logo-chip"><img src="assets/logo-alertaseg-dark.png" alt="" class="trustbar__img" width="55" height="22" loading="lazy"></span>
+          <span>AlertaSeg · Gestão SST</span>
+        </div>
+        <div class="trustbar__badge trustbar__badge--animalworld" aria-hidden="true">
+          <span class="trustbar__logo-chip"><img src="assets/logo-animal-world.png" alt="" class="trustbar__img" width="30" height="30" loading="lazy"></span>
+          <span>Animal World · Hub Pet</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2.5. SISTEMAS SOB MEDIDA -->
+  <section id="sistemas" class="section">
+    <div class="container">
+      <div class="sechead">
+        <p class="eyebrow">Engenharia Sob Encomenda</p>
+        <h2>Criação de Sistemas Sob Medida &amp; Personalizados: Feito para a sua operação, sem cobrança por usuário.</h2>
+        <p class="lead" style="margin-top:1rem; max-width:48rem; margin-inline:auto;">
+          Elimine o caos de planilhas desatualizadas e as limitações de ferramentas engessadas. Desenvolvemos o software exato que a sua empresa precisa — seja um <strong>CRM, Hub de Gestão ou uma plataforma 100% personalizada</strong> — com entrega ágil e parcelamento em <strong>até 12x no cartão</strong>.
+        </p>
+      </div>
+
+      <div class="grid grid--4">
+        <div class="card">
+          <span class="card__tag">Vendas &amp; Propostas</span>
+          <h3>CRM Operacional B2B</h3>
+          <p class="small" style="margin-top:.75rem;">Funil de vendas adaptado ao seu ciclo comercial, cadastro de clientes/leads, emissão instantânea de orçamentos e pedidos, e integração com WhatsApp Business API.</p>
+          <ul class="list list--dash" style="margin-top:1rem; border-top:1px solid var(--border); padding-top:1rem;">
+            <li>Zero custo de licença por vendedor</li>
+            <li>Alertas de follow-up automáticos</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="card__tag">Operação &amp; Estoque</span>
+          <h3>Hub de Gestão / Mini-ERP</h3>
+          <p class="small" style="margin-top:.75rem;">Centralize Ordens de Serviço (OS), fluxo financeiro integrado (contas a pagar/receber, conciliação Pix/boletos), controle de estoque e alocação de equipes de campo.</p>
+          <ul class="list list--dash" style="margin-top:1rem; border-top:1px solid var(--border); padding-top:1rem;">
+            <li>Fim das planilhas desincronizadas</li>
+            <li>Relatórios de fechamento em 1 clique</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="card__tag">Autoatendimento</span>
+          <h3>Portais &amp; Extranets</h3>
+          <p class="small" style="margin-top:.75rem;">Área logada segura para clientes e fornecedores consultarem faturas, acompanharem status de pedidos, baixarem notas fiscais e abrirem chamados de suporte.</p>
+          <ul class="list list--dash" style="margin-top:1rem; border-top:1px solid var(--border); padding-top:1rem;">
+            <li>Redução de 70% no atendimento manual</li>
+            <li>Padrão institucional de alta confiança</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="card__tag">Inteligência &amp; IA</span>
+          <h3>Dashboards &amp; Automações</h3>
+          <p class="small" style="margin-top:.75rem;">Painéis executivos em tempo real no celular para o dono acompanhar faturamento, integrados com IA para leitura automática de documentos/PDFs e resumos operacionais.</p>
+          <ul class="list list--dash" style="margin-top:1rem; border-top:1px solid var(--border); padding-top:1rem;">
+            <li>Visão clara do fluxo de caixa</li>
+            <li>Automação de rotinas repetitivas</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="grid grid--3" style="margin-top:2rem;">
+        <div class="card card--featured">
+          <h4 style="font-size:1.1rem; color:var(--accent); margin-bottom:.5rem;">1. Código 100% Seu (Lei 9.609/98)</h4>
+          <p class="small muted">Após a quitação integral, todo o código-fonte desenvolvido é transferido para a sua empresa. Sem lock-in, sem mensalidades forçadas e sem risco de ficar refém.</p>
+        </div>
+        <div class="card card--featured">
+          <h4 style="font-size:1.1rem; color:var(--accent); margin-bottom:.5rem;">2. 30 Dias de Garantia Técnica</h4>
+          <p class="small muted">Seu sistema vai para o ar com 30 dias de garantia completa para correção de qualquer bug do escopo homologado, assegurando estabilidade desde o primeiro dia.</p>
+        </div>
+        <div class="card card--featured">
+          <h4 style="font-size:1.1rem; color:var(--accent); margin-bottom:.5rem;">3. Até 12x no Cartão de Crédito</h4>
+          <p class="small muted">Parcele o investimento no cartão corporativo sem comprometer o fluxo de caixa ou pague faturado no boleto (50% de entrada + 50% na entrega).</p>
+        </div>
+      </div>
+
+      <!-- SHOWCASE DE SISTEMAS REAIS SOB MEDIDA ENTREGUES -->
+      <div style="margin-top:3.5rem; padding-top:2.5rem; border-top:1px solid var(--border);">
+        <div style="text-align:center; margin-bottom:2rem;">
+          <span class="badge"><i aria-hidden="true"></i>Entregas Reais &amp; Homologadas</span>
+          <h3 style="font-size:1.6rem; margin-top:.5rem;">Cases de Softwares Sob Medida em Produção</h3>
+          <p class="small muted" style="margin-top:.25rem; max-width:44rem; margin-inline:auto;">Projetados, desenvolvidos e entregues pela TRD com arquitetura escalável e código 100% de propriedade do cliente.</p>
+        </div>
+
+        <div class="grid grid--2">
+          <!-- CARD ALERTASEG -->
+          <article class="card card--alertaseg">
+            <div class="card__header-flex">
+              <div>
+                <span class="card__tag">SaaS / Plataforma Ocupacional</span>
+                <h3 style="margin-top:.25rem;">AlertaSeg — Gestão SST &amp; Normas Regulamentadoras</h3>
+              </div>
+              <span class="card__logo-chip"><img src="assets/logo-alertaseg-dark.png" alt="Logotipo AlertaSeg" class="card__brand-logo" loading="lazy"></span>
+            </div>
+            <p class="small muted" style="margin-bottom:.75rem;">Plataforma completa de Saúde e Segurança do Trabalho (SST) desenvolvida do zero para controle de passivos trabalhistas.</p>
+            <ul class="list list--dash" style="font-size:.85rem; margin-bottom:1rem;">
+              <li><strong>Controle de NRs:</strong> Gestão de conformidade para NR-01, NR-06 (EPIs), NR-10 e NR-35</li>
+              <li><strong>Absenteísmo &amp; Atestados:</strong> Controle de faltas médicas e históricos com evidências documentais</li>
+              <li><strong>Alertas Preditivos:</strong> Notificação antecipada de vencimento de exames periódicos (PCMSO)</li>
+              <li><strong>Validação Pública por QR Code:</strong> Certificados de treinamento emitidos com chave criptográfica</li>
+            </ul>
+            <dl class="card__specs">
+              <div class="specrow"><dt>Stack</dt><dd>Python · Django · PostgreSQL · Docker</dd></div>
+              <div class="specrow"><dt>Entrega</dt><dd>Sistema Sob Medida 100% Proprietário</dd></div>
+            </dl>
+          </article>
+
+          <!-- CARD ANIMAL WORLD -->
+          <article class="card card--animalworld">
+            <div class="card__header-flex">
+              <div>
+                <span class="card__tag">Hub de Gestão / Mini-ERP</span>
+                <h3 style="margin-top:.25rem;">Animal World — Hub Operacional Pet</h3>
+              </div>
+              <span class="card__logo-chip"><img src="assets/logo-animal-world.png" alt="Logotipo Animal World" class="card__brand-logo" loading="lazy"></span>
+            </div>
+            <p class="small muted" style="margin-bottom:.75rem;">Hub de operação diária para pet shops e clínicas com frente de caixa e esteira de serviços em tempo real.</p>
+            <ul class="list list--dash" style="font-size:.85rem; margin-bottom:1rem;">
+              <li><strong>Fila Inteligente do Dia:</strong> Banho &amp; tosa com estimativa dinâmica de saída e porte automático por peso</li>
+              <li><strong>Táxi Dog por Região:</strong> Roteirização integrada para motoristas com status de corrida</li>
+              <li><strong>Frente de Caixa (PDV):</strong> Emissão instantânea em impressoras térmicas de cupom de 80mm</li>
+              <li><strong>Mensageria WhatsApp:</strong> Disparos automáticos avisando tutores sobre a conclusão dos serviços</li>
+            </ul>
+            <dl class="card__specs">
+              <div class="specrow"><dt>Stack</dt><dd>Angular 18 · TypeScript · Node.js · ESC/POS</dd></div>
+              <div class="specrow"><dt>Status</dt><dd>Em produção / Homologado</dd></div>
+            </dl>
+          </article>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:2.5rem;">
+        <a class="btn btn--primary" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20gostaria%20de%20um%20or%C3%A7amento%20para%20cria%C3%A7%C3%A3o%20de%20sistema%20sob%20medida%20(CRM/Hub)." target="_blank" rel="noopener">Quero um orçamento de sistema sob medida</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DORES -->
+  <section id="solucoes" class="section section--alt">
+    <div class="container">
+      <div class="sechead">
+        <p class="eyebrow">Diagnóstico</p>
+        <h2>Três cenários. Um mesmo risco: parada.</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <h3>O responsável técnico saiu</h3>
+          <p class="small" style="margin-top:.75rem;">A empresa depende de um sistema vital, mas quem o desenvolveu não está mais disponível. Cada nova demanda vira um risco de interromper o faturamento.</p>
+        </div>
+        <div class="card">
+          <h3>Banco de dados no limite</h3>
+          <p class="small" style="margin-top:.75rem;">Relatórios que não terminam, lentidão em horário comercial e equipes de campo sem conseguir sincronizar pedidos de clientes.</p>
+        </div>
+        <div class="card">
+          <h3>Equipe própria inviável</h3>
+          <p class="small" style="margin-top:.75rem;">Manter três engenheiros seniores internos custa mais de R$ 35.000/mês em salários e encargos. A TRD entrega sustentação sênior a partir de R$ 3.200/mês.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. AUTODIAGNÓSTICO INTERATIVO (MICRO-FERRAMENTA DE CRO) -->
+  <section id="diagnostico" class="section">
+    <div class="container">
+      <div class="sechead">
+        <p class="eyebrow">Autoavaliação interativa em tempo real</p>
+        <h2>Em 1 minuto, meça o índice de risco do seu sistema</h2>
+        <p class="lead" style="margin-top:1rem; max-width:44rem; margin-inline:auto;">Marque os itens que a sua operação <strong>já possui 100% resolvidos</strong> hoje:</p>
+      </div>
+
+      <div class="quiz-widget">
+        <div class="quiz-list">
+          <label class="quiz-item">
+            <input type="checkbox" class="quiz-check">
+            <span>Rotina de backup com <strong>teste real de restauração</strong> validado nos últimos 30 dias</span>
+          </label>
+          <label class="quiz-item">
+            <input type="checkbox" class="quiz-check">
+            <span>Código-fonte documentado e dominado por <strong>mais de uma pessoa</strong> na empresa</span>
+          </label>
+          <label class="quiz-item">
+            <input type="checkbox" class="quiz-check">
+            <span>Banco de dados SQL operando <strong>sem lentidões ou deadlocks</strong> em horário de pico comercial</span>
+          </label>
+          <label class="quiz-item">
+            <input type="checkbox" class="quiz-check">
+            <span>Monitoramento proativo com <strong>alerta automático</strong> antes do usuário reclamar</span>
+          </label>
+          <label class="quiz-item">
+            <input type="checkbox" class="quiz-check">
+            <span>Contrato formal com <strong>SLA garantido por escrito</strong> se o sistema cair em dia útil</span>
+          </label>
+        </div>
+
+        <div class="quiz-output" aria-live="polite" role="region" aria-label="Resultado da autoavaliação">
+          <div class="quiz-score-header">
+            <div>
+              <span class="small muted">Diagnóstico Estimado:</span>
+              <div id="risk-status" role="status" style="font-size:1.25rem; font-weight:800; color:var(--danger); margin-top:.25rem;">
+                RISCO CRÍTICO (100%)
+              </div>
+            </div>
+            <div id="risk-badge" class="badge-sla badge-sla--p1">Ação Imediata</div>
+          </div>
+          
+          <div class="quiz-meter-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Índice de risco do sistema">
+            <div id="risk-fill" class="quiz-meter-fill" style="width:100%;"></div>
+          </div>
+
+          <p id="risk-desc" class="small muted" style="margin-top:.5rem;">
+            Seu ecossistema possui vulnerabilidade extrema de parada não planejada, dependência de pessoa única e ausência de retaguarda contratual.
+          </p>
+
+          <div style="margin-top:1rem; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;">
+            <a id="risk-btn" class="btn btn--primary" href="https://wa.me/5561999526374?text=*TRD%20Consultoria%20%E2%80%94%20Autodiagn%C3%B3stico%20de%20Risco*%0AOl%C3%A1%20Thiago,%20fiz%20a%20autoavalia%C3%A7%C3%A3o%20no%20site%20e%20meu%20%C3%ADndice%20de%20risco%20deu%20100%25%20(Cr%C3%ADtico).%20Gostaria%20de%20avaliar%20um%20plano%20de%20sustenta%C3%A7%C3%A3o." target="_blank" rel="noopener">
+              Solicitar laudo de remediação
+            </a>
+            <span class="small muted">Atendimento técnico com a equipe de engenharia · Sem compromisso</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- 5. CASES -->
+  <section id="cases" class="section section--alt">
+    <div class="container">
+      <div class="sechead">
+        <p class="eyebrow">Experiência comprovada</p>
+        <h2>Sistemas reais, em produção, em ambiente regulado</h2>
+      </div>
+      <div class="grid grid--3">
+
+        <!-- CASE 1: IMPRENSA NACIONAL (DOU) -->
+        <article class="card card--dou">
+          <div class="card__header-flex">
+            <div>
+              <span class="card__tag">Governo Federal · Presidência</span>
+              <h3 style="margin-top:.25rem;">Imprensa Nacional (DOU)</h3>
+            </div>
+            <span class="card__logo-chip"><img src="assets/logo-imprensa-nacional.png" alt="Logotipo Imprensa Nacional" class="card__brand-logo" loading="lazy"></span>
+          </div>
+          <p class="small muted" style="margin:.35rem 0 .75rem;">Diário Oficial da União · Missão Crítica Federal &amp; Publicação Oficial</p>
+          <p class="small">Sustentação e governança técnica na esteira de editoração, indexação e publicação dos atos oficiais dos Três Poderes da República. Alta disponibilidade, integridade documental ICP-Brasil e processamento para milhões de consultas públicas diárias.</p>
+          <dl class="card__specs">
+            <div class="specrow"><dt>Stack</dt><dd>Java · Spring Boot · PostgreSQL</dd></div>
+            <div class="specrow"><dt>Padrão</dt><dd>ICP-Brasil · Missão Crítica Federal</dd></div>
+          </dl>
+        </article>
+
+        <!-- CASE 2: INEP (ENADE) -->
+        <article class="card card--inep">
+          <div class="card__header-flex">
+            <div>
+              <span class="card__tag">Educação &amp; Alta Escala</span>
+              <h3 style="margin-top:.25rem;">INEP · ENADE</h3>
+            </div>
+            <span class="card__logo-chip"><img src="assets/logo-inep.svg" alt="Logotipo INEP" class="card__brand-logo" loading="lazy"></span>
+          </div>
+          <p class="small muted" style="margin:.35rem 0 .75rem;">Avaliações Nacionais do MEC · Escala Continental &amp; Big Data</p>
+          <p class="small">Engenharia de software e retaguarda técnica para sistemas de avaliação em escala continental (ENADE e exames nacionais do MEC). Processamento massivo de inscrições, concorrência extrema de acessos simultâneos e consolidação estatística sob auditoria rígida.</p>
+          <dl class="card__specs">
+            <div class="specrow"><dt>Stack</dt><dd>Java · Spring Boot · Angular</dd></div>
+            <div class="specrow"><dt>Escopo</dt><dd>Milhões de Inscrições · MEC</dd></div>
+          </dl>
+        </article>
+
+        <!-- CASE 3: MINISTÉRIO DA JUSTIÇA -->
+        <article class="card card--mjsp">
+          <div class="card__header-flex">
+            <div>
+              <span class="card__tag">Governo Federal</span>
+              <h3 style="margin-top:.25rem;">Ministério da Justiça (CNPD)</h3>
+            </div>
+            <span class="card__logo-chip"><img src="assets/logo-mjsp.svg" alt="Logotipo MJSP" class="card__brand-logo" loading="lazy"></span>
+          </div>
+          <p class="small muted" style="margin:.35rem 0 .75rem;">Plataforma Nacional · Segurança Pública &amp; Dados Sensíveis</p>
+          <p class="small">Plataforma nacional do Cadastro Nacional de Pessoas Desaparecidas. Integrações seguras com SINESP e DENATRAN via OAuth2 e certificados SSL, processamento assíncrono em larga escala e trilha de auditoria imutável (Hibernate Envers) em conformidade com a LGPD.</p>
+          <dl class="card__specs">
+            <div class="specrow"><dt>Stack</dt><dd>Java 17 · Spring Boot 2.7 · Angular</dd></div>
+            <div class="specrow"><dt>Infra</dt><dd>Liquibase · Azure DevOps</dd></div>
+          </dl>
+        </article>
+
+        <!-- CASE 4: SERASA EXPERIAN -->
+        <article class="card card--serasa">
+          <div class="card__header-flex">
+            <div>
+              <span class="card__tag">Bureau de Crédito</span>
+              <h3 style="margin-top:.25rem;">Serasa Experian (eConsig)</h3>
+            </div>
+            <span class="card__logo-chip"><img src="assets/logo-serasa.svg" alt="Logotipo Serasa Experian" class="card__brand-logo" loading="lazy"></span>
+          </div>
+          <p class="small muted" style="margin:.35rem 0 .75rem;">Esteira Transacional Crítica · Alta Concorrência &amp; Microsserviços</p>
+          <p class="small">Backend de alta concorrência para a esteira de crédito consignado. Microsserviços Java 17 com APIs REST, refatoração de queries e eliminação de deadlocks em horários de pico, cobertura de testes com JUnit 5 e Mockito.</p>
+          <dl class="card__specs">
+            <div class="specrow"><dt>Stack</dt><dd>Java 17 · Spring Boot · Spring Data JPA</dd></div>
+            <div class="specrow"><dt>Padrão</dt><dd>Microsserviços · APIs REST</dd></div>
+          </dl>
+        </article>
+
+        <!-- CASE 5: CVM -->
+        <article class="card card--cvm">
+          <div class="card__header-flex">
+            <div>
+              <span class="card__tag">Mercado de Capitais</span>
+              <h3 style="margin-top:.25rem;">Comissão de Valores Mobiliários</h3>
+            </div>
+            <span class="card__logo-chip"><img src="assets/logo-cvm.png" alt="Logotipo CVM" class="card__brand-logo" loading="lazy"></span>
+          </div>
+          <p class="small muted" style="margin:.35rem 0 .75rem;">Sistemas Regulatórios · Mercado de Capitais &amp; APIs</p>
+          <p class="small">Modernização fullstack de sistemas regulatórios: APIs REST documentadas com Swagger/OpenAPI, biblioteca de componentes reutilizáveis em Angular Material e correção de débitos técnicos em bases relacionais.</p>
+          <dl class="card__specs">
+            <div class="specrow"><dt>Stack</dt><dd>Java · Spring Boot · Angular 12/16</dd></div>
+            <div class="specrow"><dt>Docs</dt><dd>OpenAPI · Swagger</dd></div>
+          </dl>
+        </article>
+
+        <!-- CASE 6: ALERTASEG -->
+        <article class="card card--alertaseg">
+          <div class="card__header-flex">
+            <div>
+              <span class="card__tag">Sistema Sob Medida</span>
+              <h3 style="margin-top:.25rem;">AlertaSeg — Gestão SST</h3>
+            </div>
+            <span class="card__logo-chip"><img src="assets/logo-alertaseg-dark.png" alt="Logotipo AlertaSeg" class="card__brand-logo" loading="lazy"></span>
+          </div>
+          <p class="small muted" style="margin:.35rem 0 .75rem;">SaaS Ocupacional · NRs, PCMSO, Absenteísmo &amp; QR Code</p>
+          <p class="small">Sistema corporativo sob medida desenvolvido do zero pela TRD para segurança e medicina do trabalho. Gestão de NRs (NR-01, NR-06, NR-35), controle de absenteísmo médico, alertas de exames periódicos e emissão de certificados com QR Code criptográfico.</p>
+          <dl class="card__specs">
+            <div class="specrow"><dt>Stack</dt><dd>Python · Django · PostgreSQL</dd></div>
+            <div class="specrow"><dt>Diferencial</dt><dd>QR Code Criptográfico · NRs</dd></div>
+          </dl>
+        </article>
+
+        <!-- CASE 7: ANIMAL WORLD -->
+        <article class="card card--animalworld">
+          <div class="card__header-flex">
+            <div>
+              <span class="card__tag">Sistema Sob Medida</span>
+              <h3 style="margin-top:.25rem;">Animal World — Hub Pet</h3>
+            </div>
+            <span class="card__logo-chip"><img src="assets/logo-animal-world.png" alt="Logotipo Animal World" class="card__brand-logo" loading="lazy"></span>
+          </div>
+          <p class="small muted" style="margin:.35rem 0 .75rem;">Mini-ERP &amp; PDV · Fila Dinâmica, Táxi Dog, Cupom &amp; WhatsApp</p>
+          <p class="small">Hub operacional e mini-ERP desenvolvido sob medida para pet centers. Fila do dia de banho &amp; tosa com cálculo automático de porte por peso, logística de Táxi Dog por região com rotas para motoristas, avisos no WhatsApp e PDV térmico de 80mm.</p>
+          <dl class="card__specs">
+            <div class="specrow"><dt>Stack</dt><dd>Angular 18 · TypeScript · Node.js</dd></div>
+            <div class="specrow"><dt>Hardware</dt><dd>Impressora Térmica 80mm ESC/POS</dd></div>
+          </dl>
+        </article>
+
+        <!-- CASE 8: ALERGS -->
+        <article class="card card--alergs">
+          <div class="card__header-flex">
+            <div>
+              <span class="card__tag">Setor Público</span>
+              <h3 style="margin-top:.25rem;">ALERGS — Assembleia RS</h3>
+            </div>
+            <span class="card__logo-chip"><img src="assets/logo-alergs.png" alt="Logotipo ALERGS" class="card__brand-logo" loading="lazy"></span>
+          </div>
+          <p class="small muted" style="margin:.35rem 0 .75rem;">Sistemas Legislativos Estaduais · Suporte N3 &amp; Modernização</p>
+          <p class="small">Evolução e sustentação de sistemas legislativos estaduais: interfaces corporativas em Angular, otimização de consultas SQL e suporte N3 a aplicações de alta relevância pública.</p>
+          <dl class="card__specs">
+            <div class="specrow"><dt>Stack</dt><dd>Java · Spring Boot · Angular · SQL</dd></div>
+            <div class="specrow"><dt>Atuação</dt><dd>Suporte N3</dd></div>
+          </dl>
+        </article>
+
+        <!-- CASE 9: LLM ROUTER -->
+        <article class="card card--anthropic">
+          <div class="card__header-flex">
+            <div>
+              <span class="card__tag">IA Generativa</span>
+              <h3 style="margin-top:.25rem;">LLM Router — Projeto Próprio</h3>
+            </div>
+            <span class="card__logo-chip"><img src="assets/logo-claude.svg" alt="Logotipo Claude / Anthropic" class="card__brand-logo" width="26" height="26" loading="lazy"></span>
+          </div>
+          <p class="small muted" style="margin:.35rem 0 .75rem;">2025 – 2026 · Projeto Proprietário TRD</p>
+          <p class="small">AI Gateway corporativo que roteia prompts entre modelos (Claude, Ollama local, Kimi) por custo e latência, com padrão OpenAI-compatible, pipelines de agentes em cadeia e integração a mensageria. Prova viva de que a TRD constrói — e não apenas fala — IA aplicada.</p>
+          <dl class="card__specs">
+            <div class="specrow"><dt>Stack</dt><dd>Java 21 · Spring Boot 3 · Spring AI</dd></div>
+            <div class="specrow"><dt>Modelos</dt><dd>Anthropic API · Ollama</dd></div>
+          </dl>
+        </article>
+
+      </div>
+      <p class="small muted" style="text-align:center; margin-top:2.5rem; max-width:52rem; margin-inline:auto;">
+        Projetos corporativos e governamentais executados sob rigorosos acordos de confidencialidade (NDA), conformidade com a LGPD e entregas técnicas homologadas por marcos contratuais.
+      </p>
+    </div>
+  </section>
+
+  <!-- ARTEFATO TÉCNICO: PROVA DE ENGENHARIA (PROOF OVER PROMISE) -->
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="sechead" style="margin-bottom:1.5rem;">
+        <p class="eyebrow">Evidência técnica real</p>
+        <h2>Performance Tuning em Banco de Dados SQL de Alta Criticidade</h2>
+        <p class="lead" style="margin-top:1rem; max-width:44rem; margin-inline:auto;">
+          Menos discurso, mais evidência. Veja como a refatoração de persistência e índices compostos elimina gargalos de produção:
+        </p>
+      </div>
+
+      <div class="terminal" tabindex="0" role="region" aria-label="Auditoria e Tuning SQL">
+        <div class="terminal__topbar">
+          <div class="terminal__dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="terminal__title mono">session: prod-db-replica-01 :: explain-analyze.sql (PostgreSQL 16 / Java 17)</div>
+          <div class="terminal__status mono"><span class="terminal__pill">AUDITORIA &amp; TUNING TRD</span></div>
+        </div>
+        <pre class="terminal__body mono"><code>
+          <span class="terminal__code-block">
+            <span class="code-comment">-- INCIDENTE REAL EM PRODUÇÃO: Faturamento travado por lentidão em query de fechamento (892k registros)</span>
+            <span class="code-comment">-- ANTES DA INTERVENÇÃO: Seq Scan sem índice, contention de locks e timeout de transação</span>
+            <span class="code-line code-line--danger">
+              <span class="code-tag">[GARGALO]</span> Seq Scan on transacao_consignado (cost=0.00..892401.20 rows=482103 width=128)
+            </span>
+            <span class="code-line code-line--dim">
+              Filter: (status = 'PENDENTE' AND data_criacao &gt;= '2024-01-01')
+            </span>
+            <span class="code-line code-line--danger">
+              Planning Time: 2.14 ms | <strong style="color:var(--danger)">Execution Time: 4.821 ms (4,82 s)</strong> (Deadlocks detectados: 12 · Conexões esgotadas)
+            </span>
+          </span>
+          <span class="terminal__divider" aria-hidden="true"></span>
+          <span class="terminal__code-block">
+            <span class="code-comment">-- DEPOIS DA INTERVENÇÃO TRD: Refatoração da esteira de persistência + Índice B-Tree Composto</span>
+            <span class="code-line code-line--success">
+              <span class="code-tag code-tag--success">[OTIMIZADO]</span> Index Scan using idx_transacao_status_data on transacao_consignado (cost=0.42..8.45 rows=12 width=128)
+            </span>
+            <span class="code-line code-line--dim">
+              Index Cond: (status = 'PENDENTE' AND data_criacao &gt;= '2024-01-01')
+            </span>
+            <span class="code-line code-line--success">
+              Planning Time: 0.18 ms | <strong style="color:var(--success)">Execution Time: 14 ms</strong> (<strong style="color:var(--accent)">Redução de 99,7% de I/O</strong> · Zero locks · Transações instantâneas)<span class="terminal__cursor" aria-hidden="true"></span>
+            </span>
+          </span>
+        </code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. COMO FUNCIONA -->
+  <section id="metodo" class="section">
+    <div class="container">
+      <div class="sechead">
+        <p class="eyebrow">Método</p>
+        <h2>Da auditoria à sustentação contínua</h2>
+      </div>
+      <div class="grid grid--3">
+        <div class="card">
+          <p class="eyebrow" style="margin-bottom:.5rem;">Passo 1 — Discovery</p>
+          <h3>5 dias · R$ 3.500 único</h3>
+          <p class="small" style="margin-top:.75rem;">Auditoria do banco SQL, do código e dos riscos de parada. Você recebe um laudo executivo com plano de remediação — e 50% do valor vira crédito na contratação da sustentação contínua.</p>
+        </div>
+        <div class="card">
+          <p class="eyebrow" style="margin-bottom:.5rem;">Passo 2 — Onboarding</p>
+          <h3>Até 72 horas</h3>
+          <p class="small" style="margin-top:.75rem;">Assunção formal do sistema: acesso a repositório e credenciais sob NDA, documentação da arquitetura e definição do banco de horas.</p>
+        </div>
+        <div class="card">
+          <p class="eyebrow" style="margin-bottom:.5rem;">Passo 3 — Sustentação</p>
+          <h3>Contínua, mensal</h3>
+          <p class="small" style="margin-top:.75rem;">Manutenção corretiva, preventiva e evolutiva dentro do plano contratado, com SLA de resposta por severidade e reunião de alinhamento periódica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ROI -->
+  <section id="roi" class="section section--alt">
+    <div class="container">
+      <div class="sechead">
+        <p class="eyebrow">Custo real</p>
+        <h2>Equipe interna dedicada vs. sustentação sênior TRD</h2>
+      </div>
+      <div class="grid grid--2" style="max-width:56rem; margin-inline:auto;">
+        <div class="card card--danger">
+          <p class="small" style="font-weight:700; color:var(--danger); text-transform:uppercase; letter-spacing:.08em;">Modelo tradicional — Equipe Interna Dedicada</p>
+          <p class="price" style="margin:.75rem 0 .25rem;">R$ 35.000<small>/mês</small></p>
+          <p class="small muted">3 engenheiros seniores com encargos, férias, 13º, FGTS e equipamentos.</p>
+          <ul class="list list--cross" style="margin-top:1.25rem;">
+            <li>Passivo trabalhista latente</li>
+            <li>Risco de rotatividade e conhecimento concentrado</li>
+            <li>Custo anual: <strong class="strong">R$ 420.000</strong></li>
+          </ul>
+        </div>
+        <div class="card card--featured">
+          <span class="card__badge">Recomendado</span>
+          <p class="small" style="font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.08em;">Boutique sênior TRD</p>
+          <p class="price" style="margin:.75rem 0 .25rem;">R$ 5.500<small>/mês</small></p>
+          <p class="small muted">Retaguarda sênior dedicada: 40h técnicas com SLA P1 garantido e esteira assistida por IA supervisionada por equipe técnica sênior.</p>
+          <ul class="list list--check" style="margin-top:1.25rem;">
+            <li>Sem passivo trabalhista — contrato PJ formal</li>
+            <li>Continuidade documentada e SLA em contrato</li>
+            <li>Custo anual: <strong class="strong">R$ 66.000</strong></li>
+          </ul>
+        </div>
+      </div>
+      <p class="callout" style="max-width:56rem; margin:2rem auto 0; text-align:center;">
+        O orçamento de uma equipe interna de 3 engenheiros (R$ 420 mil/ano) paga <strong>mais de 6 anos de Plano Profissional</strong> — e 40h/mês de engenharia sênior cobre a sustentação típica de um sistema em produção.
+      </p>
+    </div>
+  </section>
+
+  <!-- 8. PLANOS -->
+  <section id="planos" class="section">
+    <div class="container">
+      <div class="sechead">
+        <p class="eyebrow">Transparência &amp; Flexibilidade</p>
+        <h2>Modelos de Contratação &amp; Preços</h2>
+        <p class="lead" style="margin-top:1rem; max-width:44rem; margin-inline:auto;">
+          Da criação do zero de CRMs e Hubs de Gestão à sustentação contínua de sistemas corporativos com SLA contratual.
+        </p>
+      </div>
+
+      <!-- FILTRO DE SEGMENTAÇÃO DE PLANOS (CRO) -->
+      <div class="plans-filter-wrap">
+        <div class="plans-filter" role="tablist" aria-label="Filtrar modelos de contratação">
+          <button type="button" class="plans-filter__btn is-active" data-filter="all" role="tab" aria-selected="true">Ver Todos os Planos</button>
+          <button type="button" class="plans-filter__btn" data-filter="criacao" role="tab" aria-selected="false">Criação de Sistemas Sob Medida</button>
+          <button type="button" class="plans-filter__btn" data-filter="sustentacao" role="tab" aria-selected="false">Sustentação &amp; SLA Contratual</button>
+        </div>
+      </div>
+
+      <!-- BLOCO: CRIAÇÃO DE SISTEMAS SOB MEDIDA -->
+      <div id="bloco-criacao" style="margin-bottom:4rem;">
+        <div style="text-align:center; margin-bottom:2rem;">
+          <span class="badge"><i aria-hidden="true"></i>Condições Especiais de Lançamento</span>
+          <h3 style="font-size:1.6rem; margin-top:.5rem;">Criação de Sistemas Sob Medida (CRM, Hub de Gestão &amp; Portais)</h3>
+          <p class="small muted" style="margin-top:.25rem;">Software desenhado exatamente para o seu processo operacional. Entrega ágil, código 100% seu e parcelamento facilitado.</p>
+        </div>
+
+        <div class="grid grid--2" style="max-width:58rem; margin-inline:auto;">
+          <article class="card">
+            <span class="card__tag" style="margin-bottom:.5rem;">Lançamento PME</span>
+            <h3>Sistema Starter (CRM Sob Medida)</h3>
+            <p class="small muted" style="margin-top:.25rem;">Ideal para empresas que querem sair do caos de planilhas e ter um CRM ou painel de controle ágil.</p>
+            <p class="price" style="margin:1.25rem 0 .25rem;">R$ 9.800 <small>à vista</small></p>
+            <p class="small" style="color:var(--accent); font-weight:600; margin-bottom:1.25rem;">ou em até 12x no Cartão · Faturado 50/50 no Boleto</p>
+            <ul class="list list--dash" style="border-top:1px solid var(--border); padding-top:1.25rem; flex:1;">
+              <li><strong class="strong">Entrega ágil em 2 a 3 semanas</strong></li>
+              <li>Até 3 módulos essenciais (Acessos + Operação + Relatórios)</li>
+              <li>Frontend em React / Next.js (TypeScript) + Tailwind</li>
+              <li>Banco de dados relacional PostgreSQL</li>
+              <li>Hospedagem em nuvem transparente na sua conta (Vercel / Render / Supabase)</li>
+              <li><strong class="strong">30 dias de garantia técnica inclusa</strong></li>
+              <li>Código-fonte 100% de sua propriedade (Lei 9.609/98)</li>
+              <li>Opção do Plano Continuidade por R$ 1.800/mês</li>
+            </ul>
+            <a class="btn btn--primary" style="margin-top:2rem;" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20tenho%20interesse%20em%20contratar%20o%20*Sistema%20Starter%20(CRM%20Sob%20Medida)*%20(R$%209.800).%20Gostaria%20de%20alinhar%20os%20detalhes%20t%C3%A9cnicos." target="_blank" rel="noopener">Orçar Sistema Starter</a>
+          </article>
+
+          <article class="card card--featured card--beam">
+            <span class="card__badge">Mais Completo</span>
+            <span class="card__tag" style="margin-bottom:.5rem;">Operação Total</span>
+            <h3>Hub de Gestão Pro / Mini-ERP</h3>
+            <p class="small muted" style="margin-top:.25rem;">Para operações completas com ordens de serviço, finanças, estoque e integrações de mensagens.</p>
+            <p class="price" style="margin:1.25rem 0 .25rem;">R$ 16.500 <small>à vista</small></p>
+            <p class="small" style="color:var(--accent); font-weight:600; margin-bottom:1.25rem;">ou em até 12x no Cartão · Faturado 50/50 no Boleto</p>
+            <ul class="list list--dash" style="border-top:1px solid var(--border); padding-top:1.25rem; flex:1;">
+              <li><strong class="strong">Entrega completa em 4 semanas</strong></li>
+              <li>Até 4 módulos integrados (Vendas, OS, Estoque, Finanças + WhatsApp)</li>
+              <li>Módulos inteligentes com automação e IA inclusos</li>
+              <li>Arquitetura corporativa escalável com PostgreSQL</li>
+              <li>Hospedagem em nuvem transparente na sua conta (AWS / Render / Supabase)</li>
+              <li><strong class="strong">30 dias de garantia técnica inclusa</strong></li>
+              <li>Código-fonte 100% de sua propriedade (Lei 9.609/98)</li>
+              <li>Opção do Plano Continuidade por R$ 1.800/mês</li>
+            </ul>
+            <a class="btn btn--primary" style="margin-top:2rem;" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20tenho%20interesse%20em%20contratar%20o%20*Hub%20de%20Gest%C3%A3o%20Pro*%20(R$%2016.500).%20Gostaria%20de%20alinhar%20os%20detalhes%20t%C3%A9cnicos." target="_blank" rel="noopener">Orçar Hub de Gestão Pro</a>
+          </article>
+        </div>
+
+        <!-- CARD SISTEMAS 100% PERSONALIZADOS / SPRINTS -->
+        <div class="discovery" style="margin-top:2rem; max-width:58rem; margin-inline:auto; border-color: var(--accent);">
+          <div>
+            <span class="card__tag" style="margin-bottom:.5rem;">Sob Demanda &amp; Setores Específicos</span>
+            <h3>Sistemas 100% Personalizados &amp; Plataformas Exclusivas</h3>
+            <p class="small" style="margin-top:.5rem; max-width:44rem;">
+              Para empresas que precisam de plataformas exclusivas, esteiras operacionais avançadas ou módulos sob medida com IA. Comece com um <strong>Mini-Discovery de 3 a 5 dias com 100% de cashback</strong> (R$ 950 a R$ 1.500) para mapear telas e arquitetura, ou contrate por <strong>Sprints Quinzenais Ágeis (a partir de R$ 8.000 / sprint)</strong> ou <strong>Escopo Fechado por Marcos</strong>. Parcelamento em até 12x no cartão corporativo.
+            </p>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <p class="price" style="font-size:1.35rem;">Sob Medida</p>
+            <p class="small" style="color:var(--accent); font-weight:600;">100% Cashback no Discovery</p>
+            <a class="btn btn--primary btn--sm" style="margin-top:.5rem;" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20gostaria%20de%20um%20or%C3%A7amento%20para%20um%20*Sistema%20Sob%20Medida%20Personalizado*." target="_blank" rel="noopener">Solicitar Orçamento</a>
+          </div>
+        </div>
+
+        <!-- BANNER PLANO CONTINUIDADE -->
+        <div class="discovery" style="margin-top:2rem; max-width:58rem; margin-inline:auto;">
+          <div>
+            <span class="card__tag" style="margin-bottom:.5rem;">Exclusivo para sistemas criados pela TRD</span>
+            <h3>Plano Continuidade TRD — R$ 1.800 <small>/mês</small></h3>
+            <p class="small" style="margin-top:.5rem; max-width:44rem;">
+              Após os 30 dias de garantia, mantenha seu sistema sempre no ar e evoluindo com <strong class="strong">10 horas técnicas mensais</strong> de suporte sênior com SLA garantido (resposta em até 4h úteis para P1) e monitoramento preventivo. Sem fidelidade forçada.
+            </p>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <p class="price">R$ 1.800 <small>/mês</small></p>
+            <a class="btn btn--ghost btn--sm" style="margin-top:.5rem;" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20tenho%20interesse%20no%20*Plano%20Continuidade%20TRD*%20(R$%201.800/m%C3%AAs)." target="_blank" rel="noopener">Saber mais</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCO: SUSTENTAÇÃO & EVOLUÇÃO CONTÍNUA (SISTEMAS EXISTENTES) -->
+      <div id="bloco-sustentacao">
+        <div style="text-align:center; margin-bottom:2rem; border-top:1px solid var(--border); padding-top:3rem;">
+          <span class="badge"><i aria-hidden="true"></i>Sistemas Existentes &amp; Legados</span>
+          <h3 style="font-size:1.6rem; margin-top:.5rem;">Sustentação Contínua &amp; Resgate com SLA</h3>
+          <p class="small muted" style="margin-top:.25rem;">Para empresas que já possuem software em produção e precisam de retaguarda sênior com SLA contratual.</p>
+        </div>
+
+
+      <div class="discovery" style="margin-bottom:3rem; border-color: var(--danger);">
+        <div>
+          <span class="card__tag" style="margin-bottom:.5rem; color:var(--danger); border-color:var(--danger);">Emergência &amp; sob demanda</span>
+          <h3>Troubleshooting Cirúrgico — Sprint de 10h</h3>
+          <p class="small" style="margin-top:.5rem; max-width:44rem;">Intervenção técnica em até <strong class="strong">24h–48h</strong> para apagar incêndios críticos: performance tuning (queries JPA, N+1, locks SQL), higienização de PII pública e adequação LGPD, hotfixes impeditivos. <strong class="strong">50% do valor dedutível como crédito</strong> na contratação da sustentação contínua.</p>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <p class="price">R$ 1.800 <small>único</small></p>
+          <p class="small" style="color:var(--accent); font-weight:600;">Início em até 24h</p>
+          <a class="btn btn--ghost btn--sm" style="margin-top:.5rem;" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20preciso%20de%20atendimento%20para%20*Troubleshooting%20Cir%C3%BArgico%20sob%20demanda*%20(R$%201.800)." target="_blank" rel="noopener">Acionar emergência</a>
+        </div>
+      </div>
+      <div class="discovery" style="margin-bottom:3rem;">
+        <div>
+          <span class="card__tag" style="margin-bottom:.5rem;">Entrada de baixo risco</span>
+          <h3>Sprint Diagnóstico de Arquitetura — Discovery de 5 dias</h3>
+          <p class="small" style="margin-top:.5rem; max-width:44rem;">Varredura completa no banco SQL, no código legado e nos riscos de parada. <strong class="strong">50% do valor é abatido como crédito</strong> na contratação da sustentação contínua.</p>
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <p class="price">R$ 3.500 <small>único</small></p>
+          <a class="btn btn--ghost btn--sm" style="margin-top:.5rem;" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20gostaria%20de%20contratar%20o%20*Sprint%20Diagn%C3%B3stico%20de%20Arquitetura%20(Discovery%20de%205%20dias)*%20(R$%203.500)." target="_blank" rel="noopener">Solicitar Discovery</a>
+        </div>
+      </div>
+
+      <div class="grid grid--3">
+
+        <article class="card">
+          <h3>Plano Essencial</h3>
+          <p class="small muted" style="margin-top:.25rem;">Sistemas estáveis que exigem retaguarda e correções pontuais.</p>
+          <p class="price" style="margin:1.5rem 0;">R$ 3.200 <small>/mês</small></p>
+          <ul class="list list--dash" style="border-top:1px solid var(--border); padding-top:1.5rem; flex:1;">
+            <li><strong class="strong">20 horas técnicas</strong> mensais</li>
+            <li>SLA P1: até 8h úteis · P2: até 6h úteis</li>
+            <li>Manutenção corretiva de bugs</li>
+            <li>Otimização de queries SQL</li>
+            <li>Reunião mensal de alinhamento</li>
+            <li>Hora extra: R$ 180/h</li>
+          </ul>
+          <a class="btn btn--ghost" style="margin-top:2rem;" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20tenho%20interesse%20no%20*Plano%20Essencial%20de%20Sustenta%C3%A7%C3%A3o*%20(R$%203.200/m%C3%AAs)." target="_blank" rel="noopener">Contratar Essencial</a>
+        </article>
+
+        <article class="card card--featured card--beam">
+          <span class="card__badge">Mais escolhido</span>
+          <h3>Plano Profissional</h3>
+          <p class="small muted" style="margin-top:.25rem;">Operações críticas com evolução contínua e resposta ágil.</p>
+          <p class="price" style="margin:1.5rem 0;">R$ 5.500 <small>/mês</small></p>
+          <ul class="list list--dash" style="border-top:1px solid var(--border); padding-top:1.5rem; flex:1;">
+            <li><strong class="strong">40 horas técnicas</strong> mensais</li>
+            <li>SLA P1: até 4h úteis · P2: até 4h úteis</li>
+            <li>Monitoramento de uptime com alertas automáticos</li>
+            <li>Correções prioritárias e pequenas evoluções</li>
+            <li>Reuniões quinzenais de alinhamento</li>
+            <li>Hora extra: R$ 160/h</li>
+          </ul>
+          <a class="btn btn--primary" style="margin-top:2rem;" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20tenho%20interesse%20no%20*Plano%20Profissional%20de%20Sustenta%C3%A7%C3%A3o*%20(R$%205.500/m%C3%AAs)." target="_blank" rel="noopener">Contratar Profissional</a>
+        </article>
+
+        <article class="card">
+          <h3>Plano Enterprise</h3>
+          <p class="small muted" style="margin-top:.25rem;">Ecossistemas complexos, módulos sob medida e SLA de emergência.</p>
+          <p class="price" style="margin:1.5rem 0;">R$ 8.000 <small>/mês</small></p>
+          <ul class="list list--dash" style="border-top:1px solid var(--border); padding-top:1.5rem; flex:1;">
+            <li><strong class="strong">60 horas técnicas</strong> mensais</li>
+            <li>SLA P1: até 2h úteis · P2: até 2h úteis</li>
+            <li>Monitoramento contínuo com alertas automáticos à equipe de sustentação</li>
+            <li>Deploys de módulos de IA e automações</li>
+            <li>Reuniões semanais e canal exclusivo</li>
+            <li>Hora extra: R$ 150/h · Sobreaviso P1: R$ 200/h</li>
+          </ul>
+          <a class="btn btn--ghost" style="margin-top:2rem;" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20tenho%20interesse%20no%20*Plano%20Enterprise%20de%20Sustenta%C3%A7%C3%A3o*%20(R$%208.000/m%C3%AAs)." target="_blank" rel="noopener">Contratar Enterprise</a>
+        </article>
+
+      </div>
+
+      <!-- MATRIZ DE SEVERIDADE & POLÍTICA DE SLA PÚBLICA (PADRÃO INTERNACIONAL) -->
+      <div class="sla-matrix-wrap">
+        <div class="sechead" style="margin-bottom:2rem;">
+          <p class="eyebrow">Transparência operacional</p>
+          <h3>Matriz de Severidade &amp; Prazos Contratuais de Resposta (SLA)</h3>
+          <p class="small muted" style="margin-top:.5rem;">Definição formal de criticidade com tempos de primeira resposta qualificada (MTTA) garantidos por escrito.</p>
+        </div>
+        <div class="table-responsive" tabindex="0" role="region" aria-label="Matriz de Severidade e Prazos Contratuais de SLA">
+          <table class="sla-table">
+            <thead>
+              <tr>
+                <th scope="col">Severidade</th>
+                <th scope="col">Definição Operacional</th>
+                <th scope="col">MTTA (Primeira Resposta)</th>
+                <th scope="col">Canal de Atendimento</th>
+                <th scope="col">Plano Contemplado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Severidade"><span class="badge-sla badge-sla--p1">P1 · Crítico</span></td>
+                <td data-label="Definição Operacional"><strong>Sistema Parado / Faturamento Interrompido.</strong> Falha impeditiva geral, indisponibilidade do banco ou da API principal.</td>
+                <td data-label="MTTA (Primeira Resposta)" class="mono"><strong>Até 2h úteis</strong> (Enterprise)<br>Até 4h úteis (Profissional)<br>Até 8h úteis (Essencial)</td>
+                <td data-label="Canal de Atendimento">Linha Direta / Canal VIP da Equipe de Engenharia</td>
+                <td data-label="Plano Contemplado">Todos os Planos</td>
+              </tr>
+              <tr>
+                <td data-label="Severidade"><span class="badge-sla badge-sla--p2">P2 · Alto</span></td>
+                <td data-label="Definição Operacional"><strong>Degradação Severa de Performance.</strong> Módulo crítico lento, falha parcial de sincronização ou timeouts intermitentes.</td>
+                <td data-label="MTTA (Primeira Resposta)" class="mono"><strong>Até 2h úteis</strong> (Enterprise)<br>Até 4h úteis (Profissional)<br>Até 6h úteis (Essencial)</td>
+                <td data-label="Canal de Atendimento">Canal Prioritário da Sustentação</td>
+                <td data-label="Plano Contemplado">Todos os Planos</td>
+              </tr>
+              <tr>
+                <td data-label="Severidade"><span class="badge-sla badge-sla--p3">P3 · Médio</span></td>
+                <td data-label="Definição Operacional"><strong>Falha Não-Bloqueante / Bug Pontual.</strong> Erro em tela secundária, relatório quebrado ou inconsistência contornável.</td>
+                <td data-label="MTTA (Primeira Resposta)" class="mono">Até 8h úteis</td>
+                <td data-label="Canal de Atendimento">Fila de Sustentação de Rotina</td>
+                <td data-label="Plano Contemplado">Todos os Planos</td>
+              </tr>
+              <tr>
+                <td data-label="Severidade"><span class="badge-sla badge-sla--p4">P4 · Evolutivo</span></td>
+                <td data-label="Definição Operacional"><strong>Melhoria / Pequena Evolução.</strong> Novo campo, ajuste visual, documentação ou pequenos refinamentos.</td>
+                <td data-label="MTTA (Primeira Resposta)" class="mono">Conforme backlog</td>
+                <td data-label="Canal de Atendimento">Reuniões de Alinhamento Técnico</td>
+                <td data-label="Plano Contemplado">Banco de Horas Mensal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      </div><!-- /#bloco-sustentacao -->
+    </div>
+  </section>
+
+  <!-- 9. CORPO TÉCNICO & GOVERNANÇA -->
+  <section id="sobre" class="section section--alt">
+    <div class="container" style="max-width:56rem;">
+      <div class="sechead">
+        <p class="eyebrow">Corpo Técnico &amp; Governança</p>
+        <h2>Quem sustenta a sua operação crítica?</h2>
+        <p class="lead" style="margin-top:1rem; max-width:44rem; margin-inline:auto;">A TRD Consultoria opera com um corpo técnico multidisciplinar de alta senioridade, governança rigorosa de código e esteiras automatizadas — assegurando estabilidade, conformidade e prontidão operacional para a sua empresa.</p>
+      </div>
+
+      <!-- CARD EXECUTIVO: SÓCIO-DIRETOR & PRINCIPAL ARCHITECT -->
+      <div class="founder-card" style="margin-bottom:2.5rem;">
+        <div class="founder-card__media">
+          <img src="assets/thiago-duarte.jpg" alt="Thiago Rocha Duarte — Sócio-Diretor e Principal Systems Architect da TRD Consultoria" class="founder-card__photo" width="180" height="180" loading="lazy">
+          <div class="founder-card__cert-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>Anthropic Certified</span>
+          </div>
+        </div>
+        <div class="founder-card__content">
+          <div class="founder-card__header">
+            <div>
+              <span class="card__tag" style="margin-bottom:.5rem;">Liderança Técnica &amp; Fundador</span>
+              <h3 style="font-size:1.5rem; margin-bottom:.25rem;">Thiago Rocha Duarte</h3>
+              <p class="founder-card__role">Sócio-Diretor &amp; Principal Systems Architect</p>
+            </div>
+            <a href="https://www.linkedin.com/in/thiagorduarte/" target="_blank" rel="noopener" class="btn btn--ghost btn--sm founder-card__linkedin" aria-label="Perfil de Thiago Duarte no LinkedIn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.63 1.63 0 1 0 0-3.26 1.63 1.63 0 0 0 0 3.26m1.4 9.74v-8.37H5.06v8.37z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+          <p class="small" style="margin-top:.5rem; color:var(--text-2); line-height:1.65;">
+            Engenheiro de software e arquiteto de sistemas especializado em ambientes regulados, alta disponibilidade e esteiras de alta volumetria. Histórico comprovado de entregas críticas na <strong>Imprensa Nacional (DOU)</strong>, <strong>INEP (ENADE)</strong>, <strong>Ministério da Justiça (CNPD)</strong>, <strong>Serasa Experian (eConsig)</strong>, <strong>CVM</strong> e <strong>ALERGS</strong> — além da arquitetura e desenvolvimento de plataformas proprietárias como <strong>AlertaSeg (SST)</strong> e <strong>Animal World (Hub Pet)</strong>.
+          </p>
+          <div class="founder-card__tags">
+            <span class="badge-tech">Java 17/21 &amp; Spring Boot</span>
+            <span class="badge-tech">Angular &amp; TypeScript</span>
+            <span class="badge-tech">PostgreSQL &amp; DBA Tuning</span>
+            <span class="badge-tech">Claude API (Anthropic Academy)</span>
+            <span class="badge-tech">LGPD &amp; Arquitetura Segura</span>
+          </div>
+          <div class="founder-card__footer">
+            <a class="btn btn--primary btn--sm" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20estou%20no%20site%20e%20gostaria%20de%20conversar%20diretamente%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar com Thiago no WhatsApp</a>
+            <span class="small muted">Atendimento executivo direto sem intermediários</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:2rem;">
+        <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; border-bottom:1px solid var(--border); padding-bottom:1.25rem; margin-bottom:1.5rem;">
+          <div>
+            <span class="card__tag" style="margin-bottom:.5rem;">Estrutura Corporativa</span>
+            <h3 style="font-size:1.35rem;">Corpo de Engenharia Multidisciplinar TRD</h3>
+            <p class="small muted" style="margin-top:.25rem;">Especialistas seniores alocados por domínio técnico para cobrir todas as camadas do seu ecossistema.</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:.75rem;">
+            <svg width="36" height="42" viewBox="0 0 200 231" role="img" aria-label="TRD Keystone" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <mask id="ks-team">
+                  <polygon points="100,0 200,57.75 200,173.25 100,231 0,173.25 0,57.75" fill="#fff"/>
+                  <path d="M100 115.5V0 M100 115.5L0 173.25 M100 115.5L200 173.25" stroke="#000" stroke-width="13" fill="none"/>
+                </mask>
+              </defs>
+              <g mask="url(#ks-team)" fill="var(--accent)">
+                <polygon points="100,115.5 0,173.25 0,57.75 100,0"/>
+                <polygon points="100,115.5 200,173.25 200,57.75 100,0"/>
+                <polygon points="100,115.5 0,173.25 100,231 200,173.25"/>
+              </g>
+            </svg>
+            <span class="small" style="font-weight:700; color:var(--text); letter-spacing:.05em;">TRD CONSULTORIA</span>
+          </div>
+        </div>
+
+        <div class="grid grid--3" style="gap:1.5rem;">
+          <div>
+            <h4 style="font-size:1rem; color:var(--accent); margin-bottom:.5rem;">Arquitetura &amp; Backend</h4>
+            <p class="small muted">Especialistas em Java (Spring Boot, Hibernate), Python (Django, FastAPI) e Node.js. Microsserviços, refatoração de legados, APIs escaláveis e integrações complexas.</p>
+          </div>
+          <div>
+            <h4 style="font-size:1rem; color:var(--accent); margin-bottom:.5rem;">Engenharia de Dados &amp; DBA</h4>
+            <p class="small muted">Especialistas em PostgreSQL, Oracle, MySQL e SQL Server. Otimização de queries, tuning de índices, eliminação de deadlocks e contenção de locks.</p>
+          </div>
+          <div>
+            <h4 style="font-size:1rem; color:var(--accent); margin-bottom:.5rem;">Frontend &amp; Aplicações Web</h4>
+            <p class="small muted">Engenheiros focados em React, Next.js, Angular e TypeScript. Interfaces corporativas de alta performance, dashboards de dados e portais modernos.</p>
+          </div>
+        </div>
+
+        <div class="grid grid--2" style="gap:1.5rem; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+          <div>
+            <h4 style="font-size:1rem; color:var(--text); margin-bottom:.5rem;">Confiabilidade &amp; Observabilidade (SRE)</h4>
+            <p class="small muted">Monitoramento contínuo com telemetria, detecção preventiva de gargalos e esteiras automatizadas de sustentação com apoio de IA.</p>
+          </div>
+          <div>
+            <h4 style="font-size:1rem; color:var(--text); margin-bottom:.5rem;">Governança Técnica &amp; Segurança</h4>
+            <p class="small muted">Homologação rigorosa de código, auditoria imutável, conformidade estrita com a LGPD e blindagem contratual sob sigilo (NDA).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid--2">
+        <div class="card">
+          <h3>Engenharia Sênior Dedicada (Sem Intermediários)</h3>
+          <p class="small" style="margin-top:.5rem;">Você alinha estratégias diretamente com a equipe técnica responsável por analisar, otimizar e homologar cada linha de código. Zero estagiários alocados na sua arquitetura e zero intermediários burocráticos.</p>
+          <ul class="list list--dash" style="margin-top:1rem;">
+            <li>Intervenção na raiz de queries SQL e microsserviços</li>
+            <li>Esteiras assistidas por IA com validação sênior humana</li>
+            <li>Canal VIP direto com a equipe técnica para incidentes P1</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Governança, Processos &amp; Blindagem</h3>
+          <p class="small" style="margin-top:.5rem;">Processos estruturados de engenharia de missão crítica: testes automatizados de regressão, cofre de segredos padronizado e conformidade estrita sob NDA.</p>
+          <ul class="list list--dash" style="margin-top:1rem;">
+            <li>Código 100% de titularidade do cliente após quitação</li>
+            <li>Contrato formal PJ com Limitação de Responsabilidade (Damage Cap)</li>
+            <li>Runbook de contingência e documentação técnica viva</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. CTA FINAL + FOOTER -->
+  <section id="contato" class="section" style="text-align:center;">
+    <div class="container">
+      <p class="eyebrow">Próximo passo</p>
+      <h2 style="max-width:38rem; margin-inline:auto;">Tire o seu sistema do papel ou blinde a sua operação atual.</h2>
+      <p class="lead" style="margin-top:1rem;">Em 30 minutos de alinhamento técnico desenhamos a estrutura do seu MVP sob medida ou o plano de sustentação com SLA.</p>
+      <div class="hero__ctas" style="margin-top:2rem;">
+        <a class="btn btn--primary" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20gostaria%20de%20agendar%20uma%20conversa%20sobre%20cria%C3%A7%C3%A3o%20de%20sistema%20sob%20medida%20ou%20sustenta%C3%A7%C3%A3o." target="_blank" rel="noopener">Conversar no WhatsApp</a>
+        <a class="btn btn--ghost" href="mailto:contato@trdconsultoria.com.br">Enviar e-mail</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONSOLE DE DIMENSIONAMENTO & DIAGNÓSTICO DE ENGENHARIA (MODAL NATIVO)
+       ============================================================ -->
+  <dialog id="eng-console-modal" class="eng-dialog" aria-labelledby="eng-dialog-title" aria-describedby="eng-dialog-desc">
+    <div class="eng-dialog__container">
+      <header class="eng-dialog__header">
+        <div class="eng-dialog__header-text">
+          <span class="badge badge-sla--p3" style="margin-bottom:.4rem; display:inline-flex;">Dimensionamento Técnico</span>
+          <h2 id="eng-dialog-title" class="eng-dialog__title">Console de Dimensionamento &amp; Engenharia</h2>
+          <p id="eng-dialog-desc" class="eng-dialog__desc">
+            Dimensione a arquitetura do seu sistema, requisitos de governança e receba o laudo técnico preliminar.
+          </p>
+        </div>
+        <button type="button" class="eng-dialog__close" id="eng-console-close-btn" aria-label="Fechar console de dimensionamento">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+
+      <form id="eng-console-form" class="eng-dialog__form" method="dialog" novalidate>
+        <div class="eng-dialog__body">
+          <!-- Coluna de Configuração -->
+          <div class="eng-dialog__controls">
+            <!-- 1. Tipo de Demanda -->
+            <fieldset class="eng-group">
+              <legend class="eng-group__legend">1. Natureza da Demanda</legend>
+              <div class="eng-grid-options">
+                <label class="eng-card-opt">
+                  <input type="radio" name="modalidade" value="criacao" checked>
+                  <span class="eng-card-opt__box">
+                    <strong>Criação Sob Medida</strong>
+                    <small>CRM, Hub de Gestão, Portal ou Mini-ERP (Código 100% seu)</small>
+                  </span>
+                </label>
+                <label class="eng-card-opt">
+                  <input type="radio" name="modalidade" value="sustentacao">
+                  <span class="eng-card-opt__box">
+                    <strong>Sustentação &amp; SLA N3</strong>
+                    <small>Retaguarda contínua, governança de código, estabilização e evolução</small>
+                  </span>
+                </label>
+                <label class="eng-card-opt">
+                  <input type="radio" name="modalidade" value="diagnostico">
+                  <span class="eng-card-opt__box">
+                    <strong>Auditoria &amp; Resgate Crítico</strong>
+                    <small>Perícia em banco SQL, lentidão, refatoração e LGPD</small>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- 2. Complexidade e Escala -->
+            <fieldset class="eng-group">
+              <legend class="eng-group__legend">2. Topologia &amp; Concorrência</legend>
+              <div class="eng-grid-options">
+                <label class="eng-card-opt">
+                  <input type="radio" name="escala" value="agil" checked>
+                  <span class="eng-card-opt__box">
+                    <strong>Operação Ágil · 1 a 3 Módulos Core</strong>
+                    <small>Até 20 usuários operacionais · Entrega em 2 a 3 semanas</small>
+                  </span>
+                </label>
+                <label class="eng-card-opt">
+                  <input type="radio" name="escala" value="corporativo">
+                  <span class="eng-card-opt__box">
+                    <strong>Corporativo · 4 a 8 Módulos</strong>
+                    <small>20 a 100 usuários · Múltiplos fluxos, faturamento e relatórios</small>
+                  </span>
+                </label>
+                <label class="eng-card-opt">
+                  <input type="radio" name="escala" value="missao-critica">
+                  <span class="eng-card-opt__box">
+                    <strong>Missão Crítica / Multi-tenant</strong>
+                    <small>100+ acessos simultâneos · Alta concorrência e tolerância zero a falhas</small>
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- 3. Módulos e Infraestrutura -->
+            <fieldset class="eng-group">
+              <legend class="eng-group__legend">3. Requisitos de Infraestrutura &amp; Compliance</legend>
+              <div class="eng-checkboxes">
+                <label class="eng-check-opt">
+                  <input type="checkbox" name="infra_db" checked>
+                  <span>Banco relacional dedicado (PostgreSQL / SQL Server) com backup ativo</span>
+                </label>
+                <label class="eng-check-opt">
+                  <input type="checkbox" name="infra_api" checked>
+                  <span>Integrações externas (WhatsApp Business API / Gateways Pix / Webhooks)</span>
+                </label>
+                <label class="eng-check-opt">
+                  <input type="checkbox" name="infra_monitoramento">
+                  <span>Monitoramento proativo de integridade e alertas automáticos</span>
+                </label>
+                <label class="eng-check-opt">
+                  <input type="checkbox" name="infra_compliance">
+                  <span>Conformidade LGPD, Trilha de Auditoria Imutável e Controle de PII</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- 4. Identificação Opcional -->
+            <fieldset class="eng-group">
+              <legend class="eng-group__legend">4. Identificação do Solicitante (Opcional)</legend>
+              <div class="eng-inputs-row">
+                <div class="eng-field">
+                  <label for="eng-client-name" class="small muted">Seu Nome / Cargo</label>
+                  <input type="text" id="eng-client-name" class="eng-input" placeholder="Ex: Rodrigo — Diretor Operacional" autocomplete="name">
+                </div>
+                <div class="eng-field">
+                  <label for="eng-client-company" class="small muted">Empresa / Sistema</label>
+                  <input type="text" id="eng-client-company" class="eng-input" placeholder="Ex: Empresa ou Projeto" autocomplete="organization">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- Coluna de Laudo / Live Output -->
+          <aside class="eng-dialog__summary" aria-live="polite">
+            <div class="eng-summary-card">
+              <div class="eng-summary-head">
+                <span class="eyebrow" style="margin-bottom:0;">Laudo Preliminar</span>
+                <div id="eng-ref-id" class="mono small muted">TRD-ENG-8402</div>
+              </div>
+
+              <div class="eng-summary-item">
+                <span class="small muted">Governança Recomendada</span>
+                <div id="eng-out-governance" class="eng-summary-val">Boutique Sênior · Ciclo Ágil</div>
+              </div>
+
+              <div class="eng-summary-item">
+                <span class="small muted">Prazo / SLA Estimado</span>
+                <div id="eng-out-sla" class="eng-summary-val">2 a 3 semanas (Sprint 1 em 5 dias)</div>
+              </div>
+
+              <div class="eng-summary-item">
+                <span class="small muted">Modelo &amp; Enquadramento Referencial</span>
+                <div id="eng-out-billing" class="eng-summary-val">Classe Starter (R$ 9.800) · Até 12x no Cartão</div>
+              </div>
+
+              <div class="eng-summary-callout">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="eng-summary-callout-icon" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <div class="small">
+                  <strong>Garantia TRD:</strong> Código 100% de propriedade do cliente (Lei 9.609/98). Sem custo por usuário. NFS-e e contrato registrado.
+                </div>
+              </div>
+
+              <div class="eng-summary-actions">
+                <a id="eng-submit-whatsapp" class="btn btn--primary" href="#" target="_blank" rel="noopener" style="width:100%; text-align:center;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.5rem;" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  Enviar ao Thiago Duarte no WhatsApp
+                </a>
+                <button type="button" id="eng-reset-btn" class="btn btn--ghost btn--sm" style="width:100%; margin-top:.5rem;">
+                  Reiniciar Simulação
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <!-- Coluna 1: Marca & Identidade -->
+        <div class="footer__brand-col">
+          <a href="#" class="nav__brand" style="display:inline-block; margin-bottom:.5rem;">
+            TRD<span class="nav__brand-dot">.</span>
+          </a>
+          <p class="footer__tagline">
+            Engenharia de software de missão crítica, sistemas corporativos sob encomenda e governança técnica de alta disponibilidade para ecossistemas regulados.
+          </p>
+          <div class="footer__badges">
+            <span class="footer__badge"><span class="footer__dot-live"></span> Brasília – DF</span>
+            <span class="footer__badge">CNPJ 43.065.207/0001-57</span>
+            <span class="footer__badge">Ativa desde 10/08/2021</span>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Soluções -->
+        <div class="footer__col">
+          <h4 class="footer__col-title">Soluções</h4>
+          <ul class="footer__nav">
+            <li><a href="#sistemas">Sistemas Sob Medida</a></li>
+            <li><a href="#sistemas">Hubs de Gestão &amp; ERPs</a></li>
+            <li><a href="#consultoria">Sustentação N3 &amp; SLA</a></li>
+            <li><a href="#cases">Arquitetura de Microsserviços</a></li>
+            <li><a href="#cases">IA Aplicada &amp; LLM Gateway</a></li>
+            <li><a href="#planos">Planos &amp; Modelos</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Cases & Clientes -->
+        <div class="footer__col">
+          <h4 class="footer__col-title">Cases &amp; Clientes</h4>
+          <ul class="footer__nav">
+            <li><a href="#cases">Imprensa Nacional (DOU)</a></li>
+            <li><a href="#cases">INEP · ENADE (MEC)</a></li>
+            <li><a href="#cases">Ministério da Justiça (MJSP)</a></li>
+            <li><a href="#cases">Serasa Experian (eConsig)</a></li>
+            <li><a href="#cases">CVM · Mercado de Capitais</a></li>
+            <li><a href="#cases">ALERGS · Poder Legislativo</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Contato Executivo -->
+        <div class="footer__col footer__contact-col">
+          <h4 class="footer__col-title">Contato Executivo</h4>
+          <ul class="footer__contact-list">
+            <li>
+              <span class="footer__contact-label">WhatsApp Direto</span>
+              <a href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20estou%20no%20site%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20os%20servi%C3%A7os%20de%20engenharia%20de%20software." target="_blank" rel="noopener" class="footer__contact-link">
+                (61) 99952-6374
+              </a>
+            </li>
+            <li>
+              <span class="footer__contact-label">E-mail Corporativo</span>
+              <a href="mailto:contato@trdconsultoria.com.br" class="footer__contact-link">
+                contato@trdconsultoria.com.br
+              </a>
+            </li>
+            <li>
+              <span class="footer__contact-label">Atendimento</span>
+              <span class="footer__contact-text">Seg a Sex · 08h às 19h</span>
+            </li>
+            <li>
+              <span class="footer__contact-label">Cobertura de SLA</span>
+              <span class="footer__contact-text">Contratual em dias úteis</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Barra Inferior de Copyright & Compliance -->
+      <div class="footer__bottom">
+        <div class="footer__legal">
+          <span>&copy; 2026 TRD Consultoria e Serviços de TI LTDA. Todos os direitos reservados.</span>
+        </div>
+        <div class="footer__links">
+          <a href="privacidade.html">Privacidade &amp; LGPD</a>
+          <span class="footer__sep" aria-hidden="true">&middot;</span>
+          <span>Sede em Brasília/DF</span>
+          <span class="footer__sep" aria-hidden="true">&middot;</span>
+          <span class="footer__status-badge"><span class="footer__dot-live"></span> Operação 99.9% Uptime</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Executive Quick-Connect Dock (CRO WhatsApp Thiago) -->
+  <aside class="exec-dock" id="exec-dock" aria-label="Canal VIP com Thiago Duarte" role="complementary">
+    <a href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20estou%20no%20site%20da%20TRD%20e%20gostaria%20de%20um%20alinhamento%20t%C3%A9cnico%20direto." target="_blank" rel="noopener" class="exec-dock__link" aria-label="Falar diretamente com Thiago Duarte no WhatsApp">
+      <div class="exec-dock__avatar-wrap">
+        <img src="assets/thiago-duarte.jpg" alt="Thiago Duarte" class="exec-dock__avatar" width="38" height="38" loading="lazy">
+        <span class="exec-dock__status" aria-hidden="true"></span>
+      </div>
+      <div class="exec-dock__text">
+        <span class="exec-dock__title">Thiago Duarte</span>
+        <span class="exec-dock__sub">Alinhamento Técnico Direto</span>
+      </div>
+      <div class="exec-dock__btn-cta" aria-hidden="true">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>WhatsApp</span>
+      </div>
+    </a>
+    <button type="button" class="exec-dock__close" id="exec-dock-close" aria-label="Ocultar atalho do WhatsApp" title="Fechar atalho">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </aside>
+
+  <script>
+    // --- 1. Gerenciador de Tema (Dark / Light) com Persistência & Atalho Alt+T ---
+    (function initThemeManager() {
+      const toggleBtn = document.getElementById('theme-toggle');
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+      function applyTheme(theme, persist) {
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.style.colorScheme = theme;
+        
+        if (metaTheme) {
+          metaTheme.setAttribute('content', theme === 'dark' ? '#080D1A' : '#F8FAFC');
+        }
+        
+        if (toggleBtn) {
+          const isDark = theme === 'dark';
+          toggleBtn.setAttribute('aria-label', isDark ? 'Alternar para modo claro' : 'Alternar para modo escuro');
+          toggleBtn.setAttribute('title', isDark ? 'Alternar para modo claro (Alt + T)' : 'Alternar para modo escuro (Alt + T)');
+        }
+
+        if (persist) {
+          try {
+            localStorage.setItem('trd-theme', theme);
+          } catch (e) {}
+        }
+      }
+
+      // Sincroniza estado inicial dos atributos do botão e meta tag
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      applyTheme(currentTheme, false);
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', function() {
+          const current = document.documentElement.getAttribute('data-theme') || 'dark';
+          const next = current === 'dark' ? 'light' : 'dark';
+          applyTheme(next, true);
+        });
+      }
+
+      // Atalho de teclado Alt + T
+      document.addEventListener('keydown', function(e) {
+        if (e.altKey && (e.key === 't' || e.key === 'T')) {
+          e.preventDefault();
+          const current = document.documentElement.getAttribute('data-theme') || 'dark';
+          applyTheme(current === 'dark' ? 'light' : 'dark', true);
+        }
+      });
+
+      // Ouvir preferência do sistema se não houver preferência salva
+      try {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+          if (!localStorage.getItem('trd-theme')) {
+            applyTheme(e.matches ? 'dark' : 'light', false);
+          }
+        });
+      } catch (err) {}
+    })();
+
+    // --- 2. Menu Mobile Acessível (Touch & Focus Trap) ---
+    (function initMobileNav() {
+      const btn = document.getElementById('nav-toggle-btn');
+      const menu = document.getElementById('nav-mobile');
+      if (!btn || !menu) return;
+
+      const iconMenu = btn.querySelector('.nav__icon-menu');
+      const iconClose = btn.querySelector('.nav__icon-close');
+
+      function setMenuState(open) {
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Fechar menu de navegação' : 'Abrir menu de navegação');
+        menu.classList.toggle('is-open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+        if (iconMenu && iconClose) {
+          iconMenu.style.display = open ? 'none' : 'block';
+          iconClose.style.display = open ? 'block' : 'none';
+        }
+      }
+
+      btn.addEventListener('click', function() {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        setMenuState(!isOpen);
+      });
+
+      menu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          setMenuState(false);
+        });
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+          setMenuState(false);
+          btn.focus();
+        }
+      });
+    })();
+
+    // --- 3. Widget Autodiagnóstico Interativo (Acessível) ---
+    function calcularRisco() {
+      const checks = document.querySelectorAll('.quiz-check');
+      let resolvidos = 0;
+      checks.forEach(function(c) { if (c.checked) resolvidos++; });
+
+      const fill = document.getElementById('risk-fill');
+      const status = document.getElementById('risk-status');
+      const badge = document.getElementById('risk-badge');
+      const desc = document.getElementById('risk-desc');
+      const btn = document.getElementById('risk-btn');
+
+      const pct = (5 - resolvidos) * 20; // 0 = 100% risco, 5 = 0%
+      if (fill) fill.style.width = pct + '%';
+      const meterBar = document.querySelector('.quiz-meter-bar');
+      if (meterBar) meterBar.setAttribute('aria-valuenow', String(pct));
+
+      let labelRisco = 'Crítico';
+      if (pct >= 80) {
+        labelRisco = 'Crítico';
+        if (fill) fill.style.backgroundColor = 'var(--danger)';
+        if (status) {
+          status.style.color = 'var(--danger)';
+          status.innerText = 'RISCO CRÍTICO (' + pct + '%)';
+        }
+        if (badge) {
+          badge.className = 'badge-sla badge-sla--p1';
+          badge.innerText = 'Ação Imediata';
+        }
+        if (desc) {
+          desc.innerText = 'Seu ecossistema possui vulnerabilidade severa de parada não planejada, dependência de pessoa única e ausência de retaguarda contratual.';
+        }
+      } else if (pct >= 40) {
+        labelRisco = 'Moderado';
+        if (fill) fill.style.backgroundColor = 'var(--accent)';
+        if (status) {
+          status.style.color = 'var(--accent)';
+          status.innerText = 'RISCO MODERADO (' + pct + '%)';
+        }
+        if (badge) {
+          badge.className = 'badge-sla badge-sla--p2';
+          badge.innerText = 'Atenção Operacional';
+        }
+        if (desc) {
+          desc.innerText = 'Existem deficiências latentes que podem gerar indisponibilidade ou perdas financeiras em picos de demanda ou transição de equipe.';
+        }
+      } else {
+        labelRisco = 'Controlado';
+        if (fill) fill.style.backgroundColor = 'var(--success)';
+        if (status) {
+          status.style.color = 'var(--success)';
+          status.innerText = 'RISCO CONTROLADO (' + pct + '%)';
+        }
+        if (badge) {
+          badge.className = 'badge-sla badge-sla--success';
+          badge.innerText = 'Boa Resiliência';
+        }
+        if (desc) {
+          desc.innerText = 'Sua operação adota boas práticas de continuidade. A TRD pode acelerar sua esteira e prover retaguarda especializada sob demanda.';
+        }
+      }
+
+      if (btn) {
+        const msg = encodeURIComponent('*TRD Consultoria — Autodiagnóstico de Risco*\nOlá Thiago, fiz a autoavaliação no site e meu ecossistema atingiu índice de risco de *' + pct + '% (' + labelRisco + ')*. Gostaria de avaliar um plano de sustentação.');
+        btn.href = 'https://wa.me/5561999526374?text=' + msg;
+      }
+    }
+
+    // --- 4. Barra de Progresso de Leitura Executiva (60FPS GPU ScaleX) ---
+    (function initReadingProgress() {
+      const progressBar = document.getElementById('nav-progress-bar');
+      if (!progressBar) return;
+
+      let ticking = false;
+      function updateProgress() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = docHeight > 0 ? Math.min(Math.max(scrollTop / docHeight, 0), 1) : 0;
+        progressBar.style.transform = 'scaleX(' + progress + ')';
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          window.requestAnimationFrame(updateProgress);
+          ticking = true;
+        }
+      }, { passive: true });
+      updateProgress();
+    })();
+
+    // --- 5. Gerenciador de Navegação & ScrollSpy de Alta Precisão ---
+    (function initNavigationSpy() {
+      const allNavLinks = Array.from(document.querySelectorAll('.nav__links a[href^="#"], .nav__mobile a[href^="#"]'));
+      const targetMap = [];
+      let isClickScrolling = false;
+      let clickTargetHref = null;
+      let scrollEndTimer = null;
+
+      // Mapear seções existentes
+      allNavLinks.forEach(function(link) {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#') && href.length > 1) {
+          const targetEl = document.querySelector(href);
+          if (targetEl && !targetMap.some(function(t) { return t.id === href; })) {
+            targetMap.push({ id: href, el: targetEl });
+          }
+        }
+      });
+
+      function setActiveLink(activeHref) {
+        allNavLinks.forEach(function(link) {
+          const isTarget = link.getAttribute('href') === activeHref;
+          if (isTarget) {
+            link.classList.add('is-active');
+            link.setAttribute('aria-current', 'page');
+          } else {
+            link.classList.remove('is-active');
+            link.removeAttribute('aria-current');
+          }
+        });
+      }
+
+      function updateActiveOnScroll() {
+        if (isClickScrolling) return;
+
+        const scrollY = window.scrollY || window.pageYOffset;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+
+        // Se o usuário está no topo da página (Hero), remove seleção
+        if (scrollY < 200) {
+          setActiveLink(null);
+          return;
+        }
+
+        // Se o usuário rolou até o fim da página (Footer / Contato), ativa Contato
+        if (windowHeight + scrollY >= documentHeight - 90) {
+          const lastTarget = targetMap[targetMap.length - 1];
+          if (lastTarget) {
+            setActiveLink(lastTarget.id);
+            return;
+          }
+        }
+
+        // Determina qual seção está na zona ativa de leitura (offset do header fixo)
+        const headerOffset = 130;
+        let currentActive = null;
+
+        for (let i = 0; i < targetMap.length; i++) {
+          const rect = targetMap[i].el.getBoundingClientRect();
+          if (rect.top <= headerOffset) {
+            currentActive = targetMap[i].id;
+          }
+        }
+
+        if (currentActive) {
+          setActiveLink(currentActive);
+        }
+      }
+
+      // 1. Resposta Imediata ao Clique do Usuário
+      allNavLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+          if (typeof link.blur === 'function') link.blur();
+          const href = link.getAttribute('href');
+          if (href && href.startsWith('#')) {
+            const targetEl = document.querySelector(href);
+            if (targetEl) {
+              // Aplica o visual ativo instantaneamente
+              isClickScrolling = true;
+              clickTargetHref = href;
+              setActiveLink(href);
+
+              clearTimeout(scrollEndTimer);
+              scrollEndTimer = setTimeout(function() {
+                isClickScrolling = false;
+                clickTargetHref = null;
+                updateActiveOnScroll();
+              }, 1800);
+
+              // Se o menu mobile estiver aberto, fecha suavemente
+              const navMobile = document.getElementById('nav-mobile');
+              const burgerBtn = document.getElementById('nav-toggle-btn');
+              if (navMobile && navMobile.classList.contains('is-open')) {
+                navMobile.classList.remove('is-open');
+                if (burgerBtn) {
+                  burgerBtn.setAttribute('aria-expanded', 'false');
+                  const iconMenu = burgerBtn.querySelector('.nav__icon-menu');
+                  const iconClose = burgerBtn.querySelector('.nav__icon-close');
+                  if (iconMenu) iconMenu.style.display = 'block';
+                  if (iconClose) iconClose.style.display = 'none';
+                }
+              }
+            }
+          }
+        });
+      });
+
+      // 2. ScrollSpy Contínuo Preciso (Baseado em Posição de Leitura e Fim de Página)
+      window.addEventListener('scroll', function() {
+        if (isClickScrolling) {
+          setActiveLink(clickTargetHref);
+          clearTimeout(scrollEndTimer);
+          scrollEndTimer = setTimeout(function() {
+            isClickScrolling = false;
+            clickTargetHref = null;
+            updateActiveOnScroll();
+          }, 250);
+          return;
+        }
+
+        updateActiveOnScroll();
+      }, { passive: true });
+
+      if ('onscrollend' in window) {
+        window.addEventListener('scrollend', function() {
+          isClickScrolling = false;
+          clickTargetHref = null;
+          updateActiveOnScroll();
+        }, { passive: true });
+      }
+
+      // Verificação inicial
+      updateActiveOnScroll();
+    })();
+
+    // --- 6. Floating Executive Quick-Connect Dock (CRO WhatsApp Thiago) ---
+    (function initExecDock() {
+      const dock = document.getElementById('exec-dock');
+      const closeBtn = document.getElementById('exec-dock-close');
+      if (!dock) return;
+
+      let dismissed = false;
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          dock.classList.remove('is-visible');
+          dock.classList.add('is-dismissed');
+          dismissed = true;
+        });
+      }
+
+      let ticking = false;
+      function checkDockVisibility() {
+        if (dismissed) return;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPct = docHeight > 0 ? (scrollTop / docHeight) : 0;
+        
+        // Surge suavemente após 20% da página percorrida
+        if (scrollPct > 0.20) {
+          dock.classList.add('is-visible');
+        } else {
+          dock.classList.remove('is-visible');
+        }
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          window.requestAnimationFrame(checkDockVisibility);
+          ticking = true;
+        }
+      }, { passive: true });
+      checkDockVisibility();
+    })();
+
+    // --- 7. Spotlight Card Hover Effect (Desktop com Mouse Real) ---
+    (function initSpotlight() {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      const targets = document.querySelectorAll('.card, .discovery');
+
+      targets.forEach(function(el) {
+        el.addEventListener('mousemove', function(e) {
+          const rect = el.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          el.style.setProperty('--mouse-x', x + 'px');
+          el.style.setProperty('--mouse-y', y + 'px');
+        }, { passive: true });
+      });
+    })();
+
+    // --- 8. Filtro Segmentado de Planos (CRO) ---
+    (function initPricingFilter() {
+      const buttons = document.querySelectorAll('.plans-filter__btn');
+      const blockCriacao = document.getElementById('bloco-criacao');
+      const blockSustentacao = document.getElementById('bloco-sustentacao');
+      if (!buttons.length || !blockCriacao || !blockSustentacao) return;
+
+      buttons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          buttons.forEach(function(b) {
+            b.classList.remove('is-active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('is-active');
+          btn.setAttribute('aria-selected', 'true');
+
+          const filter = btn.getAttribute('data-filter');
+          if (filter === 'criacao') {
+            blockCriacao.style.display = 'block';
+            blockSustentacao.style.display = 'none';
+          } else if (filter === 'sustentacao') {
+            blockCriacao.style.display = 'none';
+            blockSustentacao.style.display = 'block';
+          } else {
+            blockCriacao.style.display = 'block';
+            blockSustentacao.style.display = 'block';
+          }
+        });
+      });
+    })();
+
+    // --- 9. Console de Dimensionamento & Diagnóstico de Engenharia (Vanilla JS) ---
+    (function initEngineeringConsole() {
+      const modal = document.getElementById('eng-console-modal');
+      const form = document.getElementById('eng-console-form');
+      const closeBtn = document.getElementById('eng-console-close-btn');
+      const resetBtn = document.getElementById('eng-reset-btn');
+      const whatsappBtn = document.getElementById('eng-submit-whatsapp');
+      const triggers = document.querySelectorAll('.eng-console-trigger, [href="#console-engenharia"]');
+
+      if (!modal || !form || !whatsappBtn) return;
+
+      const STORAGE_KEY = 'trd_eng_console_state_v1';
+      let lastActiveElement = null;
+
+      // Gerador de Código Referencial Único de Diagnóstico
+      function getReferenceCode() {
+        let ref = '';
+        try {
+          ref = sessionStorage.getItem('trd_eng_ref_code');
+          if (!ref) {
+            ref = 'TRD-ENG-' + Math.floor(1000 + Math.random() * 9000);
+            sessionStorage.setItem('trd_eng_ref_code', ref);
+          }
+        } catch (e) {
+          ref = 'TRD-ENG-8402';
+        }
+        return ref;
+      }
+
+      // Motor de Cálculo & Diagnóstico de Engenharia
+      function calculateScope(data) {
+        let governance = 'Boutique Sênior · Ciclo Ágil';
+        let slaResponse = '2 a 3 semanas (Sprint 1 em 5 dias)';
+        let billing = 'Classe Starter (R$ 9.800) · Até 12x no Cartão';
+        let labelModalidade = 'Criação Sob Medida';
+        let labelEscala = 'Ágil (1 a 3 Módulos Core)';
+
+        if (data.modalidade === 'sustentacao') {
+          labelModalidade = 'Sustentação com SLA N3';
+          governance = 'Engenharia de Confiabilidade N2/N3';
+          slaResponse = 'Horário Comercial (Seg a Sex, 8h às 18h) · SLA Contratual';
+          billing = 'Plano Profissional (R$ 5.500/mês) com SLA Contratual';
+        } else if (data.modalidade === 'diagnostico') {
+          labelModalidade = 'Auditoria & Diagnóstico Técnico';
+          governance = 'Perícia Arquitetural & Benchmarking SQL';
+          slaResponse = 'Entrega de Laudo em 3 a 5 dias úteis';
+          billing = 'Auditoria Especializada (R$ 3.500 único)';
+        }
+
+        if (data.modalidade === 'criacao') {
+          if (data.escala === 'corporativo') {
+            labelEscala = 'Corporativo (4 a 8 Módulos)';
+            governance = 'Boutique Sênior · Engenharia Modular';
+            slaResponse = '3 a 5 semanas (Entregas quinzenais)';
+            billing = 'Classe Hub Pro (R$ 16.500) · Até 12x no Cartão';
+          } else if (data.escala === 'missao-critica') {
+            labelEscala = 'Missão Crítica / Multi-tenant';
+            governance = 'Arquitetura Resiliente · Alta Concorrência';
+            slaResponse = '6 a 10 semanas (Sprint 0 de Arquitetura)';
+            billing = 'Personalizado · Mini-Discovery com 100% Cashback';
+          }
+        }
+
+        const infraItems = [];
+        if (data.infra_db) infraItems.push('Banco SQL Dedicado');
+        if (data.infra_api) infraItems.push('APIs/Webhooks/Pix');
+        if (data.infra_monitoramento) infraItems.push('Monitoramento Proativo');
+        if (data.infra_compliance) infraItems.push('LGPD/Auditoria');
+
+        return {
+          modalidadeLabel: labelModalidade,
+          escalaLabel: labelEscala,
+          governance: governance,
+          slaResponse: slaResponse,
+          billing: billing,
+          infraList: infraItems.length > 0 ? infraItems.join(' | ') : 'Padrão Base'
+        };
+      }
+
+      // Leitura do Estado do Formulário
+      function getFormData() {
+        return {
+          modalidade: form.querySelector('input[name="modalidade"]:checked')?.value || 'criacao',
+          escala: form.querySelector('input[name="escala"]:checked')?.value || 'agil',
+          infra_db: form.querySelector('input[name="infra_db"]')?.checked || false,
+          infra_api: form.querySelector('input[name="infra_api"]')?.checked || false,
+          infra_monitoramento: form.querySelector('input[name="infra_monitoramento"]')?.checked || false,
+          infra_compliance: form.querySelector('input[name="infra_compliance"]')?.checked || false,
+          clientName: (document.getElementById('eng-client-name')?.value || '').trim(),
+          clientCompany: (document.getElementById('eng-client-company')?.value || '').trim()
+        };
+      }
+
+      // Restauração de Estado a partir do sessionStorage
+      function restoreState() {
+        try {
+          const raw = sessionStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const data = JSON.parse(raw);
+
+          const modInput = form.querySelector('input[name="modalidade"][value="' + data.modalidade + '"]');
+          if (modInput) modInput.checked = true;
+
+          const escInput = form.querySelector('input[name="escala"][value="' + data.escala + '"]');
+          if (escInput) escInput.checked = true;
+
+          const setCheck = function(name, val) {
+            const el = form.querySelector('input[name="' + name + '"]');
+            if (el) el.checked = !!val;
+          };
+          setCheck('infra_db', data.infra_db);
+          setCheck('infra_api', data.infra_api);
+          setCheck('infra_monitoramento', data.infra_monitoramento);
+          setCheck('infra_compliance', data.infra_compliance);
+
+          const nameEl = document.getElementById('eng-client-name');
+          if (nameEl && data.clientName) nameEl.value = data.clientName;
+
+          const compEl = document.getElementById('eng-client-company');
+          if (compEl && data.clientCompany) compEl.value = data.clientCompany;
+        } catch (e) {}
+      }
+
+      // Persistência em sessionStorage
+      function saveState(data) {
+        try {
+          sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        } catch (e) {}
+      }
+
+      // Blindagem & Geração da URL do WhatsApp (Sem Emojis Quebrados · Formato Canônico)
+      function updateWhatsAppUrl(data, scope, refId) {
+        const clientDesc = (data.clientName && data.clientCompany)
+          ? data.clientName + ' (' + data.clientCompany + ')'
+          : (data.clientName || data.clientCompany || null);
+
+        const lines = [
+          '*TRD CONSULTORIA - ESPECIFICAÇÃO DE ENGENHARIA*',
+          '----------------------------------------',
+          '*Modalidade:* ' + scope.modalidadeLabel,
+          '*Escopo:* ' + scope.escalaLabel,
+          '*Infraestrutura:* ' + scope.infraList,
+          '*Governança:* ' + scope.governance,
+          '*Prazo / SLA:* ' + scope.slaResponse,
+          '*Condição:* ' + scope.billing,
+          clientDesc ? '*Solicitante:* ' + clientDesc : null,
+          '----------------------------------------',
+          '*Referência:* ' + refId,
+          '----------------------------------------',
+          'Olá Thiago, configurei este escopo no site da TRD e gostaria de um alinhamento técnico.'
+        ].filter(Boolean);
+
+        const rawMessage = lines.join('\n');
+        const phone = '5561999526374';
+
+        whatsappBtn.href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(rawMessage);
+      }
+
+      // Atualização da Interface
+      function updateUI() {
+        const data = getFormData();
+        saveState(data);
+
+        const scope = calculateScope(data);
+        const refId = getReferenceCode();
+
+        const refEl = document.getElementById('eng-ref-id');
+        const govEl = document.getElementById('eng-out-governance');
+        const slaEl = document.getElementById('eng-out-sla');
+        const billEl = document.getElementById('eng-out-billing');
+
+        if (refEl) refEl.innerText = refId;
+        if (govEl) govEl.innerText = scope.governance;
+        if (slaEl) slaEl.innerText = scope.slaResponse;
+        if (billEl) billEl.innerText = scope.billing;
+
+        updateWhatsAppUrl(data, scope, refId);
+      }
+
+      // Abertura do Modal com Preservação de Foco & Scroll Lock
+      function openModal() {
+        lastActiveElement = document.activeElement;
+        document.documentElement.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
+
+        if (typeof modal.showModal === 'function') {
+          modal.showModal();
+        } else {
+          modal.setAttribute('open', '');
+        }
+        updateUI();
+      }
+
+      // Fechamento do Modal com Restauração de Foco & Scroll Lock
+      function closeModal() {
+        document.documentElement.style.overflow = '';
+        document.body.style.touchAction = '';
+
+        if (typeof modal.close === 'function') {
+          modal.close();
+        } else {
+          modal.removeAttribute('open');
+        }
+        if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+          lastActiveElement.focus();
+        }
+      }
+
+      // Event Listeners Reativos
+      form.addEventListener('input', updateUI);
+      form.addEventListener('change', updateUI);
+
+      triggers.forEach(function(trigger) {
+        trigger.addEventListener('click', function(e) {
+          e.preventDefault();
+          openModal();
+        });
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          closeModal();
+        });
+      }
+
+      // Fechar ao clicar no backdrop escuro
+      modal.addEventListener('click', function(e) {
+        const rect = modal.getBoundingClientRect();
+        const isInDialog = (
+          rect.top <= e.clientY &&
+          e.clientY <= rect.top + rect.height &&
+          rect.left <= e.clientX &&
+          e.clientX <= rect.left + rect.width
+        );
+        if (!isInDialog) {
+          closeModal();
+        }
+      });
+
+      // Tecla Escape (evento nativo cancel)
+      modal.addEventListener('cancel', function(e) {
+        e.preventDefault();
+        closeModal();
+      });
+
+      // Botão Reiniciar
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+          try {
+            sessionStorage.removeItem(STORAGE_KEY);
+          } catch (e) {}
+          form.reset();
+          updateUI();
+        });
+      }
+
+      // Inicialização
+      restoreState();
+      updateUI();
+    })();
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.quiz-check').forEach(function(input) {
+        input.addEventListener('change', calcularRisco);
+      });
+      calcularRisco();
+    });
+  </script>
+</body>
+</html>
