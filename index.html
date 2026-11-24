@@ -1274,7 +1274,7 @@
 
               <div class="eng-summary-item">
                 <span class="small muted">Modelo &amp; Enquadramento Referencial</span>
-                <div id="eng-out-billing" class="eng-summary-val">Classe Starter (R$ 9.800) · Até 12x no Cartão</div>
+                <div id="eng-out-billing" class="eng-summary-val">Classe Starter (R$ 4.800) · Até 12x no Cartão</div>
               </div>
 
               <div class="eng-summary-callout">
@@ -1857,15 +1857,15 @@
       function calculateScope(data) {
         let governance = 'Boutique Sênior · Ciclo Ágil';
         let slaResponse = '2 a 3 semanas (Sprint 1 em 5 dias)';
-        let billing = 'Classe Starter (R$ 9.800) · Até 12x no Cartão';
+        let billing = 'Classe Starter (R$ 4.800) · Até 12x no Cartão';
         let labelModalidade = 'Criação Sob Medida';
         let labelEscala = 'Ágil (1 a 3 Módulos Core)';
 
         if (data.modalidade === 'sustentacao') {
           labelModalidade = 'Sustentação com SLA N3';
           governance = 'Engenharia de Confiabilidade N2/N3';
-          slaResponse = 'Horário Comercial (Seg a Sex, 8h às 18h) · SLA Contratual';
-          billing = 'Plano Profissional (R$ 5.500/mês) com SLA Contratual';
+          slaResponse = 'Horário Comercial (Seg a Sex, 9h às 18h) · SLA Contratual';
+          billing = 'Standby Preventivo (R$ 490/mês) ou SLA Corporativo (R$ 3.200 a R$ 5.500/mês)';
         } else if (data.modalidade === 'diagnostico') {
           labelModalidade = 'Auditoria & Diagnóstico Técnico';
           governance = 'Perícia Arquitetural & Benchmarking SQL';
@@ -1877,13 +1877,13 @@
           if (data.escala === 'corporativo') {
             labelEscala = 'Corporativo (4 a 8 Módulos)';
             governance = 'Boutique Sênior · Engenharia Modular';
-            slaResponse = '3 a 5 semanas (Entregas quinzenais)';
-            billing = 'Classe Hub Pro (R$ 16.500) · Até 12x no Cartão';
+            slaResponse = '3 a 4 semanas (Entregas quinzenais)';
+            billing = 'Classe Hub Pro (R$ 8.900) · Até 12x no Cartão';
           } else if (data.escala === 'missao-critica') {
             labelEscala = 'Missão Crítica / Multi-tenant';
             governance = 'Arquitetura Resiliente · Alta Concorrência';
             slaResponse = '6 a 10 semanas (Sprint 0 de Arquitetura)';
-            billing = 'Personalizado · Mini-Discovery com 100% Cashback';
+            billing = 'Plataforma Sob Medida (a partir de R$ 16.500) · Sob Demanda';
           }
         }
 
