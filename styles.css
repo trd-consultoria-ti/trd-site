@@ -2478,6 +2478,21 @@ h3 { font-size: 1.25rem; }
     padding: 1rem 1.25rem 1.5rem;
     gap: 1.25rem;
   }
+  .calc-item {
+    padding: .85rem 1rem;
+  }
+  .calc-stepper {
+    padding: .15rem;
+  }
+  .calc-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.35rem;
+  }
+  .calc-input {
+    width: 2.25rem;
+    font-size: 1.1rem;
+  }
 }
 
 /* ---------- Calculadora Aberta de Escopo por Telas ---------- */
@@ -2586,6 +2601,11 @@ h3 { font-size: 1.25rem; }
   background: var(--accent);
   color: #080D1A;
   border-color: var(--accent);
+}
+
+.calc-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .calc-btn:active {
