@@ -842,21 +842,143 @@
           </div>
         </div>
 
-        <!-- BANNER FILOSOFIA PARAMÉTRICA & PLANO CONTINUIDADE -->
-        <div class="discovery" style="margin-top:2rem; max-width:76rem; margin-inline:auto;">
-          <div>
+        <!-- CALCULADORA INTERATIVA ABERTA DE ESCOPO POR TELAS -->
+        <div id="calculadora-escopo" class="calc-scope-container" style="margin-top:2.5rem; max-width:76rem; margin-inline:auto;">
+          <div class="calc-scope-header">
             <span class="card__tag" style="margin-bottom:.5rem;">A Regra da Precificação Aberta</span>
-            <h3>Calculadora Aberta de Escopo &amp; Evolução Sob Demanda</h3>
-            <p class="small" style="margin-top:.5rem; max-width:48rem;">
-              Na TRD, você sabe exatamente o que está pagando: <strong class="strong">telas básicas de login e perfil (R$ 600 a R$ 900)</strong>, <strong class="strong">telas de cadastro CRUD (R$ 900 a R$ 1.400)</strong>, <strong class="strong">telas operacionais de OS/Pedidos (R$ 1.500 a R$ 2.200)</strong> e <strong class="strong">dashboards (R$ 1.400 a R$ 2.000)</strong>. Comece pelo essencial e adicione novas telas à medida que sua operação faturar mais.
-            </p>
-            <p class="small muted" style="margin-top:.5rem;">
-              Sustentação preventiva e evolução técnica contínua com banco de horas e SLA a partir de <strong class="strong" style="color:var(--accent);">R$ 490/mês</strong>. Sem fidelidade forçada.
+            <h3 style="font-size:1.6rem; margin-top:.25rem;">Calculadora Aberta de Escopo &amp; Telas</h3>
+            <p class="small muted" style="margin-top:.35rem; max-width:48rem;">
+              Simule a composição exata do seu software sob medida: ajuste a quantidade de telas e veja o investimento total na hora, com parcelamento em até 12x no cartão corporativo PJ. Código 100% seu (Lei 9.609/98) e sem cobrança por usuário.
             </p>
           </div>
-          <div style="text-align:right; flex-shrink:0;">
-            <p class="price">A partir de R$ 490 <small>/mês</small></p>
-            <a class="btn btn--ghost btn--sm" style="margin-top:.5rem;" href="https://wa.me/5561999526374?text=*TRD%20Consultoria*%0AOl%C3%A1%20Thiago,%20gostaria%20de%20entender%20como%20funciona%20a%20*Evolu%C3%A7%C3%A3o%20Cont%C3%ADnua%20por%20Telas*%20da%20TRD." target="_blank" rel="noopener">Entender o Modelo</a>
+
+          <div class="calc-scope-grid">
+            <!-- Coluna 1: Controles de Telas e Módulos -->
+            <div class="calc-scope-controls">
+              
+              <!-- Item 1: Telas de Acesso -->
+              <div class="calc-item">
+                <div class="calc-item__info">
+                  <span class="calc-item__title">Telas de Acesso / Perfil</span>
+                  <span class="calc-item__desc">Login, perfil do usuário, recuperação de acesso ou tela inicial.</span>
+                  <span class="calc-item__unit">R$ 600 / tela</span>
+                </div>
+                <div class="calc-stepper">
+                  <button type="button" class="calc-btn" data-action="dec" data-target="basic" aria-label="Diminuir telas de acesso">−</button>
+                  <input type="number" id="calc-basic" class="calc-input" value="1" min="0" max="10" readonly>
+                  <button type="button" class="calc-btn" data-action="inc" data-target="basic" aria-label="Aumentar telas de acesso">+</button>
+                </div>
+              </div>
+
+              <!-- Item 2: Telas de Cadastro CRUD -->
+              <div class="calc-item">
+                <div class="calc-item__info">
+                  <span class="calc-item__title">Telas de Cadastro (CRUD)</span>
+                  <span class="calc-item__desc">Cadastros completos com busca e filtros: Clientes, Produtos, Fornecedores.</span>
+                  <span class="calc-item__unit">R$ 900 / tela</span>
+                </div>
+                <div class="calc-stepper">
+                  <button type="button" class="calc-btn" data-action="dec" data-target="crud" aria-label="Diminuir telas de cadastro">−</button>
+                  <input type="number" id="calc-crud" class="calc-input" value="1" min="0" max="15" readonly>
+                  <button type="button" class="calc-btn" data-action="inc" data-target="crud" aria-label="Aumentar telas de cadastro">+</button>
+                </div>
+              </div>
+
+              <!-- Item 3: Telas Operacionais -->
+              <div class="calc-item">
+                <div class="calc-item__info">
+                  <span class="calc-item__title">Telas Operacionais / Transacionais</span>
+                  <span class="calc-item__desc">Ordens de Serviço, Pedidos de Venda, Frente de Caixa (PDV), Emissão de Contratos.</span>
+                  <span class="calc-item__unit">R$ 1.500 / tela</span>
+                </div>
+                <div class="calc-stepper">
+                  <button type="button" class="calc-btn" data-action="dec" data-target="ops" aria-label="Diminuir telas operacionais">−</button>
+                  <input type="number" id="calc-ops" class="calc-input" value="1" min="0" max="15" readonly>
+                  <button type="button" class="calc-btn" data-action="inc" data-target="ops" aria-label="Aumentar telas operacionais">+</button>
+                </div>
+              </div>
+
+              <!-- Item 4: Dashboards -->
+              <div class="calc-item">
+                <div class="calc-item__info">
+                  <span class="calc-item__title">Dashboards Gerenciais / Gráficos</span>
+                  <span class="calc-item__desc">Painel executivo com métricas financeiras, gráficos de faturamento e exportação Excel.</span>
+                  <span class="calc-item__unit">R$ 1.400 / tela</span>
+                </div>
+                <div class="calc-stepper">
+                  <button type="button" class="calc-btn" data-action="dec" data-target="dash" aria-label="Diminuir dashboards">−</button>
+                  <input type="number" id="calc-dash" class="calc-input" value="1" min="0" max="10" readonly>
+                  <button type="button" class="calc-btn" data-action="inc" data-target="dash" aria-label="Aumentar dashboards">+</button>
+                </div>
+              </div>
+
+              <!-- Extra 1: Bot de WhatsApp -->
+              <div class="calc-extra">
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="calc-extra-whatsapp" class="calc-checkbox">
+                  <span>
+                    <strong>+ Automação / Bot de WhatsApp Integrado (+R$ 1.490)</strong>
+                    <small class="muted" style="display:block;">Notificações automáticas de pedidos e confirmações aos clientes.</small>
+                  </span>
+                </label>
+              </div>
+
+              <!-- Extra 2: Sustentação Opcional Standby -->
+              <div class="calc-extra" style="border-top:1px dashed var(--border); padding-top:.75rem;">
+                <label class="calc-checkbox-label">
+                  <input type="checkbox" id="calc-extra-support" class="calc-checkbox">
+                  <span>
+                    <strong>+ Incluir Retainer Preventivo Standby (+R$ 490/mês pós-entrega)</strong>
+                    <small class="muted" style="display:block;">Sustentação contínua de rotina em horário comercial (dias úteis, 09h às 18h). Sem fidelidade.</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Coluna 2: Painel Dinâmico de Resumo -->
+            <div class="calc-scope-summary">
+              <div class="calc-summary-card">
+                <span class="eyebrow" style="margin-bottom:0;">Composição em Tempo Real</span>
+                <div class="calc-summary-screens">
+                  <span id="calc-total-screens-badge" class="badge">4 Telas Selecionadas</span>
+                  <span id="calc-time-badge" class="calc-pill">Prazo: 2 a 3 semanas</span>
+                </div>
+
+                <div class="calc-summary-pricing">
+                  <span class="small muted" style="display:block;">Investimento de Desenvolvimento (Software Próprio):</span>
+                  <div id="calc-total-cash" class="calc-total-val">R$ 4.400</div>
+                  <div id="calc-total-installment" class="calc-installment-val">ou em até <strong>12x de ~R$ 440</strong> no Cartão PJ</div>
+                  <div id="calc-monthly-notice" class="calc-monthly-notice" style="display:none;">
+                    + R$ 490/mês de sustentação preventiva (inicia após entrega e garantia)
+                  </div>
+                </div>
+
+                <div class="calc-guarantees">
+                  <div class="calc-guarantee-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                    <span>Código 100% de sua propriedade (Lei 9.609/98)</span>
+                  </div>
+                  <div class="calc-guarantee-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                    <span>Zero mensalidade por usuário de SaaS</span>
+                  </div>
+                  <div class="calc-guarantee-item">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                    <span>30 dias de garantia técnica inclusa</span>
+                  </div>
+                </div>
+
+                <div class="calc-cta-wrap">
+                  <a id="calc-whatsapp-btn" class="btn btn--primary" style="width:100%; text-align:center;" href="#" target="_blank" rel="noopener">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.5rem;" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Enviar Esta Composição no WhatsApp
+                  </a>
+                  <span class="small muted" style="display:block; text-align:center; margin-top:.4rem; font-size:.75rem;">
+                    Validação direta com o engenheiro Thiago Duarte · Sem intermediários
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -2091,6 +2213,151 @@
         input.addEventListener('change', calcularRisco);
       });
       calcularRisco();
+
+      // Motor Interativo da Calculadora Aberta de Escopo por Telas
+      (function initScopeCalculator() {
+        const basicInput = document.getElementById('calc-basic');
+        const crudInput = document.getElementById('calc-crud');
+        const opsInput = document.getElementById('calc-ops');
+        const dashInput = document.getElementById('calc-dash');
+        const waCheck = document.getElementById('calc-extra-whatsapp');
+        const supportCheck = document.getElementById('calc-extra-support');
+
+        if (!basicInput || !crudInput || !opsInput || !dashInput) return;
+
+        const badgeScreens = document.getElementById('calc-total-screens-badge');
+        const badgeTime = document.getElementById('calc-time-badge');
+        const totalCashEl = document.getElementById('calc-total-cash');
+        const totalInstallmentEl = document.getElementById('calc-total-installment');
+        const monthlyNoticeEl = document.getElementById('calc-monthly-notice');
+        const waBtn = document.getElementById('calc-whatsapp-btn');
+
+        const PRICES = {
+          basic: 600,
+          crud: 900,
+          ops: 1500,
+          dash: 1400,
+          whatsapp: 1490
+        };
+
+        function calculate() {
+          const nBasic = Math.max(0, parseInt(basicInput.value, 10) || 0);
+          const nCrud = Math.max(0, parseInt(crudInput.value, 10) || 0);
+          const nOps = Math.max(0, parseInt(opsInput.value, 10) || 0);
+          const nDash = Math.max(0, parseInt(dashInput.value, 10) || 0);
+          const hasWa = waCheck ? waCheck.checked : false;
+          const hasSupport = supportCheck ? supportCheck.checked : false;
+
+          const totalScreens = nBasic + nCrud + nOps + nDash;
+
+          let total = (nBasic * PRICES.basic) +
+                      (nCrud * PRICES.crud) +
+                      (nOps * PRICES.ops) +
+                      (nDash * PRICES.dash);
+
+          if (hasWa) {
+            total += PRICES.whatsapp;
+          }
+
+          // Piso mínimo da esteira técnica é a entrada acessível
+          if (total < 1490 && totalScreens > 0) {
+            total = 1490;
+          } else if (totalScreens === 0 && !hasWa) {
+            total = 0;
+          }
+
+          // Estimativa de prazo
+          let prazo = '2 a 3 semanas';
+          if (totalScreens === 0 && hasWa) {
+            prazo = '5 a 8 dias úteis';
+          } else if (totalScreens <= 2 && !nOps && !nDash) {
+            prazo = '5 a 8 dias úteis';
+          } else if (totalScreens <= 4) {
+            prazo = '2 a 3 semanas';
+          } else if (totalScreens <= 8) {
+            prazo = '3 a 4 semanas';
+          } else if (totalScreens > 8) {
+            prazo = '4 a 6 semanas';
+          }
+
+          // Parcela em 12x aproximada no cartão PJ
+          const parcela = Math.round(total / 10);
+
+          // Atualização da UI
+          if (badgeScreens) {
+            badgeScreens.textContent = totalScreens + (totalScreens === 1 ? ' Tela Selecionada' : ' Telas Selecionadas');
+          }
+          if (badgeTime) {
+            badgeTime.textContent = 'Prazo: ' + prazo;
+          }
+          if (totalCashEl) {
+            totalCashEl.textContent = 'R$ ' + total.toLocaleString('pt-BR');
+          }
+          if (totalInstallmentEl) {
+            if (total > 0) {
+              totalInstallmentEl.innerHTML = 'ou em até <strong>12x de ~R$ ' + parcela.toLocaleString('pt-BR') + '</strong> no Cartão PJ';
+              totalInstallmentEl.style.display = 'block';
+            } else {
+              totalInstallmentEl.style.display = 'none';
+            }
+          }
+          if (monthlyNoticeEl) {
+            monthlyNoticeEl.style.display = hasSupport ? 'block' : 'none';
+          }
+
+          // Montagem do link para o WhatsApp
+          if (waBtn) {
+            let msg = '*TRD Consultoria — Simulação de Escopo por Telas*\n' +
+                      'Olá Thiago, acabei de montar uma simulação na calculadora do site:\n' +
+                      '• Telas de Acesso/Perfil: ' + nBasic + '\n' +
+                      '• Telas de Cadastro (CRUD): ' + nCrud + '\n' +
+                      '• Telas Operacionais (OS/Pedidos): ' + nOps + '\n' +
+                      '• Dashboards/Relatórios: ' + nDash + '\n';
+            
+            if (hasWa) {
+              msg += '• Bot de WhatsApp Integrado: Sim (+R$ 1.490)\n';
+            }
+            msg += '• Total de Telas: ' + totalScreens + '\n' +
+                   '• Investimento Estimado: R$ ' + total.toLocaleString('pt-BR') + (total > 0 ? ' (em até 12x de ~R$ ' + parcela.toLocaleString('pt-BR') + ' no Cartão PJ)' : '') + '\n' +
+                   '• Prazo Estimado: ' + prazo + '\n';
+
+            if (hasSupport) {
+              msg += '• Sustentação Preventiva Standby: R$ 490/mês (opcional)\n';
+            }
+
+            msg += '\nGostaria de validar esse escopo com você!';
+
+            waBtn.href = 'https://wa.me/5561999526374?text=' + encodeURIComponent(msg);
+          }
+        }
+
+        // Controles dos botões +/-
+        document.querySelectorAll('.calc-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            const action = btn.getAttribute('data-action');
+            const targetKey = btn.getAttribute('data-target');
+            const input = document.getElementById('calc-' + targetKey);
+            if (!input) return;
+
+            let val = parseInt(input.value, 10) || 0;
+            const min = parseInt(input.getAttribute('min'), 10) || 0;
+            const max = parseInt(input.getAttribute('max'), 10) || 20;
+
+            if (action === 'inc' && val < max) {
+              val++;
+            } else if (action === 'dec' && val > min) {
+              val--;
+            }
+            input.value = val;
+            calculate();
+          });
+        });
+
+        if (waCheck) waCheck.addEventListener('change', calculate);
+        if (supportCheck) supportCheck.addEventListener('change', calculate);
+
+        calculate();
+      })();
     });
   </script>
 </body>
