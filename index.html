@@ -2371,7 +2371,9 @@
 
           // Estimativa de prazo
           let prazo = '2 a 3 semanas';
-          if (totalScreens === 0 && hasWa) {
+          if (totalScreens === 0 && !hasWa) {
+            prazo = 'A definir';
+          } else if (totalScreens === 0 && hasWa) {
             prazo = '5 a 8 dias úteis';
           } else if (totalScreens <= 2 && !nOps && !nDash) {
             prazo = '5 a 8 dias úteis';
