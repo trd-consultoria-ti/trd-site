@@ -1348,7 +1348,7 @@
             </div>
             <div class="calc-stepper">
               <button type="button" class="calc-btn" data-action="dec" data-target="crud" aria-label="Diminuir telas de cadastro">−</button>
-              <input type="number" id="calc-crud" class="calc-input" value="1" min="0" max="15" readonly>
+              <input type="number" id="calc-crud" class="calc-input" value="0" min="0" max="15" readonly>
               <button type="button" class="calc-btn" data-action="inc" data-target="crud" aria-label="Aumentar telas de cadastro">+</button>
             </div>
           </div>
@@ -1362,7 +1362,7 @@
             </div>
             <div class="calc-stepper">
               <button type="button" class="calc-btn" data-action="dec" data-target="ops" aria-label="Diminuir telas operacionais">−</button>
-              <input type="number" id="calc-ops" class="calc-input" value="1" min="0" max="15" readonly>
+              <input type="number" id="calc-ops" class="calc-input" value="0" min="0" max="15" readonly>
               <button type="button" class="calc-btn" data-action="inc" data-target="ops" aria-label="Aumentar telas operacionais">+</button>
             </div>
           </div>
@@ -1376,7 +1376,7 @@
             </div>
             <div class="calc-stepper">
               <button type="button" class="calc-btn" data-action="dec" data-target="dash" aria-label="Diminuir dashboards">−</button>
-              <input type="number" id="calc-dash" class="calc-input" value="1" min="0" max="10" readonly>
+              <input type="number" id="calc-dash" class="calc-input" value="0" min="0" max="10" readonly>
               <button type="button" class="calc-btn" data-action="inc" data-target="dash" aria-label="Aumentar dashboards">+</button>
             </div>
           </div>
@@ -1409,14 +1409,14 @@
           <div class="calc-summary-card" style="position:static;">
             <span class="eyebrow" style="margin-bottom:0;">Composição em Tempo Real</span>
             <div class="calc-summary-screens">
-              <span id="calc-total-screens-badge" class="badge">4 Telas Selecionadas</span>
-              <span id="calc-time-badge" class="calc-pill">Prazo: 2 a 3 semanas</span>
+              <span id="calc-total-screens-badge" class="badge">1 Tela Selecionada</span>
+              <span id="calc-time-badge" class="calc-pill">Prazo: 5 a 8 dias úteis</span>
             </div>
 
             <div class="calc-summary-pricing">
               <span class="small muted" style="display:block;">Investimento de Desenvolvimento (Software Próprio):</span>
-              <div id="calc-total-cash" class="calc-total-val">R$ 4.400</div>
-              <div id="calc-total-installment" class="calc-installment-val">ou em até <strong>12x de ~R$ 440</strong> no Cartão PJ</div>
+              <div id="calc-total-cash" class="calc-total-val">R$ 1.490</div>
+              <div id="calc-total-installment" class="calc-installment-val">ou em até <strong>12x de ~R$ 150</strong> no Cartão PJ</div>
               <div id="calc-monthly-notice" class="calc-monthly-notice" style="display:none;">
                 + R$ 490/mês de sustentação preventiva (inicia após entrega e garantia)
               </div>
@@ -1446,7 +1446,21 @@
                   <span id="calc-copy-text">Copiar</span>
                 </button>
               </div>
-              <pre id="calc-live-pre" class="calc-live-pre" aria-live="polite" aria-atomic="true"></pre>
+              <pre id="calc-live-pre" class="calc-live-pre" aria-live="polite" aria-atomic="true">TRD Consultoria — Composição do Seu Sistema Sob Medida:
+• Telas de Acesso/Perfil: 1 (R$ 1.490)
+• Telas de Cadastro (CRUD): 0 (nenhuma)
+• Telas Operacionais (OS/Pedidos): 0 (nenhuma)
+• Dashboards Gerenciais: 0 (nenhum)
+--------------------------------------------------
+• Total de Telas: 1
+• Investimento de Desenvolvimento: R$ 1.490
+• Condição Facilitada: em até 12x de ~R$ 150 no Cartão PJ
+• Prazo Estimado de Entrega: 5 a 8 dias úteis
+
+Garantias:
+✓ Código 100% de sua titularidade (Lei 9.609/98)
+✓ Zero custo de licença ou mensalidade por usuário
+✓ 30 dias de garantia técnica inclusa contra bugs</pre>
             </div>
 
             <div class="calc-cta-wrap">
@@ -2386,7 +2400,7 @@
           }
 
           // Parcela em 12x aproximada no cartão PJ
-          const parcela = Math.round(total / 10);
+          const parcela = (total === 1490) ? 150 : Math.round(total / 10);
 
           // Atualização dos Badges e Valores Principais
           if (badgeScreens) {
@@ -2413,7 +2427,10 @@
           // Atualização Dinâmica do Resumo Formatado DIRETAMENTE NA TELA
           if (livePre) {
             let resumo = 'TRD Consultoria — Composição do Seu Sistema Sob Medida:\n';
-            resumo += '• Telas de Acesso/Perfil: ' + nBasic + ' (' + (nBasic > 0 ? 'R$ ' + (nBasic * PRICES.basic).toLocaleString('pt-BR') : 'nenhuma') + ')\n';
+            const basicValorText = (nBasic === 1 && totalScreens === 1)
+              ? 'R$ 1.490'
+              : (nBasic > 0 ? 'R$ ' + (nBasic * PRICES.basic).toLocaleString('pt-BR') : 'nenhuma');
+            resumo += '• Telas de Acesso/Perfil: ' + nBasic + ' (' + basicValorText + ')\n';
             resumo += '• Telas de Cadastro (CRUD): ' + nCrud + ' (' + (nCrud > 0 ? 'R$ ' + (nCrud * PRICES.crud).toLocaleString('pt-BR') : 'nenhuma') + ')\n';
             resumo += '• Telas Operacionais (OS/Pedidos): ' + nOps + ' (' + (nOps > 0 ? 'R$ ' + (nOps * PRICES.ops).toLocaleString('pt-BR') : 'nenhuma') + ')\n';
             resumo += '• Dashboards Gerenciais: ' + nDash + ' (' + (nDash > 0 ? 'R$ ' + (nDash * PRICES.dash).toLocaleString('pt-BR') : 'nenhum') + ')\n';
@@ -2509,6 +2526,7 @@
         if (waCheck) waCheck.addEventListener('change', calculate);
         if (supportCheck) supportCheck.addEventListener('change', calculate);
 
+        window.updateCalc = calculate;
         calculate();
       })();
     });
