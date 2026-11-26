@@ -1,43 +1,19 @@
-# Landing Page Corporativa Oficial — TRD Consultoria
-### TRD Consultoria e Serviços de TI LTDA
-**URL Oficial de Produção:** [https://trdconsultoria.com.br/](https://trdconsultoria.com.br/)  
-*Stack: HTML5 Semântico, Tailwind CSS CDN, Design Tokens Oficiais TRD e Acessibilidade WCAG 2.2 AAA*
+# TRD Consultoria e Serviços de TI LTDA
 
----
+Vitrine institucional oficial da **TRD Consultoria e Serviços de TI LTDA** (`trdconsultoria.com.br`), construída em **Angular 19** e **Tailwind CSS** sob diretrizes visuais **iOS Liquid Glass** e acessibilidade WCAG AA/AAA.
 
-## 1. Visão Geral
+## Arquitetura da Aplicação
 
-Este diretório contém os arquivos-fonte da Landing Page institucional da **TRD Consultoria e Serviços de TI LTDA**. 
+- **Framework:** Angular 19 (Standalone Components, Signals, `httpResource`, `@defer (on idle)`)
+- **Estilização:** Tailwind CSS + tokens semânticos Liquid Glass (Light Mode e Dark Mode com atalho `Alt+T` e persistência em `localStorage`)
+- **Dados Institucionais:** Servidos estaticamente em `/api/institutional.json` com estados completos de carregamento, busca vazia, falha de rede e sucesso
+- **Roteamento:** Vitrine principal (`/`) e Política de Privacidade e Governança LGPD (`/privacidade`)
+- **Publicação:** GitHub Pages via `.github/workflows/pages.yml` com fallback SPA (`404.html`), `.nojekyll` e domínio customizado (`public/CNAME`)
 
-A página foi construída com foco em alta performance, carregamento instantâneo (sub-segundo) e comunicação direta com o decisor corporativo C-Level (CTOs, Diretores de TI e CFOs).
+## Comandos de Desenvolvimento
 
----
-
-## 2. Estrutura de Arquivos
-
+```bash
+npm ci
+npx ng serve --port 4210
+npx ng build --configuration production
 ```
-site/
-├── index.html        # Página principal com arquitetura de conversão B2B e tokens TRD
-└── README.md         # Este guia de documentação da landing page
-```
-
----
-
-## 3. Seções da Landing Page
-
-1. **Header Fiduciário:** Logotipo vetorial oficial, navegação rápida e botão direto para WhatsApp de novos negócios.
-2. **Hero Section:** Proposta de valor central ("Sustentação de Sistemas Críticos & Engenharia de IA Sob Medida").
-3. **Métricas de Autoridade:** Ancoragem de anos de mercado, disponibilidade SLA 99.9% e foco em Java/Spring/Angular/SQL.
-4. **Serviços Especializados:**
-   - Sustentação de Sistemas Legados (SLA de 1h a 24h).
-   - Desenvolvimento Sob Medida de Sistemas e MVPs (metodologia solo em 20 dias).
-   - Engenharia de IA Aplicada & Squads de Agentes Autônomos.
-5. **Casos de Uso e Dores Solucionadas:** Gargalos em bancos de dados, rescisões repentinas de desenvolvedores internos e compliance LGPD.
-6. **Footer Institucional:** Dados cadastrais completos (CNPJ 43.065.207/0001-57), canais de atendimento, conformidade legal e copyright.
-
----
-
-## 4. Hospedagem e Publicação
-
-- A landing page é servida de forma segura e com suporte a HTTPS e domínio personalizado através da infraestrutura de páginas do GitHub (`trdconsultoria.com.br`).
-- O arquivo [`CNAME`](../CNAME) na raiz do repositório garante o apontamento do domínio oficial.

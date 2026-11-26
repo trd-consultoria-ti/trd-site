@@ -1,0 +1,13 @@
+# Dependencies & Build Outputs
+/node_modules
+/dist
+/out-tsc
+/.angular
+
+# Tooling & Temporary Scratch
+/.taste-skill
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
