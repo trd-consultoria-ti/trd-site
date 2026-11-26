@@ -8,7 +8,7 @@ Vitrine institucional oficial da **TRD Consultoria e Serviços de TI LTDA** (`tr
 - **Estilização:** Tailwind CSS + tokens semânticos Liquid Glass (Light Mode e Dark Mode com atalho `Alt+T` e persistência em `localStorage`)
 - **Dados Institucionais:** Servidos estaticamente em `/api/institutional.json` com estados completos de carregamento, busca vazia, falha de rede e sucesso
 - **Roteamento:** Vitrine principal (`/`) e Política de Privacidade e Governança LGPD (`/privacidade`)
-- **Publicação:** GitHub Pages via `.github/workflows/pages.yml` com fallback SPA (`404.html`), `.nojekyll` e domínio customizado (`public/CNAME`)
+- **Publicação:** Vercel (build estático + rewrite SPA automático) no projeto `trd-site`, domínio `trdconsultoria.com.br`. O GitHub é apenas depósito de código; sem GitHub Pages.
 
 ## Comandos de Desenvolvimento
 
