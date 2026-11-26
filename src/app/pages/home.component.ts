@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { httpResource } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import {
   InstitutionalPayload,
   LogoContrastMode,
@@ -17,7 +16,7 @@ type HeroFrameView = 'hub' | 'sla';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, ScopeSimulatorComponent],
+  imports: [ScopeSimulatorComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- 1. HERO (1st screen, subtle load entrance, live interactive Liquid Glass app-frame) -->
@@ -441,23 +440,13 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
     <!-- 3. EXPERIÊNCIA & AUTORIDADE (Angular 19 httpResource + Real Logos + 4 Real States) -->
     <section id="experiencia" class="py-16 sm:py-20">
       <div class="mx-auto max-w-[1240px] px-5 sm:px-8">
-        <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-          <div class="max-w-2xl">
-            <h2 class="text-2xl font-bold text-ink sm:text-4xl">
-              Experiência comprovada em ecossistemas regulados e plataformas próprias
-            </h2>
-            <p class="mt-4 text-base leading-relaxed text-secondary sm:text-lg">
-              Bagagem técnica consolidada em órgãos de Estado, mercado de capitais, bureaus de crédito de alta concorrência e softwares sob medida em produção.
-            </p>
-          </div>
-          <a
-            href="https://www.linkedin.com/in/thiagorduarte/"
-            target="_blank"
-            rel="noopener"
-            class="btn-glass-pill self-start lg:self-auto"
-          >
-            Ver trajetória no LinkedIn
-          </a>
+        <div class="max-w-2xl">
+          <h2 class="text-2xl font-bold text-ink sm:text-4xl">
+            Experiência comprovada em ecossistemas regulados e plataformas próprias
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-secondary sm:text-lg">
+            Bagagem técnica consolidada em órgãos de Estado, mercado de capitais, bureaus de crédito de alta concorrência e softwares sob medida em produção.
+          </p>
         </div>
 
         <!-- Real Institutional Trajectory Logos on Transparent Glass (ZERO White Boxes!) -->
@@ -482,8 +471,8 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </div>
         }
 
-        <!-- Interactive Category Segmented Control + Search Filter -->
-        <div class="mt-9 flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
+        <!-- Interactive Category Segmented Control -->
+        <div class="mt-9 flex flex-wrap items-center">
           <div class="segmented-track" role="tablist" aria-label="Filtrar portfólio por domínio">
             @for (cat of categories; track cat.id) {
               <button
@@ -495,43 +484,6 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                 class="segmented-btn"
               >
                 {{ cat.label }}
-              </button>
-            }
-          </div>
-
-          <div class="relative w-full lg:w-80">
-            <label for="portfolio-search" class="sr-only">Buscar projetos por nome ou tecnologia</label>
-            <input
-              id="portfolio-search"
-              type="search"
-              [ngModel]="searchQuery()"
-              (ngModelChange)="searchQuery.set($event)"
-              placeholder="Buscar órgão, case ou stack..."
-              class="min-h-[46px] w-full rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] pl-10 pr-10 text-sm text-ink placeholder:text-muted backdrop-blur-xl"
-            />
-            <svg
-              class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            @if (searchQuery()) {
-              <button
-                type="button"
-                (click)="searchQuery.set('')"
-                aria-label="Limpar texto da busca"
-                class="absolute right-1.5 top-1/2 inline-flex h-[38px] w-[38px] -translate-y-1/2 items-center justify-center rounded-full text-muted hover:text-ink"
-              >
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-                  <path d="M18 6L6 18M6 6l12 12"></path>
-                </svg>
               </button>
             }
           </div>
