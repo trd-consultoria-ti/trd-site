@@ -1,0 +1,199 @@
+{
+  "updatedAt": "2026-11-26",
+  "authorityLogos": [
+    {
+      "id": "dou",
+      "name": "Imprensa Nacional (DOU)",
+      "role": "Publicação oficial federal",
+      "src": "assets/logo-imprensa-nacional.png",
+      "contrastMode": "native",
+      "aspect": "square"
+    },
+    {
+      "id": "mjsp",
+      "name": "Ministério da Justiça (MJSP)",
+      "role": "Segurança pública e dados sensíveis",
+      "src": "assets/logo-mjsp.svg",
+      "contrastMode": "native",
+      "aspect": "square"
+    },
+    {
+      "id": "serasa",
+      "name": "Serasa Experian",
+      "role": "Esteira transacional crítica",
+      "src": "assets/logo-serasa.svg",
+      "contrastMode": "optical-invert",
+      "aspect": "wide"
+    },
+    {
+      "id": "cvm",
+      "name": "Comissão de Valores Mobiliários",
+      "role": "Regulação do mercado de capitais",
+      "src": "assets/logo-cvm.png",
+      "contrastMode": "cvm-boost",
+      "aspect": "wide"
+    },
+    {
+      "id": "inep",
+      "name": "INEP e Exames Nacionais",
+      "role": "Processamento em escala continental",
+      "src": "assets/logo-inep.svg",
+      "contrastMode": "mono-invert",
+      "aspect": "wide"
+    },
+    {
+      "id": "alergs",
+      "name": "Assembleia Legislativa RS",
+      "role": "Sistemas legislativos estaduais",
+      "src": "assets/logo-alergs.png",
+      "contrastMode": "optical-invert",
+      "aspect": "wide"
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic Academy",
+      "role": "Arquitetura certificada em IA aplicada",
+      "src": "assets/logo-anthropic.svg",
+      "contrastMode": "mono-invert",
+      "aspect": "wide"
+    }
+  ],
+  "cases": [
+    {
+      "id": "imprensa-nacional-dou",
+      "organization": "Imprensa Nacional (Diário Oficial da União)",
+      "sector": "Governo Federal",
+      "category": "missao-critica",
+      "gridSpan": "lg:col-span-7",
+      "logo": "assets/logo-imprensa-nacional.png",
+      "contrastMode": "native",
+      "aspect": "square",
+      "metricValue": "99.9%",
+      "metricNote": "Integridade ICP-Brasil",
+      "summary": "Sustentação e governança técnica na esteira de editoração, indexação e publicação oficial dos atos normativos dos Três Poderes da República.",
+      "outcome": "Continuidade operacional para milhões de consultas públicas diárias, validação criptográfica documental e resposta ágil sob rito formal de mudança.",
+      "stack": ["Java", "Spring Boot", "PostgreSQL", "ICP-Brasil"]
+    },
+    {
+      "id": "serasa-experian-econsig",
+      "organization": "Serasa Experian (Plataforma eConsig)",
+      "sector": "Bureau de Crédito",
+      "category": "missao-critica",
+      "gridSpan": "lg:col-span-5",
+      "logo": "assets/logo-serasa.svg",
+      "contrastMode": "optical-invert",
+      "aspect": "wide",
+      "metricValue": "14 ms",
+      "metricNote": "Latência SQL otimizada",
+      "summary": "Engenharia de backend de alta concorrência para a esteira transacional de crédito consignado em janelas críticas de fechamento.",
+      "outcome": "Refatoração de consultas relacionais, eliminação de contenção de locks em horários de pico e cobertura automatizada com JUnit 5 e Mockito.",
+      "stack": ["Java 17", "Spring Boot", "Spring Data JPA", "APIs REST"]
+    },
+    {
+      "id": "ministerio-da-justica-cnpd",
+      "organization": "Ministério da Justiça e Segurança Pública",
+      "sector": "Segurança Pública Nacional",
+      "category": "missao-critica",
+      "gridSpan": "lg:col-span-5",
+      "logo": "assets/logo-mjsp.svg",
+      "contrastMode": "native",
+      "aspect": "square",
+      "metricValue": "OAuth2",
+      "metricNote": "Trilha imutável LGPD",
+      "summary": "Arquitetura e evolução de plataforma nacional sensível integrada aos barramentos federais SINESP e DENATRAN com certificados digitais.",
+      "outcome": "Processamento assíncrono resiliente, versionamento de esquema com Liquibase e auditoria histórica imutável via Hibernate Envers.",
+      "stack": ["Java 17", "Spring Boot", "Angular", "Liquibase"]
+    },
+    {
+      "id": "alertaseg-gestao-sst",
+      "organization": "AlertaSeg: Plataforma de Gestão Ocupacional",
+      "sector": "Sistema Corporativo Sob Medida",
+      "category": "sob-medida",
+      "gridSpan": "lg:col-span-7",
+      "logo": "assets/logo-alertaseg-dark.png",
+      "logoDark": "assets/logo-alertaseg.png",
+      "contrastMode": "dual-asset",
+      "aspect": "wide",
+      "metricValue": "100%",
+      "metricNote": "Código próprio do cliente",
+      "summary": "Plataforma proprietária projetada do zero pela TRD para controle de passivos trabalhistas, saúde ocupacional e normas regulamentadoras.",
+      "outcome": "Gestão completa de NR-01, NR-06, NR-10 e NR-35, alertas preditivos de exames periódicos PCMSO e certificados validados por QR Code criptográfico.",
+      "stack": ["Python", "Django", "PostgreSQL", "Docker"]
+    },
+    {
+      "id": "cvm-mercado-capitais",
+      "organization": "Comissão de Valores Mobiliários (CVM)",
+      "sector": "Autarquia Federal",
+      "category": "missao-critica",
+      "gridSpan": "md:col-span-6 lg:col-span-4",
+      "logo": "assets/logo-cvm.png",
+      "contrastMode": "cvm-boost",
+      "aspect": "wide",
+      "metricValue": "OpenAPI",
+      "metricNote": "Contratos padronizados",
+      "summary": "Modernização fullstack de sistemas regulatórios estratégicos para fiscalização e transparência do mercado de capitais brasileiro.",
+      "outcome": "Padronização de interfaces em Angular, documentação viva de APIs REST e saneamento estrutural de débitos técnicos em bancos relacionais.",
+      "stack": ["Java", "Spring Boot", "Angular", "Swagger"]
+    },
+    {
+      "id": "inep-enade-mec",
+      "organization": "INEP: Exames e Avaliações Nacionais",
+      "sector": "Educação em Alta Escala",
+      "category": "missao-critica",
+      "gridSpan": "md:col-span-6 lg:col-span-4",
+      "logo": "assets/logo-inep.svg",
+      "contrastMode": "mono-invert",
+      "aspect": "wide",
+      "metricValue": "< 2h",
+      "metricNote": "Prontidão em janelas MEC",
+      "summary": "Engenharia de software e sustentação para plataformas nacionais de avaliação superior com picos severos de acessos simultâneos.",
+      "outcome": "Estabilidade transacional durante inscrições nacionais massivas e consolidação segura de dados estatísticos auditáveis.",
+      "stack": ["Java", "Spring Boot", "Angular", "SQL"]
+    },
+    {
+      "id": "alergs-legislativo",
+      "organization": "Assembleia Legislativa do Rio Grande do Sul",
+      "sector": "Poder Legislativo Estadual",
+      "category": "missao-critica",
+      "gridSpan": "md:col-span-6 lg:col-span-4",
+      "logo": "assets/logo-alergs.png",
+      "contrastMode": "optical-invert",
+      "aspect": "wide",
+      "metricValue": "N3",
+      "metricNote": "Engenharia de sustentação",
+      "summary": "Sustentação especializada de terceiro nível e evolução contínua de sistemas parlamentares e administrativos de relevância pública.",
+      "outcome": "Otimização de consultas SQL pesadas, modernização progressiva de telas em Angular e redução consistente de chamados recorrentes.",
+      "stack": ["Java", "Spring Boot", "Angular", "SQL"]
+    },
+    {
+      "id": "animal-world-hub",
+      "organization": "Animal World: Hub Operacional e Frente de Caixa",
+      "sector": "Mini-ERP Sob Encomenda",
+      "category": "sob-medida",
+      "gridSpan": "md:col-span-6 lg:col-span-6",
+      "logo": "assets/logo-animal-world.png",
+      "contrastMode": "native",
+      "aspect": "square",
+      "metricValue": "80mm",
+      "metricNote": "Integração térmica direta",
+      "summary": "Sistema operacional centralizado para redes de serviços pet com esteira de atendimento em tempo real, logística regional e frente de caixa.",
+      "outcome": "Cálculo automático de porte e fila do dia, roteirização de motoristas por bairro, avisos automáticos no WhatsApp e impressão ESC/POS instantânea.",
+      "stack": ["Angular", "TypeScript", "Node.js", "ESC/POS"]
+    },
+    {
+      "id": "trd-llm-router",
+      "organization": "Gateway Corporativo de IA e Roteamento LLM",
+      "sector": "Engenharia Proprietária TRD",
+      "category": "ia-arquitetura",
+      "gridSpan": "lg:col-span-6",
+      "logo": "assets/logo-anthropic.svg",
+      "contrastMode": "mono-invert",
+      "aspect": "wide",
+      "metricValue": "Java 21",
+      "metricNote": "Spring AI e governança",
+      "summary": "Barramento corporativo de inteligência artificial para orquestrar múltiplos modelos generativos com resiliência, auditoria e retenção zero de dados.",
+      "outcome": "Failover automático entre provedores em nuvem e instâncias locais, triagem documental estruturada e integração segura a fluxos internos.",
+      "stack": ["Java 21", "Spring Boot 3", "Spring AI", "Anthropic API"]
+    }
+  ]
+}

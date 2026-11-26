@@ -1,11 +1,11 @@
 {
   "name": "TRD Consultoria e Serviços de TI",
   "short_name": "TRD Consultoria",
-  "description": "Sustentação de Sistemas Corporativos com SLA",
-  "start_url": "./",
+  "description": "Sistemas corporativos sob medida e sustentação de missão crítica com SLA contratual",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#080D1A",
-  "theme_color": "#080D1A",
+  "background_color": "#F8FAFC",
+  "theme_color": "#F8FAFC",
   "icons": [
     {
       "src": "assets/icon-192.png",

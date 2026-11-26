@@ -1,0 +1,451 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Self-hosted variable Inter font */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/inter-var-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/inter-var-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191,
+    U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ============================================================
+   iOS 18/26 Liquid Glass + TRD Institutional Tokens
+   Light Mode (:root default) & Dark Mode ([data-theme="dark"] / .dark)
+   ============================================================ */
+:root,
+[data-theme="light"] {
+  --bg-canvas: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: rgba(241, 245, 249, 0.85);
+
+  --glass-bg: rgba(255, 255, 255, 0.68);
+  --glass-bg-strong: rgba(255, 255, 255, 0.82);
+  --glass-nav-bg: rgba(248, 250, 252, 0.74);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-outline: rgba(15, 23, 42, 0.08);
+  --glass-specular: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  --glass-shadow: 0 18px 42px -18px rgba(15, 23, 42, 0.09), 0 2px 8px -2px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(15, 23, 42, 0.06);
+  --glass-shadow-subtle: 0 10px 26px -14px rgba(15, 23, 42, 0.07), 0 0 0 1px rgba(15, 23, 42, 0.06);
+
+  --ink-primary: #0F172A;
+  --ink-secondary: #334155;
+  --ink-muted: #475569;
+
+  --trd-logo-primary: #080D1A;
+  --trd-logo-subtitle: #334155;
+
+  --accent-cyan: #0891B2;
+  --accent-cyan-strong: #0E7490;
+  --accent-cyan-soft: rgba(8, 145, 178, 0.11);
+  --accent-cyan-border: rgba(8, 145, 178, 0.28);
+  --accent-ink: #FFFFFF;
+
+  --status-emerald: #059669;
+  --status-emerald-soft: rgba(5, 150, 105, 0.11);
+  --status-amber: #B45309;
+  --status-amber-soft: rgba(180, 83, 9, 0.11);
+  --status-red: #DC2626;
+  --status-red-soft: rgba(220, 38, 38, 0.10);
+
+  --skeleton-base: rgba(203, 213, 225, 0.45);
+  --skeleton-highlight: rgba(255, 255, 255, 0.78);
+
+  --canvas-ambient:
+    radial-gradient(920px 520px at 14% 4%, rgba(6, 182, 212, 0.11), transparent 65%),
+    radial-gradient(780px 480px at 88% 12%, rgba(14, 116, 144, 0.08), transparent 62%),
+    radial-gradient(860px 540px at 50% 56%, rgba(148, 163, 184, 0.12), transparent 68%);
+
+  color-scheme: light;
+}
+
+[data-theme="dark"],
+.dark {
+  --bg-canvas: #000000;
+  --bg-surface: #1C1C1E;
+  --bg-elevated: rgba(44, 44, 46, 0.72);
+
+  --glass-bg: rgba(28, 28, 30, 0.64);
+  --glass-bg-strong: rgba(36, 36, 38, 0.78);
+  --glass-nav-bg: rgba(12, 12, 14, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-outline: rgba(255, 255, 255, 0.10);
+  --glass-specular: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  --glass-shadow: 0 22px 48px -18px rgba(0, 0, 0, 0.72), 0 2px 10px -2px rgba(0, 0, 0, 0.55);
+  --glass-shadow-subtle: 0 12px 28px -14px rgba(0, 0, 0, 0.62);
+
+  --ink-primary: #F8FAFC;
+  --ink-secondary: #CBD5E1;
+  --ink-muted: #94A3B8;
+
+  --trd-logo-primary: #F8FAFC;
+  --trd-logo-subtitle: #CBD5E1;
+
+  --accent-cyan: #22D3EE;
+  --accent-cyan-strong: #06B6D4;
+  --accent-cyan-soft: rgba(34, 211, 238, 0.13);
+  --accent-cyan-border: rgba(34, 211, 238, 0.32);
+  --accent-ink: #04131A;
+
+  --status-emerald: #34D399;
+  --status-emerald-soft: rgba(52, 211, 153, 0.14);
+  --status-amber: #FBBF24;
+  --status-amber-soft: rgba(251, 191, 36, 0.14);
+  --status-red: #F87171;
+  --status-red-soft: rgba(248, 113, 113, 0.14);
+
+  --skeleton-base: rgba(44, 44, 46, 0.72);
+  --skeleton-highlight: rgba(72, 72, 76, 0.65);
+
+  --canvas-ambient:
+    radial-gradient(900px 500px at 16% 3%, rgba(6, 182, 212, 0.15), transparent 64%),
+    radial-gradient(760px 460px at 86% 10%, rgba(34, 211, 238, 0.10), transparent 60%),
+    radial-gradient(820px 520px at 50% 54%, rgba(30, 41, 59, 0.28), transparent 68%);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  overflow-x: clip;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: clip;
+  background-color: var(--bg-canvas);
+  background-image: var(--canvas-ambient);
+  background-attachment: scroll;
+  color: var(--ink-secondary);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.22s ease, color 0.22s ease;
+}
+
+::selection {
+  background-color: var(--accent-cyan);
+  color: var(--accent-ink);
+}
+
+h1, h2, h3, h4 {
+  color: var(--ink-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.14;
+  font-weight: 650;
+}
+
+.metric-mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Skip Link Accessibility */
+.skip-link {
+  position: fixed;
+  top: -120px;
+  left: 1rem;
+  z-index: 100;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1.25rem;
+  border-radius: 9999px;
+  background-color: var(--accent-cyan);
+  color: var(--accent-ink);
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.18s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  outline: 2px solid var(--ink-primary);
+  outline-offset: 3px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Liquid Glass Surfaces & Controls (Zero Decorative Gradients)
+   ============================================================ */
+.glass-navbar {
+  background-color: var(--glass-nav-bg);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-specular), 0 4px 24px -10px rgba(15, 23, 42, 0.08);
+}
+
+.glass-panel {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-specular), var(--glass-shadow);
+  border-radius: 26px;
+}
+
+.glass-panel-strong {
+  background-color: var(--glass-bg-strong);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-specular), var(--glass-shadow);
+  border-radius: 28px;
+}
+
+.glass-subcard {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--glass-outline);
+  box-shadow: var(--glass-specular);
+  border-radius: 20px;
+}
+
+.glass-chip {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-specular), var(--glass-shadow-subtle);
+  border-radius: 9999px;
+}
+
+/* Primary & Secondary Pill Buttons (>= 44px target, crisp solid fill) */
+.btn-primary-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 46px;
+  padding: 0.65rem 1.4rem;
+  border-radius: 9999px;
+  background-color: var(--accent-cyan);
+  color: var(--accent-ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 8px 20px -8px rgba(8, 145, 178, 0.42);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.18s ease, transform 0.16s ease, box-shadow 0.18s ease;
+}
+
+.btn-primary-pill:hover {
+  background-color: var(--accent-cyan-strong);
+  transform: translateY(-1px);
+}
+
+.btn-primary-pill:active {
+  transform: translateY(0) scale(0.985);
+}
+
+.btn-glass-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 46px;
+  padding: 0.65rem 1.35rem;
+  border-radius: 9999px;
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  color: var(--ink-primary);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-specular), var(--glass-shadow-subtle);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.16s ease;
+}
+
+.btn-glass-pill:hover {
+  border-color: var(--accent-cyan-border);
+  background-color: var(--glass-bg-strong);
+  transform: translateY(-1px);
+}
+
+.btn-glass-pill:active {
+  transform: translateY(0) scale(0.985);
+}
+
+/* Segmented Control (iOS 18/26 style) */
+.segmented-track {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  padding: 0.3rem;
+  border-radius: 20px;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--glass-outline);
+  box-shadow: var(--glass-specular);
+}
+
+.segmented-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  font-size: 0.875rem;
+  font-weight: 550;
+  color: var(--ink-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.segmented-btn:hover {
+  color: var(--ink-primary);
+}
+
+.segmented-btn[aria-selected="true"],
+.segmented-btn.is-active {
+  background-color: var(--bg-surface);
+  color: var(--ink-primary);
+  border-color: var(--glass-border);
+  box-shadow: var(--glass-specular), 0 4px 12px -4px rgba(0, 0, 0, 0.16);
+  font-weight: 600;
+}
+
+/* Interactive Selection Cards (only interactive controls respond to pointer) */
+.interactive-card {
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.16s ease;
+}
+
+.interactive-card:hover {
+  border-color: var(--accent-cyan-border);
+  transform: translateY(-2px);
+}
+
+.interactive-card:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.interactive-card[aria-pressed="true"],
+.interactive-card.is-selected {
+  border-color: var(--accent-cyan);
+  background-color: var(--glass-bg-strong);
+  box-shadow: var(--glass-specular), 0 0 0 1px var(--accent-cyan-border), var(--glass-shadow-subtle);
+}
+
+/* ============================================================
+   Optical Contrast Adjustments for Real Client Logos (NO White Boxes!)
+   ============================================================ */
+.client-logo-slot {
+  background: transparent !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-theme="dark"] .logo-mono-invert,
+.dark .logo-mono-invert {
+  filter: brightness(0) invert(1) opacity(0.94);
+}
+
+[data-theme="dark"] .logo-optical-invert,
+.dark .logo-optical-invert {
+  filter: invert(1) hue-rotate(180deg) brightness(1.16) contrast(1.04);
+}
+
+[data-theme="dark"] .logo-cvm-boost,
+.dark .logo-cvm-boost {
+  filter: brightness(1.75) saturate(1.15);
+}
+
+/* ============================================================
+   Subtle Hero Entrance & Glass Skeleton Loading
+   ============================================================ */
+@keyframes heroEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-enter {
+  animation: heroEnter 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-enter-delayed {
+  animation: heroEnter 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+@keyframes skeletonPulse {
+  0%, 100% {
+    background-color: var(--skeleton-base);
+  }
+  50% {
+    background-color: var(--skeleton-highlight);
+  }
+}
+
+.skeleton-box {
+  border-radius: 14px;
+  background-color: var(--skeleton-base);
+  animation: skeletonPulse 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
