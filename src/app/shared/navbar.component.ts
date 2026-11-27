@@ -49,8 +49,8 @@ interface NavAnchor {
             "
             [attr.title]="
               themeService.isDark()
-                ? 'Alternar para modo claro (Atalho: Alt + T)'
-                : 'Alternar para modo escuro (Atalho: Alt + T)'
+                ? 'Alternar para Liquid Glass Claro (Atalho: Alt + T ou Ctrl + M)'
+                : 'Alternar para Liquid Glass Escuro (Atalho: Alt + T ou Ctrl + M)'
             "
           >
             @if (themeService.isDark()) {

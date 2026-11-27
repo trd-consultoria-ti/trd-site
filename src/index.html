@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR" data-theme="dark" class="dark">
 <head>
   <meta charset="utf-8">
   <title>TRD Consultoria | Sistemas corporativos sob medida e sustentação crítica</title>
@@ -22,9 +22,10 @@
   <meta name="twitter:title" content="TRD Consultoria | Sistemas corporativos sob medida e sustentação crítica">
   <meta name="twitter:description" content="Sistemas corporativos sob medida com código próprio e sustentação de missão crítica com SLA contratual.">
   <meta name="twitter:image" content="https://trdconsultoria.com.br/assets/og-cover.png">
-  <meta name="theme-color" content="#F8FAFC">
+  <meta name="theme-color" content="#0b0f19">
 
   <link rel="preload" href="fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/JetBrainsMono-600.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="manifest" href="manifest.webmanifest">
@@ -33,17 +34,18 @@
     (function () {
       try {
         var saved = localStorage.getItem('trd-theme');
-        var theme = saved === 'dark' || saved === 'light' ? saved : 'light';
+        var theme = saved === 'dark' || saved === 'light' ? saved : 'dark';
         var root = document.documentElement;
         root.setAttribute('data-theme', theme);
         root.classList.toggle('dark', theme === 'dark');
         root.style.colorScheme = theme;
         var meta = document.querySelector('meta[name="theme-color"]');
         if (meta) {
-          meta.setAttribute('content', theme === 'dark' ? '#000000' : '#F8FAFC');
+          meta.setAttribute('content', theme === 'dark' ? '#0b0f19' : '#F8FAFC');
         }
       } catch (e) {
-        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.classList.add('dark');
       }
     })();
   </script>

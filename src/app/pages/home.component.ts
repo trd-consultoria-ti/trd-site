@@ -244,7 +244,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
 
         <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
           <!-- Bento Card 1 (Wide 7 cols): 100% IP Ownership + Architectural Hub Diagram -->
-          <article class="glass-panel flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          <article class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
             <div>
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-[var(--accent-cyan)]">
@@ -307,7 +307,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 2 (Compact 5 cols): Contrast vs Spreadsheets, Per-Seat SaaS, Freelancers -->
-          <article class="glass-panel flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <article class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
             <div>
               <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-ink">
                 Comparativo estrutural
@@ -361,7 +361,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 3 (Compact 5 cols): Legal Safety, NDA & Damage Cap -->
-          <article class="glass-panel flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <article class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
             <div>
               <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-ink">
                 Blindagem jurídica corporativa
@@ -391,7 +391,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 4 (Wide 7 cols): Direct Senior Execution & Principal Architect -->
-          <article class="glass-panel flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          <article class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
             <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
               <img
                 src="assets/thiago-duarte.jpg"
@@ -467,7 +467,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             aria-label="Ecossistemas e instituições de referência técnica"
           >
             @for (logo of portfolioResource.value().authorityLogos; track logo.id) {
-              <div class="glass-panel flex flex-col items-center justify-between gap-3 px-3 py-4 text-center">
+              <div class="glass-card flex flex-col items-center justify-between gap-3 px-3 py-4 text-center">
                 <div class="client-logo-slot h-11 w-full">
                   <img
                     [src]="logo.src"
@@ -507,7 +507,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
               [ngModel]="searchQuery()"
               (ngModelChange)="searchQuery.set($event)"
               placeholder="Buscar órgão, case ou stack..."
-              class="min-h-[46px] w-full rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] pl-10 pr-10 text-sm text-ink placeholder:text-muted backdrop-blur-xl"
+              class="glass-input min-h-[46px] w-full rounded-full pl-10 pr-10 text-sm placeholder:text-muted"
             />
             <svg
               class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
@@ -614,7 +614,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-12">
             @for (item of filteredCases(); track item.id) {
               <article
-                [class]="'glass-panel col-span-1 flex flex-col justify-between p-6 sm:p-7 md:col-span-12 ' + (isUnfiltered() ? item.gridSpan : 'md:col-span-6')"
+                [class]="'glass-card col-span-1 flex flex-col justify-between p-6 sm:p-7 md:col-span-12 ' + (isUnfiltered() ? item.gridSpan : 'md:col-span-6')"
               >
                 <div>
                   <div class="flex items-start justify-between gap-4">
@@ -691,7 +691,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                 [attr.aria-selected]="activeStepIndex() === i"
                 [class.is-selected]="activeStepIndex() === i"
                 (click)="activeStepIndex.set(i)"
-                class="interactive-card glass-panel flex min-h-[68px] w-full items-center gap-4 p-4 text-left sm:p-5"
+                class="interactive-card glass-card flex min-h-[68px] w-full items-center gap-4 p-4 text-left sm:p-5"
               >
                 <span
                   class="metric-mono inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-bold"
@@ -775,7 +775,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </div>
 
           <div class="mt-5 overflow-x-auto">
-            <table class="w-full min-w-[600px] border-collapse text-left text-sm">
+            <table class="trd-table w-full min-w-[600px] border-collapse text-left text-sm">
               <thead>
                 <tr class="border-b border-[var(--glass-outline)] text-xs font-semibold text-muted">
                   <th scope="col" class="py-3 pr-4">Nível</th>

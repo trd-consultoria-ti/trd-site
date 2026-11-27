@@ -6,11 +6,12 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: [
+          '"Inter"',
           '-apple-system',
           'BlinkMacSystemFont',
           '"SF Pro Display"',
           '"SF Pro Text"',
-          '"Inter"',
+          'system-ui',
           'sans-serif',
         ],
         mono: [
@@ -23,6 +24,14 @@ module.exports = {
         ],
       },
       colors: {
+        trd: {
+          obsidian: '#0b0f19',
+          slate: '#111827',
+          border: '#1e293b',
+          cyan: '#06b6d4',
+          electric: '#22d3ee',
+          cyanAccessible: '#0891b2',
+        },
         canvas: 'var(--bg-canvas)',
         surface: 'var(--bg-surface)',
         elevated: 'var(--bg-elevated)',
@@ -38,8 +47,11 @@ module.exports = {
         hairline: 'var(--glass-border)',
       },
       borderRadius: {
-        glass: '24px',
-        'glass-lg': '28px',
+        glass: '22px',
+        'glass-lg': '26px',
+      },
+      transitionTimingFunction: {
+        'ios-spring': 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
     },
   },

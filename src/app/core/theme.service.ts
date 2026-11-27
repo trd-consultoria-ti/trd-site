@@ -38,7 +38,7 @@ export class ThemeService {
     } catch {
       // Ignore storage access errors in restricted contexts
     }
-    return 'light';
+    return 'dark';
   }
 
   private applyDomTheme(theme: TrdTheme, persist: boolean): void {
@@ -49,7 +49,7 @@ export class ThemeService {
 
     const metaTheme = this.doc.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
-      metaTheme.setAttribute('content', theme === 'dark' ? '#000000' : '#F8FAFC');
+      metaTheme.setAttribute('content', theme === 'dark' ? '#0b0f19' : '#F8FAFC');
     }
 
     if (persist) {
