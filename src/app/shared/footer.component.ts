@@ -9,7 +9,7 @@ import { TrdLogoComponent } from './trd-logo.component';
   imports: [RouterLink, TrdLogoComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <footer class="mt-20 border-t border-[var(--glass-border)] bg-[var(--glass-nav-bg)] backdrop-blur-lg [backdrop-filter:blur(20px)_saturate(210%)] [-webkit-backdrop-filter:blur(20px)_saturate(210%)]">
+    <footer class="glass-footer mt-20">
       <div class="mx-auto max-w-[1240px] px-5 py-14 sm:px-8">
         <div class="grid grid-cols-1 gap-10 md:grid-cols-12">
           <div class="md:col-span-5">

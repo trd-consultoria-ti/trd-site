@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TrdLiquidGlassDirective } from '../core/liquid-glass';
 
 @Component({
   selector: 'app-privacy',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, TrdLiquidGlassDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <section class="py-12 sm:py-16">
@@ -18,7 +19,7 @@ import { RouterLink } from '@angular/router';
           </a>
         </div>
 
-        <article class="glass-panel-strong p-6 sm:p-10">
+        <article trdLiquidGlass="overlay" class="glass-panel-strong p-6 sm:p-10">
           <header class="border-b border-[var(--glass-outline)] pb-6">
             <h1 class="text-2xl font-bold text-ink sm:text-4xl">
               Política de Privacidade e Governança de Dados

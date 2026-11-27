@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { TrdLiquidGlassDirective } from '../core/liquid-glass';
 import { ThemeService } from '../core/theme.service';
 import { TrdLogoComponent } from './trd-logo.component';
 
@@ -12,11 +13,15 @@ interface NavAnchor {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, TrdLogoComponent],
+  imports: [RouterLink, TrdLogoComponent, TrdLiquidGlassDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'sticky top-0 z-50 block w-full',
+  },
   template: `
-    <header class="glass-navbar sticky top-0 z-50 w-full">
-      <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-8">
+    <div class="w-full px-3 pt-3 sm:px-6">
+      <header trdLiquidGlass="chrome" class="glass-navbar mx-auto max-w-[1240px] rounded-full">
+        <div class="flex items-center justify-between gap-2 px-4 py-2 sm:gap-4 sm:px-6">
         <a
           routerLink="/"
           (click)="handleHomeClick($event)"
@@ -92,21 +97,22 @@ interface NavAnchor {
             }
           </button>
         </div>
-      </div>
+        </div>
+      </header>
 
       @if (mobileOpen()) {
         <div
           id="mobile-glass-drawer"
-          class="border-t border-[var(--glass-border)] px-5 pb-6 pt-4 lg:hidden"
+          class="glass-panel-strong mx-auto mt-2.5 max-w-[1240px] px-5 pb-6 pt-4 lg:hidden"
           role="region"
           aria-label="Menu móvel institucional"
         >
-          <nav class="mx-auto flex max-w-[1240px] flex-col gap-2.5">
+          <nav class="flex flex-col gap-2.5">
             @for (item of navItems; track item.fragment) {
               <a
                 [href]="'/#' + item.fragment"
                 (click)="navigateToSection($event, item.fragment)"
-                class="flex min-h-[46px] items-center justify-between rounded-2xl border border-[var(--glass-outline)] bg-[var(--bg-elevated)] px-4 text-base font-medium text-ink"
+                class="glass-subcard flex min-h-[46px] items-center justify-between px-4 text-base font-medium text-ink"
               >
                 <span>{{ item.label }}</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -124,7 +130,7 @@ interface NavAnchor {
           </nav>
         </div>
       }
-    </header>
+    </div>
   `,
 })
 export class NavbarComponent {

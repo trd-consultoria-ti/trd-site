@@ -2,16 +2,17 @@ import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ScopeModuleOption } from '../core/institutional.models';
+import { TrdLiquidGlassDirective } from '../core/liquid-glass';
 
 type OperationalContext = 'expansao' | 'regulado' | 'legado';
 
 @Component({
   selector: 'app-scope-simulator',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TrdLiquidGlassDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="glass-panel-strong p-6 sm:p-9">
+    <div trdLiquidGlass="overlay" class="glass-panel-strong p-6 sm:p-9">
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
         <!-- Left column: Interactive Module & Context Builder -->
         <div class="lg:col-span-7">
@@ -114,7 +115,7 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
         </div>
 
         <!-- Right column: Recommended Architecture, Operational Gains & Dispatch -->
-        <div class="flex flex-col justify-between rounded-[24px] border border-[var(--glass-outline)] bg-[var(--bg-elevated)] p-5 sm:p-6 lg:col-span-5">
+        <div class="glass-subcard flex flex-col justify-between rounded-[24px] p-5 sm:p-6 lg:col-span-5">
           <div>
             <div class="flex items-center justify-between gap-2">
               <span class="text-sm font-semibold text-ink">Síntese arquitetural recomendada</span>
@@ -129,7 +130,7 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
               <span class="text-xs font-medium text-muted">Stack tecnológica sugerida</span>
               <div class="mt-2 flex flex-wrap gap-2">
                 @for (tech of recommendedStack(); track tech) {
-                  <span class="rounded-full border border-[var(--glass-outline)] bg-[var(--bg-surface)] px-3 py-1 text-xs font-semibold text-ink">
+                  <span class="rounded-full border border-[var(--glass-border)] bg-[var(--glass-inset-surface)] px-3 py-1 text-xs font-semibold text-ink">
                     {{ tech }}
                   </span>
                 }
@@ -152,7 +153,7 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
             </div>
 
             <!-- Structured Technical Briefing Preview -->
-            <div class="mt-5 rounded-2xl border border-[var(--glass-outline)] bg-[var(--bg-surface)] p-3.5">
+            <div class="mt-5 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-inset-surface)] p-3.5">
               <div class="flex items-center justify-between gap-2">
                 <span class="text-xs font-semibold text-ink">Prévia do briefing técnico</span>
                 <span class="text-xs text-muted">Pronto para envio sob sigilo NDA</span>
@@ -217,7 +218,7 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
                         [href]="channel === 'whatsapp' ? whatsappHref() : mailtoHref()"
                         [attr.target]="channel === 'whatsapp' ? '_blank' : null"
                         [attr.rel]="channel === 'whatsapp' ? 'noopener' : null"
-                        class="inline-flex min-h-[44px] items-center rounded-full bg-[var(--bg-surface)] px-3.5 text-xs font-semibold text-ink border border-[var(--glass-outline)]"
+                        class="inline-flex min-h-[44px] items-center rounded-full border border-[var(--glass-border)] bg-[var(--glass-inset-surface)] px-3.5 text-xs font-semibold text-ink"
                       >
                         {{ channel === 'whatsapp' ? 'Abrir conversa direta no WhatsApp' : 'Abrir cliente de e-mail padrão' }}
                       </a>
