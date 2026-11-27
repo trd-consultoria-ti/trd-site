@@ -136,11 +136,17 @@ export function shapeOf(element: HTMLElement, style?: CSSStyleDeclaration): Glas
   const height = element.offsetHeight;
   if (!width || !height) return null;
   const computed = style ?? getComputedStyle(element);
-  const corner = computed.borderTopLeftRadius || '0px';
-  const parsed = corner.endsWith('%')
-    ? (Math.min(width, height) * parseFloat(corner)) / 100
-    : parseFloat(corner) || 0;
-  const radius = clamp(parsed, 0, Math.min(width / 2, height / 2));
+  const radii = [
+    computed.borderTopLeftRadius,
+    computed.borderTopRightRadius,
+    computed.borderBottomRightRadius,
+    computed.borderBottomLeftRadius
+  ].map((corner) =>
+    corner?.endsWith('%')
+      ? (Math.min(width, height) * parseFloat(corner)) / 100
+      : parseFloat(corner || '0') || 0
+  );
+  const radius = clamp(Math.max(...radii), 0, Math.min(width / 2, height / 2));
   return { width, height, radius };
 }
 

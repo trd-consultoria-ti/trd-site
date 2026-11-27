@@ -97,10 +97,10 @@
   --trd-logo-primary: #080D1A;
   --trd-logo-subtitle: #334155;
 
-  --accent-cyan: #0891B2;
-  --accent-cyan-strong: #06B6D4;
+  --accent-cyan: #0E7490;
+  --accent-cyan-strong: #0B5F78;
   --accent-cyan-soft: rgba(6, 182, 212, 0.14);
-  --accent-cyan-border: rgba(8, 145, 178, 0.36);
+  --accent-cyan-border: rgba(14, 116, 144, 0.36);
   --accent-cyan-glow: 0 12px 26px -8px rgba(6, 182, 212, 0.44);
   --accent-ink: #FFFFFF;
 
@@ -341,12 +341,83 @@ h1, h2, h3, h4 {
 }
 
 .glass-subcard {
-  background-color: var(--glass-subcard-bg);
-  -webkit-backdrop-filter: blur(12px) saturate(190%);
-  backdrop-filter: blur(12px) saturate(190%);
+  background-color: #F1F5F9;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.045), 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+}
+
+[data-theme="dark"] .glass-subcard,
+.dark .glass-subcard {
+  background-color: #0D1320;
+  border-color: rgba(30, 41, 59, 0.9);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Mobile Floating Liquid Glass Drawer & Scrim (Zero Vidro-sobre-Vidro) */
+.mobile-nav-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 48;
+  background: rgba(15, 23, 42, 0.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+[data-theme="dark"] .mobile-nav-scrim,
+.dark .mobile-nav-scrim {
+  background: rgba(4, 9, 20, 0.18);
+}
+
+.mobile-glass-drawer {
+  position: fixed;
+  top: calc(max(12px, env(safe-area-inset-top, 0px)) + 68px);
+  left: max(12px, env(safe-area-inset-left, 0px));
+  right: max(12px, env(safe-area-inset-right, 0px));
+  max-width: 420px;
+  margin-inline: auto;
+  z-index: 52;
+  border-radius: 26px;
+  background-color: rgba(255, 255, 255, 0.56);
+  -webkit-backdrop-filter: blur(16px) saturate(205%);
+  backdrop-filter: blur(16px) saturate(205%);
   border: 1px solid var(--glass-border);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  border-radius: 18px;
+  box-shadow: 0 24px 56px -14px rgba(15, 23, 42, 0.2), 0 6px 18px -6px rgba(8, 145, 178, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.94), inset 0 -0.5px 0 rgba(255, 255, 255, 0.48), inset 0 0 0 0.5px rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="dark"] .mobile-glass-drawer,
+.dark .mobile-glass-drawer {
+  background-color: rgba(13, 18, 30, 0.58);
+  -webkit-backdrop-filter: blur(16px) saturate(210%);
+  backdrop-filter: blur(16px) saturate(210%);
+  box-shadow: 0 28px 64px -12px rgba(0, 0, 0, 0.8), 0 0 28px -8px rgba(34, 211, 238, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.24), inset 0 -0.5px 0 rgba(255, 255, 255, 0.08), inset 0 0 0 0.5px rgba(255, 255, 255, 0.16);
+}
+
+.mobile-nav-row {
+  background-color: rgba(15, 23, 42, 0.035);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms var(--ios-spring);
+}
+
+.mobile-nav-row:hover,
+.mobile-nav-row:active {
+  background-color: rgba(6, 182, 212, 0.13);
+  border-color: rgba(14, 116, 144, 0.24);
+}
+
+[data-theme="dark"] .mobile-nav-row,
+.dark .mobile-nav-row {
+  background-color: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .mobile-nav-row:hover,
+[data-theme="dark"] .mobile-nav-row:active,
+.dark .mobile-nav-row:hover,
+.dark .mobile-nav-row:active {
+  background-color: rgba(34, 211, 238, 0.15);
+  border-color: rgba(34, 211, 238, 0.28);
 }
 
 .glass-chip {
@@ -442,18 +513,43 @@ h1, h2, h3, h4 {
   transform: translateY(0) scale(0.97);
 }
 
-/* Segmented Control (iOS 26 Liquid Glass style) */
+/* Segmented Control (iOS 26 style — sem backdrop-filter aninhado) */
 .segmented-track {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 0.3rem;
   padding: 0.3rem;
   border-radius: 20px;
-  background-color: var(--glass-subcard-bg);
-  -webkit-backdrop-filter: blur(14px) saturate(190%);
-  backdrop-filter: blur(14px) saturate(190%);
-  border: 1px solid var(--glass-border);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background-color: rgba(15, 23, 42, 0.055);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+[data-theme="dark"] .segmented-track,
+.dark .segmented-track {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Proibição universal de cascata vidro-sobre-vidro em todos os viewports (320px a 2560px) */
+.glass-panel .glass-card,
+.glass-panel .glass-panel,
+.glass-panel .glass-panel-strong,
+.glass-panel .glass-chip,
+.glass-panel .glass-input,
+.glass-panel .btn-glass-pill,
+.glass-panel-strong .glass-card,
+.glass-panel-strong .glass-panel,
+.glass-panel-strong .glass-chip,
+.glass-panel-strong .glass-input,
+.glass-panel-strong .btn-glass-pill,
+.glass-card .glass-chip,
+.glass-card .glass-input,
+.glass-card .btn-glass-pill,
+.glass-footer .glass-chip {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .segmented-btn {
@@ -534,6 +630,140 @@ input[type="search"]::-webkit-search-decoration {
   .lg-surface[data-lg-engine="blink"][data-lg-kind="chrome"],
   .lg-surface[data-lg-engine="blink"][data-lg-kind="overlay"] {
     backdrop-filter: blur(18px) var(--lg-filter, saturate(210%)) saturate(210%);
+  }
+}
+
+/* ============================================================
+   Mobile TBDR Containment & Vertical Atmosphere (< 768px)
+   - Camada Funcional Flutuante: <= 2 superfícies (glass-navbar + mobile-glass-drawer)
+   - Camada de Conteúdo: 0% backdrop-filter + 4-layer On-Chip SRAM luminous depth
+   ============================================================ */
+@media (max-width: 767px) {
+  :root,
+  [data-theme="light"] {
+    --ambient-layer:
+      radial-gradient(95vw 28vh at 50% 4%, rgba(6, 182, 212, 0.26), transparent 70%),
+      radial-gradient(82vw 34vh at 88% 34%, rgba(8, 145, 178, 0.18), transparent 72%),
+      radial-gradient(84vw 34vh at 12% 66%, rgba(34, 211, 238, 0.18), transparent 72%),
+      radial-gradient(92vw 26vh at 50% 96%, rgba(5, 150, 105, 0.14), transparent 72%);
+  }
+
+  [data-theme="dark"],
+  .dark {
+    --ambient-layer:
+      radial-gradient(96vw 30vh at 50% 4%, rgba(34, 211, 238, 0.26), transparent 68%),
+      radial-gradient(84vw 36vh at 88% 34%, rgba(6, 182, 212, 0.20), transparent 70%),
+      radial-gradient(86vw 36vh at 12% 66%, rgba(34, 211, 238, 0.18), transparent 70%),
+      radial-gradient(94vw 28vh at 50% 96%, rgba(52, 211, 153, 0.14), transparent 72%);
+  }
+
+  .glass-navbar {
+    background-color: rgba(255, 255, 255, 0.46);
+    -webkit-backdrop-filter: blur(15px) saturate(205%);
+    backdrop-filter: blur(15px) saturate(205%);
+  }
+
+  [data-theme="dark"] .glass-navbar,
+  .dark .glass-navbar {
+    background-color: rgba(11, 15, 25, 0.48);
+    -webkit-backdrop-filter: blur(15px) saturate(210%);
+    backdrop-filter: blur(15px) saturate(210%);
+  }
+
+  @supports (backdrop-filter: url(#trd-lg-probe)) {
+    .lg-surface[data-lg-engine="blink"][data-lg-kind="chrome"] {
+      backdrop-filter: blur(15px) var(--lg-filter, saturate(205%)) saturate(205%);
+    }
+
+    .lg-surface[data-lg-engine="blink"][data-lg-kind="overlay"] {
+      backdrop-filter: blur(16px) var(--lg-filter, saturate(210%)) saturate(210%);
+    }
+  }
+
+  .glass-card,
+  .glass-panel,
+  .glass-panel-strong:not(#mobile-glass-drawer),
+  .glass-subcard,
+  .glass-chip,
+  .glass-input,
+  .btn-glass-pill,
+  .segmented-track,
+  .glass-footer {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .glass-card,
+  .glass-panel {
+    border-radius: 18px;
+    background:
+      radial-gradient(120% 90% at 12% 0%, rgba(6, 182, 212, 0.045), transparent 58%) padding-box,
+      linear-gradient(180deg, #FFFFFF 0%, #F7FAFD 100%) padding-box,
+      linear-gradient(180deg, rgba(8, 145, 178, 0.18) 0%, rgba(15, 23, 42, 0.075) 45%, rgba(15, 23, 42, 0.12) 100%) border-box;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 28px -14px rgba(15, 23, 42, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.96);
+  }
+
+  .glass-panel-strong:not(#mobile-glass-drawer) {
+    border-radius: 20px;
+    background:
+      radial-gradient(130% 95% at 10% 0%, rgba(6, 182, 212, 0.075), transparent 60%) padding-box,
+      linear-gradient(180deg, #FFFFFF 0%, #F4F9FD 100%) padding-box,
+      linear-gradient(180deg, rgba(6, 182, 212, 0.28) 0%, rgba(15, 23, 42, 0.09) 50%, rgba(15, 23, 42, 0.14) 100%) border-box;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.04), 0 18px 40px -18px rgba(15, 23, 42, 0.12), 0 8px 22px -12px rgba(8, 145, 178, 0.14), inset 0 1px 0 #FFFFFF;
+  }
+
+  .glass-subcard {
+    border-radius: 14px;
+  }
+
+  .glass-chip,
+  .glass-input,
+  .btn-glass-pill {
+    background-color: #FFFFFF;
+    border-color: rgba(15, 23, 42, 0.12);
+  }
+
+  .glass-footer {
+    background-color: #FFFFFF;
+    border-top-color: rgba(15, 23, 42, 0.1);
+  }
+
+  [data-theme="dark"] .glass-card,
+  [data-theme="dark"] .glass-panel,
+  .dark .glass-card,
+  .dark .glass-panel {
+    background:
+      radial-gradient(120% 85% at 16% 0%, rgba(34, 211, 238, 0.08), transparent 58%) padding-box,
+      linear-gradient(180deg, #172033 0%, #0F1624 100%) padding-box,
+      linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(34, 211, 238, 0.13) 32%, rgba(30, 41, 59, 0.85) 100%) border-box;
+    box-shadow: 0 16px 34px -12px rgba(0, 0, 0, 0.76), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  [data-theme="dark"] .glass-panel-strong:not(#mobile-glass-drawer),
+  .dark .glass-panel-strong:not(#mobile-glass-drawer) {
+    background:
+      radial-gradient(130% 95% at 10% 0%, rgba(34, 211, 238, 0.10), transparent 60%) padding-box,
+      linear-gradient(180deg, #1A2438 0%, #101829 100%) padding-box,
+      linear-gradient(180deg, rgba(34, 211, 238, 0.30) 0%, rgba(255, 255, 255, 0.12) 45%, rgba(30, 41, 59, 0.88) 100%) border-box;
+    box-shadow: 0 20px 44px -16px rgba(0, 0, 0, 0.85), 0 0 28px -12px rgba(34, 211, 238, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  [data-theme="dark"] .glass-chip,
+  [data-theme="dark"] .glass-input,
+  [data-theme="dark"] .btn-glass-pill,
+  .dark .glass-chip,
+  .dark .glass-input,
+  .dark .btn-glass-pill {
+    background-color: #111827;
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  [data-theme="dark"] .glass-footer,
+  .dark .glass-footer {
+    background-color: #0b0f19;
+    border-top-color: rgba(255, 255, 255, 0.1);
   }
 }
 
@@ -618,6 +848,7 @@ input[type="search"]::-webkit-search-decoration {
   }
 
   .glass-navbar,
+  .mobile-glass-drawer,
   .glass-footer,
   .glass-panel,
   .glass-card,
