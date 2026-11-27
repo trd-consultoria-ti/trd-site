@@ -81,9 +81,12 @@ import { TrdLiquidGlassDirective } from '../core/liquid-glass';
               </p>
               <div class="mt-4 rounded-2xl border border-[var(--accent-cyan-border)] bg-[var(--accent-cyan-soft)] p-5">
                 <h3 class="text-base font-semibold text-ink">Canal Oficial do Encarregado pelo Tratamento de Dados</h3>
-                <p class="mt-1.5 text-sm text-secondary">
-                  E-mail direto:
-                  <a href="mailto:contato@trdconsultoria.com.br" class="font-semibold text-[var(--accent-cyan)] hover:underline">
+                <p class="mt-1.5 flex flex-wrap items-center gap-x-1.5 text-sm text-secondary">
+                  <span>E-mail direto:</span>
+                  <a
+                    href="mailto:contato@trdconsultoria.com.br"
+                    class="inline-flex min-h-[44px] items-center font-semibold text-[var(--accent-cyan)] hover:underline"
+                  >
                     contato&#64;trdconsultoria.com.br
                   </a>
                 </p>
