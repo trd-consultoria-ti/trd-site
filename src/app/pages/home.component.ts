@@ -529,7 +529,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                 type="button"
                 (click)="searchQuery.set('')"
                 aria-label="Limpar texto da busca"
-                class="absolute right-1.5 top-1/2 inline-flex h-[38px] w-[38px] -translate-y-1/2 items-center justify-center rounded-full text-muted hover:text-ink"
+                class="absolute right-0.5 top-1/2 inline-flex h-[44px] w-[44px] -translate-y-1/2 items-center justify-center rounded-full text-muted hover:text-ink"
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
                   <path d="M18 6L6 18M6 6l12 12"></path>

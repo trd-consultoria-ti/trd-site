@@ -64,6 +64,12 @@ let nextLogoInstanceId = 0;
         }
       }
 
+      @media (max-width: 374px) {
+        .logo-sub {
+          display: none;
+        }
+      }
+
       :host(.is-compact) .logo-sub {
         display: none;
       }

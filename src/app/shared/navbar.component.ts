@@ -51,7 +51,7 @@ interface NavAnchor {
           <button
             type="button"
             (click)="themeService.toggleTheme()"
-            class="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] text-ink transition-transform hover:-translate-y-0.5 active:scale-95"
+            class="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full border border-[var(--glass-border)] bg-slate-900/[0.045] dark:bg-white/[0.07] text-ink transition-transform hover:-translate-y-0.5 active:scale-95"
             [attr.aria-label]="
               themeService.isDark() ? 'Alternar para modo claro' : 'Alternar para modo escuro'
             "
@@ -84,7 +84,7 @@ interface NavAnchor {
           <button
             type="button"
             (click)="toggleMobileMenu()"
-            class="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full border border-[var(--glass-border)] bg-[var(--glass-bg)] text-ink lg:hidden"
+            class="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full border border-[var(--glass-border)] bg-slate-900/[0.045] dark:bg-white/[0.07] text-ink lg:hidden"
             [attr.aria-expanded]="mobileOpen()"
             aria-controls="mobile-glass-drawer"
             [attr.aria-label]="mobileOpen() ? 'Fechar menu de navegação' : 'Abrir menu de navegação'"
@@ -105,17 +105,23 @@ interface NavAnchor {
 
       @if (mobileOpen()) {
         <div
+          class="mobile-nav-scrim lg:hidden"
+          (click)="mobileOpen.set(false)"
+          aria-hidden="true"
+        ></div>
+        <div
           id="mobile-glass-drawer"
-          class="glass-panel-strong mx-auto mt-2.5 max-w-[1240px] px-5 pb-6 pt-4 lg:hidden"
+          trdLiquidGlass="overlay"
+          class="mobile-glass-drawer px-5 pb-6 pt-4 lg:hidden"
           role="region"
           aria-label="Menu móvel institucional"
         >
-          <nav class="flex flex-col gap-2.5">
+          <nav class="flex flex-col gap-2">
             @for (item of navItems; track item.fragment) {
               <a
                 [href]="'/#' + item.fragment"
                 (click)="navigateToSection($event, item.fragment)"
-                class="glass-subcard flex min-h-[46px] items-center justify-between px-4 text-base font-medium text-ink"
+                class="mobile-nav-row flex min-h-[48px] items-center justify-between px-4 text-base font-medium text-ink"
               >
                 <span>{{ item.label }}</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

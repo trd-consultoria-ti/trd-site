@@ -19,8 +19,8 @@ interface RegisteredSurface {
 const MAX_ACTIVE_BLINK_FILTERS = 3;
 
 const SURFACE_PRIORITY: Record<LiquidGlassSurfaceKind, number> = {
-  chrome: 3,
-  overlay: 2,
+  overlay: 3,
+  chrome: 2,
   card: 1,
 };
 
@@ -100,7 +100,7 @@ export class LiquidGlassEngineService {
   private syncAllSurfaces(): void {
     const ranked = Array.from(this.surfaces.values())
       .filter((s) => s.kind !== 'card' && this.isVisible(s.element))
-      .sort((a, b) => b.priority - a.priority || a.id - b.id);
+      .sort((a, b) => b.priority - a.priority || b.id - a.id);
 
     const blinkAllowed = new Set<number>();
     for (let i = 0; i < Math.min(MAX_ACTIVE_BLINK_FILTERS, ranked.length); i++) {
