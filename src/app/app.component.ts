@@ -11,7 +11,8 @@ import { NavbarComponent } from './shared/navbar.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a class="skip-link" href="#main">Pular para o conteúdo principal</a>
-    <div class="flex min-h-screen flex-col">
+    <div class="trd-ambient-backdrop" aria-hidden="true"></div>
+    <div class="relative z-[1] flex min-h-screen flex-col">
       <app-navbar />
       <main id="main" class="flex-1">
         <router-outlet />

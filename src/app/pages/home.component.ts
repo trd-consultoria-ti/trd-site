@@ -9,6 +9,7 @@ import {
   PortfolioCategory,
   ProcessStep,
 } from '../core/institutional.models';
+import { TrdLiquidGlassDirective } from '../core/liquid-glass';
 import { ThemeService } from '../core/theme.service';
 import { ScopeSimulatorComponent } from '../features/scope-simulator.component';
 
@@ -17,7 +18,7 @@ type HeroFrameView = 'hub' | 'sla';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, ScopeSimulatorComponent],
+  imports: [FormsModule, ScopeSimulatorComponent, TrdLiquidGlassDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- 1. HERO (1st screen, subtle load entrance, live interactive Liquid Glass app-frame) -->
@@ -75,6 +76,7 @@ type HeroFrameView = 'hub' | 'sla';
           <!-- Live Interactive Liquid Glass App-Frame Showcase -->
           <div class="hero-enter-delayed lg:col-span-6">
             <div
+              trdLiquidGlass="overlay"
               class="glass-panel-strong overflow-hidden p-4 sm:p-5"
               role="region"
               aria-label="Demonstração interativa de arquitetura TRD"
@@ -172,7 +174,7 @@ type HeroFrameView = 'hub' | 'sla';
                     }
                   </div>
 
-                  <div class="rounded-2xl border border-[var(--glass-outline)] bg-[var(--bg-surface)] px-3.5 py-2.5 text-xs text-secondary">
+                  <div class="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-inset-surface)] px-3.5 py-2.5 text-xs text-secondary">
                     <strong class="font-semibold text-ink">Inspeção do módulo:</strong>
                     {{ hubFlows[selectedFlowIndex()].inspection }}
                   </div>
@@ -208,7 +210,7 @@ type HeroFrameView = 'hub' | 'sla';
                     </div>
                   </div>
 
-                  <div class="rounded-2xl border border-[var(--glass-outline)] bg-[var(--bg-surface)] p-3.5">
+                  <div class="rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-inset-surface)] p-3.5">
                     <div class="flex items-center justify-between text-xs">
                       <span class="font-semibold text-ink">Evidência de diagnóstico PostgreSQL</span>
                       <span class="metric-mono text-[var(--status-emerald)]">-99.7% I/O</span>
@@ -218,7 +220,7 @@ Planning Time: 0.18 ms | Execution Time: 14.02 ms
 SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                   </div>
 
-                  <div class="flex flex-wrap items-center justify-between gap-2 rounded-2xl bg-[var(--bg-elevated)] px-3.5 py-2.5 text-xs text-secondary">
+                  <div class="flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-subcard-bg)] px-3.5 py-2.5 text-xs text-secondary">
                     <span>Cobertura formal com assinatura digital Gov.br e cláusula Damage Cap</span>
                     <span class="font-semibold text-ink">Prontidão ativa</span>
                   </div>
@@ -244,7 +246,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
 
         <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
           <!-- Bento Card 1 (Wide 7 cols): 100% IP Ownership + Architectural Hub Diagram -->
-          <article class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
             <div>
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-[var(--accent-cyan)]">
@@ -262,7 +264,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             </div>
 
             <!-- Inline Architectural Hub Diagram -->
-            <div class="mt-6 rounded-2xl border border-[var(--glass-outline)] bg-[var(--bg-surface)] p-4">
+            <div class="mt-6 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-inset-surface)] p-4">
               <svg
                 viewBox="0 0 620 148"
                 class="h-auto w-full"
@@ -307,7 +309,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 2 (Compact 5 cols): Contrast vs Spreadsheets, Per-Seat SaaS, Freelancers -->
-          <article class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
             <div>
               <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-ink">
                 Comparativo estrutural
@@ -361,7 +363,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 3 (Compact 5 cols): Legal Safety, NDA & Damage Cap -->
-          <article class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
             <div>
               <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-ink">
                 Blindagem jurídica corporativa
@@ -391,7 +393,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 4 (Wide 7 cols): Direct Senior Execution & Principal Architect -->
-          <article class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
             <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
               <img
                 src="assets/thiago-duarte.jpg"
@@ -655,7 +657,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                 <div class="mt-5 flex flex-wrap items-center justify-between gap-2 border-t border-[var(--glass-outline)] pt-4">
                   <div class="flex flex-wrap gap-1.5">
                     @for (tech of item.stack; track tech) {
-                      <span class="rounded-full border border-[var(--glass-outline)] bg-[var(--bg-surface)] px-2.5 py-1 text-xs font-medium text-ink">
+                      <span class="rounded-full border border-[var(--glass-border)] bg-[var(--glass-inset-surface)] px-2.5 py-1 text-xs font-medium text-ink">
                         {{ tech }}
                       </span>
                     }
@@ -711,7 +713,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </div>
 
           <!-- Active Step Detail Panel -->
-          <div class="glass-panel-strong flex flex-col justify-between p-6 sm:p-8 lg:col-span-7" role="tabpanel">
+          <div trdLiquidGlass="card" class="glass-panel-strong flex flex-col justify-between p-6 sm:p-8 lg:col-span-7" role="tabpanel">
             @if (processSteps[activeStepIndex()]; as step) {
               <div>
                 <div class="flex flex-wrap items-center justify-between gap-2">
@@ -761,7 +763,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
         </div>
 
         <!-- Compact SLA Severity Governance Table -->
-        <div class="glass-panel mt-8 overflow-hidden p-6 sm:p-8">
+        <div trdLiquidGlass="card" class="glass-panel mt-8 overflow-hidden p-6 sm:p-8">
           <div class="flex flex-col justify-between gap-2 sm:flex-row sm:items-end">
             <div>
               <h3 class="text-lg font-bold text-ink sm:text-xl">
@@ -869,7 +871,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
     <!-- 6. CTA EXECUTIVO (#contato) -->
     <section id="contato" class="pt-10 pb-8 sm:pt-14">
       <div class="mx-auto max-w-[1240px] px-5 sm:px-8">
-        <div class="glass-panel-strong p-8 sm:p-12">
+        <div trdLiquidGlass="overlay" class="glass-panel-strong p-8 sm:p-12">
           <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-12">
             <div class="lg:col-span-7">
               <span class="glass-chip inline-flex items-center gap-2 px-3.5 py-1 text-xs font-semibold text-ink">
