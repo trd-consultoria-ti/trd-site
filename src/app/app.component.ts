@@ -25,7 +25,9 @@ export class AppComponent {
 
   @HostListener('window:keydown', ['$event'])
   handleGlobalShortcut(event: KeyboardEvent): void {
-    if (event.altKey && (event.key === 't' || event.key === 'T')) {
+    const isAltT = event.altKey && (event.key === 't' || event.key === 'T');
+    const isCtrlM = event.ctrlKey && (event.key === 'm' || event.key === 'M');
+    if (isAltT || isCtrlM) {
       event.preventDefault();
       this.themeService.toggleTheme();
     }

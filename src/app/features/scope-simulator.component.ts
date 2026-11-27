@@ -94,7 +94,7 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
                 [ngModel]="contactName()"
                 (ngModelChange)="onFieldEdit('name', $event)"
                 placeholder="Ex.: Mariana Alves, Diretora de Operações"
-                class="mt-1.5 min-h-[46px] w-full rounded-2xl border border-[var(--glass-outline)] bg-[var(--bg-surface)] px-4 text-sm text-ink placeholder:text-muted"
+                class="glass-input mt-1.5 min-h-[46px] w-full rounded-2xl px-4 text-sm placeholder:text-muted"
               />
             </div>
             <div>
@@ -107,7 +107,7 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
                 [ngModel]="companyName()"
                 (ngModelChange)="onFieldEdit('company', $event)"
                 placeholder="Ex.: Grupo Horizonte Logística"
-                class="mt-1.5 min-h-[46px] w-full rounded-2xl border border-[var(--glass-outline)] bg-[var(--bg-surface)] px-4 text-sm text-ink placeholder:text-muted"
+                class="glass-input mt-1.5 min-h-[46px] w-full rounded-2xl px-4 text-sm placeholder:text-muted"
               />
             </div>
           </div>
