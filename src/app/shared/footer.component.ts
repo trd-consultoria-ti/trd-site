@@ -9,7 +9,10 @@ import { TrdLogoComponent } from './trd-logo.component';
   imports: [RouterLink, TrdLogoComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <footer class="glass-footer mt-20">
+    <footer
+      class="glass-footer mt-20"
+      style="padding-bottom: env(safe-area-inset-bottom, 0px);"
+    >
       <div class="mx-auto max-w-[1240px] px-5 py-14 sm:px-8">
         <div class="grid grid-cols-1 gap-10 md:grid-cols-12">
           <div class="md:col-span-5">

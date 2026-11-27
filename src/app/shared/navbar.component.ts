@@ -19,7 +19,10 @@ interface NavAnchor {
     class: 'sticky top-0 z-50 block w-full',
   },
   template: `
-    <div class="w-full px-3 pt-3 sm:px-6">
+    <div
+      class="w-full px-3 sm:px-6"
+      style="padding-top: max(0.75rem, env(safe-area-inset-top, 0px));"
+    >
       <header trdLiquidGlass="chrome" class="glass-navbar mx-auto max-w-[1240px] rounded-full">
         <div class="flex items-center justify-between gap-2 px-4 py-2 sm:gap-4 sm:px-6">
         <a
