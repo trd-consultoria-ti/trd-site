@@ -751,53 +751,62 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
         </div>
 
         <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
-          <!-- Step Selector (Smooth CSS Grid 0fr -> 1fr Accordion) -->
-          <div class="flex flex-col gap-3 lg:col-span-5" role="tablist" aria-label="Etapas do método de engenharia">
+          <!-- Step Selector (Smooth CSS Grid 0fr -> 1fr WAI-ARIA Disclosure Accordion) -->
+          <div class="flex flex-col gap-3 lg:col-span-5" role="region" aria-label="Etapas do método de engenharia">
             @for (step of processSteps; track step.id; let i = $index) {
-              <button
-                type="button"
-                role="tab"
-                trdPressMotion
-                [attr.aria-selected]="activeStepIndex() === i"
-                [attr.aria-expanded]="activeStepIndex() === i"
+              <div
+                class="method-step-item interactive-card glass-card flex w-full flex-col items-stretch p-4 text-left sm:p-5"
                 [class.is-selected]="activeStepIndex() === i"
-                (click)="selectStep(i)"
-                class="method-step-item interactive-card glass-card flex min-h-[68px] w-full flex-col items-stretch p-4 text-left sm:p-5"
               >
-                <div class="flex w-full items-center justify-between gap-3">
-                  <div class="flex min-w-0 items-center gap-4">
-                    <span
-                      class="metric-mono inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-bold"
-                      [class.bg-[var(--accent-cyan)]]="activeStepIndex() === i"
-                      [class.text-[var(--accent-ink)]]="activeStepIndex() === i"
-                      [class.bg-[var(--bg-elevated)]]="activeStepIndex() !== i"
-                      [class.text-ink]="activeStepIndex() !== i"
-                    >
-                      {{ step.index }}
-                    </span>
-                    <div class="min-w-0">
-                      <h3 class="text-base font-semibold text-ink sm:text-lg">{{ step.title }}</h3>
-                      <p class="mt-0.5 text-xs text-muted">{{ step.subtitle }}</p>
-                    </div>
-                  </div>
-                  <svg
-                    class="accordion-chevron h-4 w-4 shrink-0 text-muted"
-                    [class.is-open]="activeStepIndex() === i"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
+                <h3 class="m-0">
+                  <button
+                    type="button"
+                    trdPressMotion
+                    [id]="'method-trigger-' + step.id"
+                    [attr.aria-expanded]="activeStepIndex() === i"
+                    [attr.aria-controls]="'method-panel-' + step.id"
+                    (click)="selectStep(i)"
+                    class="flex min-h-[48px] w-full items-center justify-between gap-3 text-left"
                   >
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </div>
+                    <span class="flex min-w-0 items-center gap-4">
+                      <span
+                        class="metric-mono inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-bold"
+                        [class.bg-[var(--accent-cyan)]]="activeStepIndex() === i"
+                        [class.text-[var(--accent-ink)]]="activeStepIndex() === i"
+                        [class.bg-[var(--bg-elevated)]]="activeStepIndex() !== i"
+                        [class.text-ink]="activeStepIndex() !== i"
+                      >
+                        {{ step.index }}
+                      </span>
+                      <span class="block min-w-0">
+                        <span class="block text-base font-semibold text-ink sm:text-lg">{{ step.title }}</span>
+                        <span class="mt-0.5 block text-xs font-normal text-muted">{{ step.subtitle }}</span>
+                      </span>
+                    </span>
+                    <svg
+                      class="accordion-chevron h-4 w-4 shrink-0 text-muted"
+                      [class.is-open]="activeStepIndex() === i"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                </h3>
 
                 <div
                   class="accordion-wrapper"
+                  role="region"
+                  [id]="'method-panel-' + step.id"
+                  [attr.aria-labelledby]="'method-trigger-' + step.id"
                   [attr.data-open]="activeStepIndex() === i"
+                  [attr.aria-hidden]="activeStepIndex() !== i"
+                  [attr.inert]="activeStepIndex() !== i ? '' : null"
                 >
                   <div class="accordion-inner">
                     <div class="mt-3.5 border-t border-[var(--glass-outline)] pt-3 text-xs leading-relaxed text-secondary">
@@ -809,12 +818,17 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                     </div>
                   </div>
                 </div>
-              </button>
+              </div>
             }
           </div>
 
           <!-- Active Step Detail Panel -->
-          <div trdLiquidGlass="card" class="glass-panel-strong flex flex-col justify-between p-6 sm:p-8 lg:col-span-7" role="tabpanel">
+          <div
+            trdLiquidGlass="card"
+            class="glass-panel-strong flex flex-col justify-between p-6 sm:p-8 lg:col-span-7"
+            role="region"
+            [attr.aria-labelledby]="'method-trigger-' + processSteps[activeStepIndex()].id"
+          >
             @if (processSteps[activeStepIndex()]; as step) {
               <div
                 [class.scope-summary-slide-a]="stepSlide().active && !stepSlide().alt"
@@ -1253,7 +1267,12 @@ export class HomeComponent implements AfterViewInit {
     event.preventDefault();
     const target = this.doc.getElementById(id);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const behavior: ScrollBehavior = this.doc.defaultView?.matchMedia?.(
+        '(prefers-reduced-motion: reduce)'
+      ).matches
+        ? 'auto'
+        : 'smooth';
+      target.scrollIntoView({ behavior, block: 'start' });
     }
   }
 

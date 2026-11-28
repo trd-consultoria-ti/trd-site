@@ -1,22 +1,23 @@
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {
   DestroyRef,
   Directive,
   ElementRef,
   HostListener,
+  PLATFORM_ID,
+  Renderer2,
   inject,
   input,
-  Renderer2,
 } from '@angular/core';
 
 /**
  * TrdPressMotionDirective
- * 
+ *
  * Implementa a física tátil de Emil Kowalski / Apple Human Interface Guidelines:
- * - Resposta tátil imediata com escala calibrada (padrão 0.94 para toque claramente perceptível no mobile)
- * - Transição com curva elástica cúbica Apple: cubic-bezier(0.16, 1, 0.3, 1)
- * - GPU-accelerated com will-change dinâmico durante a interação
- * - Blindagem contra rajadas de toque (clearTimeout) e memory leak guard (DestroyRef)
- * - Erradicação total de reflow (apenas transform e opacity)
+ * - Resposta tátil imediata com escala calibrada (padrão 0.94)
+ * - Respeita integralmente `prefers-reduced-motion: reduce` (SSR-safe)
+ * - Preserva as transições declarativas do CSS (`@layer components`) sem sobrescrever `transition` inline
+ * - GPU-accelerated com will-change dinâmico durante a interação e limpeza determinística
  */
 @Directive({
   selector: '[trdPressMotion]',
@@ -26,9 +27,6 @@ import {
   },
 })
 export class TrdPressMotionDirective {
-  /**
-   * Fator de escala durante o toque (padrão 0.94). Suporta uso como atributo vazio ou valor numérico.
-   */
   readonly pressScale = input<number, number | string | ''>(0.94, {
     alias: 'trdPressMotion',
     transform: (val) => {
@@ -42,6 +40,8 @@ export class TrdPressMotionDirective {
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly renderer = inject(Renderer2);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly doc = inject(DOCUMENT);
 
   isPressed = false;
   private willChangeTimer: ReturnType<typeof setTimeout> | null = null;
@@ -52,25 +52,23 @@ export class TrdPressMotionDirective {
     });
   }
 
+  private prefersReducedMotion(): boolean {
+    if (!isPlatformBrowser(this.platformId)) return true;
+    return this.doc.defaultView?.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
+  }
+
   @HostListener('pointerdown', ['$event'])
   onPointerDown(event: PointerEvent): void {
-    // Apenas responde ao botão primário (toque ou clique esquerdo)
-    if (event.button !== 0) return;
+    if (event.button !== 0 || this.prefersReducedMotion()) return;
 
     this.clearTimer();
     const node = this.el.nativeElement;
-    
-    // Ativa GPU will-change somente na iminência do movimento (composite-only e compatível com magnetic hover)
+
     this.renderer.setStyle(node, 'will-change', 'transform');
     this.renderer.setStyle(
       node,
       'transform',
       `translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) scale(${this.pressScale() || 0.94})`
-    );
-    this.renderer.setStyle(
-      node,
-      'transition',
-      'transform 100ms cubic-bezier(0.16, 1, 0.3, 1)'
     );
     this.isPressed = true;
   }
@@ -88,17 +86,10 @@ export class TrdPressMotionDirective {
       'transform',
       'translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) scale(1)'
     );
-    this.renderer.setStyle(
-      node,
-      'transition',
-      'transform 180ms cubic-bezier(0.16, 1, 0.3, 1)'
-    );
 
     this.clearTimer();
-    // Libera estilos inline e memória de GPU após amortecimento para preservar hover/magnetic
     this.willChangeTimer = setTimeout(() => {
       this.renderer.removeStyle(node, 'transform');
-      this.renderer.removeStyle(node, 'transition');
       this.renderer.setStyle(node, 'will-change', 'auto');
       this.willChangeTimer = null;
     }, 200);

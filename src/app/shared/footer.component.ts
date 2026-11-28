@@ -151,10 +151,15 @@ export class FooterComponent {
 
   goToFragment(event: MouseEvent, fragment: string): void {
     event.preventDefault();
+    const behavior: ScrollBehavior = this.doc.defaultView?.matchMedia?.(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+      ? 'auto'
+      : 'smooth';
     const scrollTarget = () => {
       const el = this.doc.getElementById(fragment);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el.scrollIntoView({ behavior, block: 'start' });
       }
     };
 

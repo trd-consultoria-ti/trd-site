@@ -35,7 +35,6 @@ interface OdometerToken {
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'trd-odometer',
-    '[attr.aria-label]': 'value()',
   },
   template: `
     <span class="sr-only">{{ value() }}</span>

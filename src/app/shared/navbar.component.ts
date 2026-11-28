@@ -231,11 +231,17 @@ export class NavbarComponent {
     }
   }
 
+  private getScrollBehavior(): ScrollBehavior {
+    return this.doc.defaultView?.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+      ? 'auto'
+      : 'smooth';
+  }
+
   handleHomeClick(event: MouseEvent): void {
     this.closeMobileMenu();
     if (this.router.url === '/' || this.router.url.startsWith('/#')) {
       event.preventDefault();
-      this.doc.defaultView?.scrollTo({ top: 0, behavior: 'smooth' });
+      this.doc.defaultView?.scrollTo({ top: 0, behavior: this.getScrollBehavior() });
     }
   }
 
@@ -246,7 +252,7 @@ export class NavbarComponent {
     const scrollTarget = () => {
       const el = this.doc.getElementById(fragment);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el.scrollIntoView({ behavior: this.getScrollBehavior(), block: 'start' });
       }
     };
 

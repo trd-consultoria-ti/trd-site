@@ -473,6 +473,20 @@ h1, h2, h3, h4 {
   box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.14);
 }
 
+/* Emil Kowalski Tactile Physics inside @layer components (preserves button hover/focus transitions) */
+.emil-press,
+[trdPressMotion] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 200ms ease,
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* Primary & Secondary Pill Buttons (>= 44px target, Neural Cyan -> Electric Cyan glow) */
 .btn-primary-pill {
   display: inline-flex;
@@ -491,7 +505,12 @@ h1, h2, h3, h4 {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34), 0 8px 22px -8px rgba(6, 182, 212, 0.48);
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 180ms ease, transform 180ms var(--ios-spring), box-shadow 200ms ease;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ios-spring),
+    box-shadow 200ms ease;
 }
 
 .btn-primary-pill:hover {
@@ -523,7 +542,12 @@ h1, h2, h3, h4 {
   box-shadow: var(--glass-specular), var(--glass-shadow-subtle);
   cursor: pointer;
   text-decoration: none;
-  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms var(--ios-spring), box-shadow 180ms ease;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ios-spring),
+    box-shadow 180ms ease;
 }
 
 .btn-glass-pill:hover {
@@ -535,6 +559,19 @@ h1, h2, h3, h4 {
 
 .btn-glass-pill:active {
   transform: translateY(0) scale(0.94);
+}
+
+.emil-press:active,
+[trdPressMotion]:active,
+.emil-press.is-pressed,
+[trdPressMotion].is-pressed {
+  transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) scale(0.94) !important;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 200ms ease,
+    color 180ms ease,
+    transform 100ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Segmented Control (iOS 26 style — sem backdrop-filter aninhado) */
@@ -626,6 +663,10 @@ input[type="search"]::-webkit-search-decoration {
 
 .interactive-card:active {
   transform: translateY(0) scale(0.94);
+}
+
+.method-step-item.interactive-card:active {
+  transform: translateY(0);
 }
 
 .interactive-card[aria-pressed="true"],
@@ -836,41 +877,41 @@ input[type="search"]::-webkit-search-decoration {
 /* ============================================================
    Emil Kowalski Motion & Tactile Physics (100% Composite-Only GPU)
    ============================================================ */
-.emil-press,
-[trdPressMotion] {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
-}
 
-.emil-press:active,
-[trdPressMotion]:active,
-.emil-press.is-pressed,
-[trdPressMotion].is-pressed {
-  transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) scale(0.94) !important;
-  transition: transform 100ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* 1. Micro-Pulse de Confiabilidade no Status ("99.9% Uptime") */
+/* 1. Micro-Pulse de Confiabilidade no Status ("99.9% Uptime") — 100% Composite-Only GPU */
 @keyframes statusPulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    transform: scale(1);
+    opacity: 0.72;
   }
   70% {
-    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    transform: scale(2.4);
+    opacity: 0;
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    transform: scale(2.4);
+    opacity: 0;
   }
 }
 
 .status-beacon-green {
+  position: relative;
   display: inline-block;
   width: 8px;
   height: 8px;
   border-radius: 9999px;
   background-color: #22c55e;
+}
+
+.status-beacon-green::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: #22c55e;
+  pointer-events: none;
+  transform: scale(1);
+  opacity: 0;
   animation: statusPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
@@ -940,6 +981,7 @@ input[type="search"]::-webkit-search-decoration {
     content: '';
     position: absolute;
     inset: 0;
+    z-index: 1;
     border-radius: inherit;
     background: radial-gradient(
       400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
@@ -955,6 +997,7 @@ input[type="search"]::-webkit-search-decoration {
     content: '';
     position: absolute;
     inset: 0;
+    z-index: 1;
     border-radius: inherit;
     padding: 1.25px;
     background: radial-gradient(
@@ -1004,6 +1047,8 @@ input[type="search"]::-webkit-search-decoration {
     transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0);
     transition:
       background-color 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease,
       transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 200ms ease;
   }
@@ -1076,7 +1121,7 @@ input[type="search"]::-webkit-search-decoration {
   animation: scopeSummarySlideB 220ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 
-/* 6. Smooth Accordion com CSS Grid Nativo (0fr -> 1fr, Zero scrollHeight JS) */
+/* 6. Smooth Accordion com CSS Grid Nativo (0fr -> 1fr, Zero scrollHeight JS + Ocultação Semântica) */
 .accordion-wrapper {
   display: grid;
   grid-template-rows: 0fr;
@@ -1090,6 +1135,18 @@ input[type="search"]::-webkit-search-decoration {
 .accordion-inner {
   overflow: hidden;
   min-height: 0;
+  visibility: hidden;
+  transition: visibility 0s linear 250ms;
+}
+
+.accordion-wrapper[data-open="false"] .accordion-inner {
+  visibility: hidden;
+  transition: visibility 0s linear 250ms;
+}
+
+.accordion-wrapper[data-open="true"] .accordion-inner {
+  visibility: visible;
+  transition-delay: 0s;
 }
 
 .accordion-chevron {
@@ -1248,8 +1305,21 @@ input[type="search"]::-webkit-search-decoration {
     animation: none !important;
     transform: translate3d(0, 0, 0) !important;
   }
-  .status-beacon-green {
+  .status-beacon-green,
+  .status-beacon-green::after {
     animation: none !important;
+  }
+  .status-beacon-green::after {
+    opacity: 0 !important;
+  }
+  .emil-press,
+  [trdPressMotion],
+  .emil-press:active,
+  [trdPressMotion]:active,
+  .emil-press.is-pressed,
+  [trdPressMotion].is-pressed {
+    transform: none !important;
+    transition: none !important;
   }
   .arch-service-card,
   .method-step-item,
