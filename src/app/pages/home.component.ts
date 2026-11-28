@@ -4,8 +4,10 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   PLATFORM_ID,
   computed,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -109,7 +111,7 @@ type HeroFrameView = 'hub' | 'sla';
                     trdPressMotion
                     [attr.aria-selected]="heroView() === 'hub'"
                     [class.is-active]="heroView() === 'hub'"
-                    (click)="heroView.set('hub')"
+                    (click)="setHeroView('hub')"
                     class="segmented-btn flex-1 sm:flex-initial !min-h-[44px] !px-3.5 !py-1.5 !text-xs"
                   >
                     Hub Operacional Sob Medida
@@ -120,7 +122,7 @@ type HeroFrameView = 'hub' | 'sla';
                     trdPressMotion
                     [attr.aria-selected]="heroView() === 'sla'"
                     [class.is-active]="heroView() === 'sla'"
-                    (click)="heroView.set('sla')"
+                    (click)="setHeroView('sla')"
                     class="segmented-btn flex-1 sm:flex-initial !min-h-[44px] !px-3.5 !py-1.5 !text-xs"
                   >
                     Painel de Confiabilidade e SLA
@@ -130,7 +132,7 @@ type HeroFrameView = 'hub' | 'sla';
 
               @if (heroView() === 'hub') {
                 <!-- View 1: Custom Operational Hub -->
-                <div class="mt-4 space-y-3.5" role="tabpanel" aria-label="Hub Operacional Sob Medida">
+                <div class="hero-frame-panel mt-4 space-y-3.5" role="tabpanel" aria-label="Hub Operacional Sob Medida">
                   <div class="flex flex-wrap items-center justify-between gap-2">
                     <div>
                       <h2 class="text-base font-semibold text-ink">Esteira Corporativa Unificada</h2>
@@ -196,7 +198,7 @@ type HeroFrameView = 'hub' | 'sla';
                 </div>
               } @else {
                 <!-- View 2: Reliability & SLA Telemetry -->
-                <div class="mt-4 space-y-3.5" role="tabpanel" aria-label="Painel de Confiabilidade e SLA">
+                <div class="hero-frame-panel mt-4 space-y-3.5" role="tabpanel" aria-label="Painel de Confiabilidade e SLA">
                   <div class="flex flex-wrap items-center justify-between gap-2">
                     <div>
                       <h2 class="text-base font-semibold text-ink">Observabilidade e Sustentação N3</h2>
@@ -935,6 +937,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
 export class HomeComponent implements AfterViewInit {
   private readonly doc = inject(DOCUMENT);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly destroyRef = inject(DestroyRef);
   readonly themeService = inject(ThemeService);
 
   readonly heroView = signal<HeroFrameView>('hub');
@@ -946,6 +949,54 @@ export class HomeComponent implements AfterViewInit {
 
   readonly apiEndpoint = signal<string>('/api/institutional.json');
   readonly portfolioResource = httpResource<InstitutionalPayload>(() => this.apiEndpoint());
+
+  private cardObserver: IntersectionObserver | null = null;
+  private portfolioMutationObserver: MutationObserver | null = null;
+
+  constructor() {
+    // Vínculo reativo para observar cards assíncronos do portfólio assim que chegarem ao DOM
+    effect(() => {
+      const hasData = this.portfolioResource.hasValue();
+      this.selectedCategory();
+      this.searchQuery();
+
+      if (hasData && isPlatformBrowser(this.platformId)) {
+        setTimeout(() => {
+          this.observePortfolioCards();
+        }, 80);
+      }
+    });
+
+    this.destroyRef.onDestroy(() => {
+      this.cardObserver?.disconnect();
+      this.cardObserver = null;
+      this.portfolioMutationObserver?.disconnect();
+      this.portfolioMutationObserver = null;
+    });
+  }
+
+  setHeroView(view: HeroFrameView): void {
+    if (this.heroView() === view) return;
+    this.heroView.set(view);
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        const panel = this.doc.querySelector('.hero-frame-panel');
+        if (panel) {
+          gsap.fromTo(
+            panel,
+            { opacity: 0, y: 12 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.35,
+              ease: 'power2.out',
+              clearProps: 'transform',
+            }
+          );
+        }
+      }, 15);
+    }
+  }
 
   readonly categories: { id: PortfolioCategory; label: string }[] = [
     { id: 'todos', label: 'Todos os projetos' },
@@ -1127,6 +1178,17 @@ export class HomeComponent implements AfterViewInit {
     }
   }
 
+  private observePortfolioCards(): void {
+    if (!this.cardObserver) return;
+    const cards = this.doc.querySelectorAll<HTMLElement>('.portfolio-case-card');
+    cards.forEach((card) => {
+      if (!card.dataset['motionObserved']) {
+        card.dataset['motionObserved'] = 'true';
+        this.cardObserver?.observe(card);
+      }
+    });
+  }
+
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
@@ -1139,82 +1201,82 @@ export class HomeComponent implements AfterViewInit {
     // 1. Revelação inicial do Hero Copy
     gsap.fromTo(
       '.hero-enter',
-      { opacity: 0, y: 16 },
+      { opacity: 0, y: 24 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.65,
+        duration: 0.75,
         ease: 'power3.out',
         clearProps: 'transform',
       }
     );
 
-    // 2. Métricas de SLA (< 2h, 100%, 99.9%): fade-in e subida em cascata escalonada
+    // 2. Métricas de SLA (< 2h, 100%, 99.9%): fade-in e subida nítida em cascata escalonada
     gsap.fromTo(
       '.sla-metric-item',
-      { opacity: 0, y: 22 },
+      { opacity: 0, y: 28, scale: 0.95 },
       {
         opacity: 1,
         y: 0,
-        duration: 0.6,
-        stagger: 0.12,
+        scale: 1,
+        duration: 0.7,
+        stagger: 0.14,
         delay: 0.15,
         ease: 'power3.out',
         clearProps: 'transform',
       }
     );
 
-    // 3. Scroll Reveal via IntersectionObserver para seções de Arquitetura, Portfólio e Metodologia
+    // 3. Scroll Reveal Card a Card (disparo no momento exato em que cada card cruza a tela móvel)
     if (typeof IntersectionObserver !== 'undefined') {
-      const observerOptions: IntersectionObserverInit = {
-        root: null,
-        rootMargin: '0px 0px -40px 0px',
-        threshold: 0.1,
-      };
-
-      const observeAndStagger = (
-        containerSelector: string,
-        itemSelector: string,
-        yOffset = 25,
-        staggerDelay = 0.08
-      ) => {
-        const container = this.doc.querySelector(containerSelector);
-        if (!container) return;
-
-        const observer = new IntersectionObserver((entries, obs) => {
+      this.cardObserver = new IntersectionObserver(
+        (entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              const items = container.querySelectorAll(itemSelector);
-              if (items.length > 0) {
-                gsap.fromTo(
-                  items,
-                  { opacity: 0, y: yOffset },
-                  {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.65,
-                    stagger: staggerDelay,
-                    ease: 'power3.out',
-                    clearProps: 'transform',
-                  }
-                );
-              }
-              obs.unobserve(entry.target);
+              gsap.fromTo(
+                entry.target,
+                { opacity: 0, y: 42, scale: 0.97 },
+                {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  duration: 0.7,
+                  ease: 'power3.out',
+                  clearProps: 'transform',
+                }
+              );
+              observer.unobserve(entry.target);
             }
           });
-        }, observerOptions);
+        },
+        {
+          root: null,
+          rootMargin: '0px 0px -40px 0px',
+          threshold: 0.12,
+        }
+      );
 
-        observer.observe(container);
-      };
+      // Observar cada card de Arquitetura & Serviços e cada etapa da Metodologia individualmente
+      this.doc
+        .querySelectorAll<HTMLElement>('.arch-service-card, .method-step-item')
+        .forEach((card) => {
+          this.cardObserver?.observe(card);
+        });
 
-      // Cards de Arquitetura & Serviços (#beneficios): deslocamento sutil de 25px e stagger de 80ms
-      observeAndStagger('#beneficios', '.arch-service-card', 25, 0.08);
+      // Observar imediatamente os cards do portfólio já renderizados
+      this.observePortfolioCards();
 
-      // Cards de Casos Reais / Portfólio (#experiencia)
-      observeAndStagger('#experiencia', '.portfolio-case-card', 25, 0.08);
-
-      // Etapas da Metodologia 01 a 04 (#como-funciona): revelação sequencial ao rolar
-      observeAndStagger('#como-funciona', '.method-step-item', 20, 0.09);
+      // MutationObserver no container de experiência para capturar renderização tardia/assíncrona
+      const expContainer = this.doc.getElementById('experiencia');
+      if (expContainer && typeof MutationObserver !== 'undefined') {
+        this.portfolioMutationObserver = new MutationObserver(() => {
+          this.observePortfolioCards();
+        });
+        this.portfolioMutationObserver.observe(expContainer, {
+          childList: true,
+          subtree: true,
+        });
+      }
     }
   }
 }

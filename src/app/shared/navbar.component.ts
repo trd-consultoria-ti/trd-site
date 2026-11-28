@@ -194,7 +194,7 @@ export class NavbarComponent {
     this.toggleTimer = setTimeout(() => {
       this.isToggling = false;
       this.toggleTimer = null;
-    }, 240);
+    }, 280);
   }
 
   closeMobileMenu(): void {
