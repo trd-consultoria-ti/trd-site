@@ -25,6 +25,13 @@ export class TrdLiquidGlassDirective implements AfterViewInit {
   constructor() {
     effect(() => {
       const currentKind = this.kind();
+      if (this.isMobileCard(currentKind)) {
+        if (this.unregister) {
+          this.unregister();
+          this.unregister = null;
+        }
+        return;
+      }
       if (this.unregister) {
         this.unregister();
         this.unregister = this.engine.registerSurface(this.el.nativeElement, currentKind);
@@ -33,8 +40,13 @@ export class TrdLiquidGlassDirective implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    const currentKind = this.kind();
+    if (this.isMobileCard(currentKind)) {
+      return;
+    }
+
     const node = this.el.nativeElement;
-    this.unregister = this.engine.registerSurface(node, this.kind());
+    this.unregister = this.engine.registerSurface(node, currentKind);
 
     if (typeof ResizeObserver !== 'undefined') {
       let raf = 0;
@@ -56,5 +68,9 @@ export class TrdLiquidGlassDirective implements AfterViewInit {
       this.unregister?.();
       this.unregister = null;
     });
+  }
+
+  private isMobileCard(kind: LiquidGlassSurfaceKind): boolean {
+    return typeof window !== 'undefined' && window.innerWidth < 768 && kind === 'card';
   }
 }

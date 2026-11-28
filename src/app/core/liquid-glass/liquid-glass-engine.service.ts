@@ -72,6 +72,11 @@ export class LiquidGlassEngineService {
   }
 
   registerSurface(element: HTMLElement, kind: LiquidGlassSurfaceKind): () => void {
+    if (this.isMobileViewport() && kind === 'card') {
+      element.setAttribute('data-lg-engine', 'layer0');
+      return () => {};
+    }
+
     const id = ++this.nextId;
     this.surfaces.set(id, {
       id,
@@ -116,6 +121,14 @@ export class LiquidGlassEngineService {
     const { element } = entry;
     void this._themeTick();
 
+    if (this.isMobileViewport() && entry.kind === 'card') {
+      element.setAttribute('data-lg-engine', 'layer0');
+      element.removeAttribute('data-lg-rim');
+      element.style.removeProperty('--lg-filter');
+      element.style.removeProperty('--lg-rim');
+      return;
+    }
+
     if (!this.isVisible(element)) {
       element.setAttribute('data-lg-engine', 'hidden');
       element.removeAttribute('data-lg-rim');
@@ -158,6 +171,10 @@ export class LiquidGlassEngineService {
       return false;
     }
     return true;
+  }
+
+  private isMobileViewport(): boolean {
+    return typeof window !== 'undefined' && window.innerWidth < 768;
   }
 
   private readMedia(query: string): boolean {
