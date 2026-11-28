@@ -1235,7 +1235,7 @@ export class HomeComponent implements AfterViewInit {
             if (entry.isIntersecting) {
               gsap.fromTo(
                 entry.target,
-                { opacity: 0, y: 42, scale: 0.97 },
+                { opacity: 0, y: 42, scale: 0.94 },
                 {
                   opacity: 1,
                   y: 0,
