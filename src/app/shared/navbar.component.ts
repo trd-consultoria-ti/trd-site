@@ -1,7 +1,15 @@
 import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  HostListener,
+  inject,
+  signal,
+} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TrdLiquidGlassDirective } from '../core/liquid-glass';
+import { TrdPressMotionDirective } from '../core/motion';
 import { ThemeService } from '../core/theme.service';
 import { TrdLogoComponent } from './trd-logo.component';
 
@@ -13,7 +21,7 @@ interface NavAnchor {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, TrdLogoComponent, TrdLiquidGlassDirective],
+  imports: [RouterLink, TrdLogoComponent, TrdLiquidGlassDirective, TrdPressMotionDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'sticky top-0 z-50 block w-full',
@@ -28,6 +36,7 @@ interface NavAnchor {
         <a
           routerLink="/"
           (click)="handleHomeClick($event)"
+          trdPressMotion
           class="inline-flex min-h-[44px] min-w-0 items-center rounded-2xl pr-1 focus-visible:outline-2"
           style="background: transparent;"
           aria-label="TRD Consultoria, voltar ao início"
@@ -40,6 +49,7 @@ interface NavAnchor {
             <a
               [href]="'/#' + item.fragment"
               (click)="navigateToSection($event, item.fragment)"
+              trdPressMotion
               class="inline-flex min-h-[44px] items-center rounded-full px-3.5 text-[0.925rem] font-medium text-secondary transition-colors hover:bg-black/[0.04] hover:text-ink dark:hover:bg-white/[0.07]"
             >
               {{ item.label }}
@@ -51,6 +61,7 @@ interface NavAnchor {
           <button
             type="button"
             (click)="themeService.toggleTheme()"
+            trdPressMotion
             class="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full border border-[var(--glass-border)] bg-slate-900/[0.045] dark:bg-white/[0.07] text-ink transition-transform hover:-translate-y-0.5 active:scale-95"
             [attr.aria-label]="
               themeService.isDark() ? 'Alternar para modo claro' : 'Alternar para modo escuro'
@@ -76,6 +87,7 @@ interface NavAnchor {
           <a
             href="/#arquitetura"
             (click)="navigateToSection($event, 'arquitetura')"
+            trdPressMotion
             class="btn-primary-pill hidden sm:inline-flex"
           >
             Agendar diagnóstico
@@ -84,6 +96,7 @@ interface NavAnchor {
           <button
             type="button"
             (click)="toggleMobileMenu()"
+            trdPressMotion
             class="inline-flex h-[44px] w-[44px] shrink-0 items-center justify-center rounded-full border border-[var(--glass-border)] bg-slate-900/[0.045] dark:bg-white/[0.07] text-ink lg:hidden"
             [attr.aria-expanded]="mobileOpen()"
             aria-controls="mobile-glass-drawer"
@@ -106,7 +119,7 @@ interface NavAnchor {
       @if (mobileOpen()) {
         <div
           class="mobile-nav-scrim lg:hidden"
-          (click)="mobileOpen.set(false)"
+          (click)="closeMobileMenu()"
           aria-hidden="true"
         ></div>
         <div
@@ -121,6 +134,7 @@ interface NavAnchor {
               <a
                 [href]="'/#' + item.fragment"
                 (click)="navigateToSection($event, item.fragment)"
+                trdPressMotion
                 class="mobile-nav-row flex min-h-[48px] items-center justify-between px-4 text-base font-medium text-ink"
               >
                 <span>{{ item.label }}</span>
@@ -132,6 +146,7 @@ interface NavAnchor {
             <a
               href="/#arquitetura"
               (click)="navigateToSection($event, 'arquitetura')"
+              trdPressMotion
               class="btn-primary-pill mt-2 w-full"
             >
               Agendar diagnóstico
@@ -146,8 +161,13 @@ export class NavbarComponent {
   readonly themeService = inject(ThemeService);
   private readonly router = inject(Router);
   private readonly doc = inject(DOCUMENT);
+  private readonly destroyRef = inject(DestroyRef);
 
   readonly mobileOpen = signal(false);
+
+  // Blindagem contra reentrância de toque no drawer
+  private isToggling = false;
+  private toggleTimer: ReturnType<typeof setTimeout> | null = null;
 
   readonly navItems: NavAnchor[] = [
     { label: 'Benefícios', fragment: 'beneficios' },
@@ -157,19 +177,39 @@ export class NavbarComponent {
     { label: 'Contato', fragment: 'contato' },
   ];
 
+  constructor() {
+    this.destroyRef.onDestroy(() => {
+      if (this.toggleTimer !== null) {
+        clearTimeout(this.toggleTimer);
+        this.toggleTimer = null;
+      }
+    });
+  }
+
   toggleMobileMenu(): void {
+    if (this.isToggling) return;
+    this.isToggling = true;
     this.mobileOpen.update((open) => !open);
+
+    this.toggleTimer = setTimeout(() => {
+      this.isToggling = false;
+      this.toggleTimer = null;
+    }, 280);
+  }
+
+  closeMobileMenu(): void {
+    this.mobileOpen.set(false);
   }
 
   @HostListener('document:keydown.escape')
   onEscape(): void {
     if (this.mobileOpen()) {
-      this.mobileOpen.set(false);
+      this.closeMobileMenu();
     }
   }
 
   handleHomeClick(event: MouseEvent): void {
-    this.mobileOpen.set(false);
+    this.closeMobileMenu();
     if (this.router.url === '/' || this.router.url.startsWith('/#')) {
       event.preventDefault();
       this.doc.defaultView?.scrollTo({ top: 0, behavior: 'smooth' });
@@ -178,7 +218,7 @@ export class NavbarComponent {
 
   navigateToSection(event: MouseEvent, fragment: string): void {
     event.preventDefault();
-    this.mobileOpen.set(false);
+    this.closeMobileMenu();
 
     const scrollTarget = () => {
       const el = this.doc.getElementById(fragment);

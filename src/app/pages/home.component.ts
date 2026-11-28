@@ -1,6 +1,16 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { httpResource } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  PLATFORM_ID,
+  computed,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   InstitutionalPayload,
@@ -10,6 +20,7 @@ import {
   ProcessStep,
 } from '../core/institutional.models';
 import { TrdLiquidGlassDirective } from '../core/liquid-glass';
+import { TrdPressMotionDirective } from '../core/motion';
 import { ThemeService } from '../core/theme.service';
 import { ScopeSimulatorComponent } from '../features/scope-simulator.component';
 
@@ -18,7 +29,7 @@ type HeroFrameView = 'hub' | 'sla';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, ScopeSimulatorComponent, TrdLiquidGlassDirective],
+  imports: [FormsModule, ScopeSimulatorComponent, TrdLiquidGlassDirective, TrdPressMotionDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- 1. HERO (1st screen, subtle load entrance, live interactive Liquid Glass app-frame) -->
@@ -44,6 +55,7 @@ type HeroFrameView = 'hub' | 'sla';
               <a
                 href="#arquitetura"
                 (click)="scrollToSection($event, 'arquitetura')"
+                trdPressMotion
                 class="btn-primary-pill w-full sm:w-auto"
               >
                 Mapear meu sistema
@@ -51,6 +63,7 @@ type HeroFrameView = 'hub' | 'sla';
               <a
                 href="#experiencia"
                 (click)="scrollToSection($event, 'experiencia')"
+                trdPressMotion
                 class="btn-glass-pill w-full sm:w-auto"
               >
                 Conhecer casos reais
@@ -58,15 +71,15 @@ type HeroFrameView = 'hub' | 'sla';
             </div>
 
             <dl class="mt-9 grid grid-cols-3 gap-4 border-t border-[var(--glass-outline)] pt-6">
-              <div>
+              <div class="sla-metric-item">
                 <dt class="text-xs font-medium text-muted">Resposta crítica P1</dt>
                 <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">&lt; 2h</dd>
               </div>
-              <div>
+              <div class="sla-metric-item">
                 <dt class="text-xs font-medium text-muted">Titularidade do código</dt>
                 <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">100%</dd>
               </div>
-              <div>
+              <div class="sla-metric-item">
                 <dt class="text-xs font-medium text-muted">Disponibilidade alvo</dt>
                 <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">99.9%</dd>
               </div>
@@ -94,9 +107,10 @@ type HeroFrameView = 'hub' | 'sla';
                   <button
                     type="button"
                     role="tab"
+                    trdPressMotion
                     [attr.aria-selected]="heroView() === 'hub'"
                     [class.is-active]="heroView() === 'hub'"
-                    (click)="heroView.set('hub')"
+                    (click)="setHeroView('hub')"
                     class="segmented-btn flex-1 sm:flex-initial !min-h-[44px] !px-3.5 !py-1.5 !text-xs"
                   >
                     Hub Operacional Sob Medida
@@ -104,9 +118,10 @@ type HeroFrameView = 'hub' | 'sla';
                   <button
                     type="button"
                     role="tab"
+                    trdPressMotion
                     [attr.aria-selected]="heroView() === 'sla'"
                     [class.is-active]="heroView() === 'sla'"
-                    (click)="heroView.set('sla')"
+                    (click)="setHeroView('sla')"
                     class="segmented-btn flex-1 sm:flex-initial !min-h-[44px] !px-3.5 !py-1.5 !text-xs"
                   >
                     Painel de Confiabilidade e SLA
@@ -116,7 +131,7 @@ type HeroFrameView = 'hub' | 'sla';
 
               @if (heroView() === 'hub') {
                 <!-- View 1: Custom Operational Hub -->
-                <div class="mt-4 space-y-3.5" role="tabpanel" aria-label="Hub Operacional Sob Medida">
+                <div class="hero-frame-panel mt-4 space-y-3.5" role="tabpanel" aria-label="Hub Operacional Sob Medida">
                   <div class="flex flex-wrap items-center justify-between gap-2">
                     <div>
                       <h2 class="text-base font-semibold text-ink">Esteira Corporativa Unificada</h2>
@@ -150,6 +165,7 @@ type HeroFrameView = 'hub' | 'sla';
                     @for (flow of hubFlows; track flow.code; let idx = $index) {
                       <button
                         type="button"
+                        trdPressMotion
                         (click)="selectedFlowIndex.set(idx)"
                         [class.is-selected]="selectedFlowIndex() === idx"
                         class="interactive-card glass-subcard flex min-h-[48px] w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left"
@@ -181,7 +197,7 @@ type HeroFrameView = 'hub' | 'sla';
                 </div>
               } @else {
                 <!-- View 2: Reliability & SLA Telemetry -->
-                <div class="mt-4 space-y-3.5" role="tabpanel" aria-label="Painel de Confiabilidade e SLA">
+                <div class="hero-frame-panel mt-4 space-y-3.5" role="tabpanel" aria-label="Painel de Confiabilidade e SLA">
                   <div class="flex flex-wrap items-center justify-between gap-2">
                     <div>
                       <h2 class="text-base font-semibold text-ink">Observabilidade e Sustentação N3</h2>
@@ -246,7 +262,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
 
         <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
           <!-- Bento Card 1 (Wide 7 cols): 100% IP Ownership + Architectural Hub Diagram -->
-          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
             <div>
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-[var(--accent-cyan)]">
@@ -309,7 +325,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 2 (Compact 5 cols): Contrast vs Spreadsheets, Per-Seat SaaS, Freelancers -->
-          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
             <div>
               <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-ink">
                 Comparativo estrutural
@@ -363,7 +379,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 3 (Compact 5 cols): Legal Safety, NDA & Damage Cap -->
-          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
             <div>
               <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-ink">
                 Blindagem jurídica corporativa
@@ -393,7 +409,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 4 (Wide 7 cols): Direct Senior Execution & Principal Architect -->
-          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
             <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
               <img
                 src="assets/thiago-duarte.jpg"
@@ -456,14 +472,27 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             href="https://www.linkedin.com/in/thiagorduarte/"
             target="_blank"
             rel="noopener"
+            trdPressMotion
             class="btn-glass-pill self-start lg:self-auto"
           >
             Ver trajetória no LinkedIn
           </a>
         </div>
 
-        <!-- Real Institutional Trajectory Logos on Transparent Glass (ZERO White Boxes!) -->
-        @if (portfolioResource.hasValue()) {
+        <!-- Real Institutional Trajectory Logos on Transparent Glass (Reserva estrita de layout para CLS = 0) -->
+        @if (portfolioResource.isLoading()) {
+          <div
+            class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7"
+            aria-hidden="true"
+          >
+            @for (slot of [1, 2, 3, 4, 5, 6, 7]; track slot) {
+              <div class="glass-card flex flex-col items-center justify-between gap-3 px-3 py-4 text-center">
+                <div class="skeleton-box h-11 w-full"></div>
+                <div class="skeleton-box h-4 w-20"></div>
+              </div>
+            }
+          </div>
+        } @else if (portfolioResource.hasValue()) {
           <div
             class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7"
             aria-label="Ecossistemas e instituições de referência técnica"
@@ -475,7 +504,9 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                     [src]="logo.src"
                     [alt]="logo.name"
                     [class]="logoClass(logo.contrastMode, logo.aspect)"
-                    loading="lazy"
+                    width="108"
+                    height="44"
+                    loading="eager"
                   />
                 </div>
                 <span class="text-xs font-medium leading-tight text-secondary">{{ logo.name }}</span>
@@ -491,6 +522,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
               <button
                 type="button"
                 role="tab"
+                trdPressMotion
                 [attr.aria-selected]="selectedCategory() === cat.id"
                 [class.is-active]="selectedCategory() === cat.id"
                 (click)="selectedCategory.set(cat.id)"
@@ -527,6 +559,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             @if (searchQuery()) {
               <button
                 type="button"
+                trdPressMotion
                 (click)="searchQuery.set('')"
                 aria-label="Limpar texto da busca"
                 class="absolute right-0.5 top-1/2 inline-flex h-[44px] w-[44px] -translate-y-1/2 items-center justify-center rounded-full text-muted hover:text-ink"
@@ -581,6 +614,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             </p>
             <button
               type="button"
+              trdPressMotion
               (click)="reloadPortfolio()"
               class="btn-primary-pill mt-6"
             >
@@ -605,6 +639,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             </p>
             <button
               type="button"
+              trdPressMotion
               (click)="clearFilters()"
               class="btn-primary-pill mt-6"
             >
@@ -616,7 +651,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-12">
             @for (item of filteredCases(); track item.id) {
               <article
-                [class]="'glass-card col-span-1 flex flex-col justify-between p-6 sm:p-7 md:col-span-12 ' + (isUnfiltered() ? item.gridSpan : 'md:col-span-6')"
+                [class]="'portfolio-case-card glass-card col-span-1 flex flex-col justify-between p-6 sm:p-7 md:col-span-12 ' + (isUnfiltered() ? item.gridSpan : 'md:col-span-6')"
               >
                 <div>
                   <div class="flex items-start justify-between gap-4">
@@ -690,10 +725,11 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
               <button
                 type="button"
                 role="tab"
+                trdPressMotion
                 [attr.aria-selected]="activeStepIndex() === i"
                 [class.is-selected]="activeStepIndex() === i"
                 (click)="activeStepIndex.set(i)"
-                class="interactive-card glass-card flex min-h-[68px] w-full items-center gap-4 p-4 text-left sm:p-5"
+                class="method-step-item interactive-card glass-card flex min-h-[68px] w-full items-center gap-4 p-4 text-left sm:p-5"
               >
                 <span
                   class="metric-mono inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-bold"
@@ -753,6 +789,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                 <a
                   href="#arquitetura"
                   (click)="scrollToSection($event, 'arquitetura')"
+                  trdPressMotion
                   class="btn-glass-pill"
                 >
                   Simular meu escopo
@@ -891,12 +928,14 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                 href="https://wa.me/5561999526374?text=Ol%C3%A1%20Thiago%2C%20estou%20no%20site%20da%20TRD%20Consultoria%20e%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20t%C3%A9cnico%20de%20sistema%20ou%20sustenta%C3%A7%C3%A3o."
                 target="_blank"
                 rel="noopener"
+                trdPressMotion
                 class="btn-primary-pill w-full sm:w-auto"
               >
                 Conversar no WhatsApp
               </a>
               <a
                 href="mailto:contato@trdconsultoria.com.br?subject=Diagn%C3%B3stico%20T%C3%A9cnico%20%7C%20TRD%20Consultoria"
+                trdPressMotion
                 class="btn-glass-pill w-full sm:w-auto"
               >
                 Enviar e-mail corporativo
@@ -908,8 +947,10 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
     </section>
   `,
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   private readonly doc = inject(DOCUMENT);
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly destroyRef = inject(DestroyRef);
   readonly themeService = inject(ThemeService);
 
   readonly heroView = signal<HeroFrameView>('hub');
@@ -921,6 +962,44 @@ export class HomeComponent {
 
   readonly apiEndpoint = signal<string>('/api/institutional.json');
   readonly portfolioResource = httpResource<InstitutionalPayload>(() => this.apiEndpoint());
+
+  private cardObserver: IntersectionObserver | null = null;
+  private portfolioMutationObserver: MutationObserver | null = null;
+  private scrollListenerCleanup: (() => void) | null = null;
+  private scrollRaf = 0;
+
+  constructor() {
+    // Vínculo reativo para observar cards assíncronos do portfólio assim que chegarem ao DOM
+    effect(() => {
+      const hasData = this.portfolioResource.hasValue();
+      this.selectedCategory();
+      this.searchQuery();
+
+      if (hasData && isPlatformBrowser(this.platformId)) {
+        setTimeout(() => {
+          this.observePortfolioCards();
+        }, 60);
+      }
+    });
+
+    this.destroyRef.onDestroy(() => {
+      this.cardObserver?.disconnect();
+      this.cardObserver = null;
+      this.portfolioMutationObserver?.disconnect();
+      this.portfolioMutationObserver = null;
+      this.scrollListenerCleanup?.();
+      this.scrollListenerCleanup = null;
+      if (this.scrollRaf) {
+        cancelAnimationFrame(this.scrollRaf);
+        this.scrollRaf = 0;
+      }
+    });
+  }
+
+  setHeroView(view: HeroFrameView): void {
+    if (this.heroView() === view) return;
+    this.heroView.set(view);
+  }
 
   readonly categories: { id: PortfolioCategory; label: string }[] = [
     { id: 'todos', label: 'Todos os projetos' },
@@ -1099,6 +1178,120 @@ export class HomeComponent {
     const target = this.doc.getElementById(id);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  private revealCard(card: Element): void {
+    card.classList.remove('reveal-pending');
+    card.classList.add('is-revealed');
+    this.cardObserver?.unobserve(card);
+  }
+
+  private prepareCardForReveal(card: HTMLElement): void {
+    if (this.isMobileViewport()) return;
+    if (card.dataset['motionObserved']) return;
+    card.dataset['motionObserved'] = 'true';
+
+    const win = this.doc.defaultView;
+    const viewportHeight = win?.innerHeight ?? 800;
+    const rect = card.getBoundingClientRect();
+
+    // Já visível ou acima da dobra: mantém 100% visível sem ocultar (CLS = 0)
+    if (rect.top <= viewportHeight * 1.02) {
+      card.classList.add('is-revealed');
+      return;
+    }
+
+    card.classList.add('reveal-pending');
+    this.cardObserver?.observe(card);
+  }
+
+  private isMobileViewport(): boolean {
+    const win = this.doc.defaultView;
+    if (!win) return true;
+    return typeof win.matchMedia === 'function'
+      ? win.matchMedia('(max-width: 767px)').matches
+      : win.innerWidth < 768;
+  }
+
+  private sweepPassedCards(): void {
+    const win = this.doc.defaultView;
+    const viewportHeight = win?.innerHeight ?? 800;
+    const pending = this.doc.querySelectorAll<HTMLElement>('.reveal-pending');
+    pending.forEach((card) => {
+      if (card.getBoundingClientRect().top <= viewportHeight + 60) {
+        this.revealCard(card);
+      }
+    });
+  }
+
+  private observePortfolioCards(): void {
+    if (!this.cardObserver) return;
+    const cards = this.doc.querySelectorAll<HTMLElement>('.portfolio-case-card');
+    cards.forEach((card) => this.prepareCardForReveal(card));
+  }
+
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    // Mobile (< 768px): 100% visível no primeiro ciclo de pintura, zero coupling com IntersectionObserver
+    if (this.isMobileViewport()) return;
+
+    const win = this.doc.defaultView;
+    const prefersReduced =
+      typeof win !== 'undefined' &&
+      win !== null &&
+      typeof win.matchMedia === 'function' &&
+      win.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced) return;
+
+    // Scroll Reveal Off-Thread via IntersectionObserver + fallback passivo contra fast fling scroll
+    if (typeof IntersectionObserver !== 'undefined') {
+      this.cardObserver = new IntersectionObserver(
+        (entries) => {
+          const viewportHeight = this.doc.defaultView?.innerHeight ?? 800;
+          entries.forEach((entry) => {
+            if (entry.isIntersecting || entry.boundingClientRect.top <= viewportHeight) {
+              this.revealCard(entry.target);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: '0px 0px -20px 0px',
+          threshold: 0.05,
+        }
+      );
+
+      this.doc
+        .querySelectorAll<HTMLElement>('.arch-service-card, .method-step-item')
+        .forEach((card) => this.prepareCardForReveal(card));
+
+      this.observePortfolioCards();
+
+      const expContainer = this.doc.getElementById('experiencia');
+      if (expContainer && typeof MutationObserver !== 'undefined') {
+        this.portfolioMutationObserver = new MutationObserver(() => {
+          this.observePortfolioCards();
+        });
+        this.portfolioMutationObserver.observe(expContainer, {
+          childList: true,
+          subtree: true,
+        });
+      }
+
+      if (win) {
+        const onScroll = () => {
+          if (this.scrollRaf) return;
+          this.scrollRaf = requestAnimationFrame(() => {
+            this.scrollRaf = 0;
+            this.sweepPassedCards();
+          });
+        };
+        win.addEventListener('scroll', onScroll, { passive: true });
+        this.scrollListenerCleanup = () => win.removeEventListener('scroll', onScroll);
+      }
     }
   }
 }

@@ -362,6 +362,8 @@ h1, h2, h3, h4 {
   background: rgba(15, 23, 42, 0.08);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
+  animation: mobileScrimEnter 200ms ease-out both;
+  will-change: opacity;
 }
 
 [data-theme="dark"] .mobile-nav-scrim,
@@ -383,6 +385,28 @@ h1, h2, h3, h4 {
   backdrop-filter: blur(16px) saturate(205%);
   border: 1px solid var(--glass-border);
   box-shadow: 0 24px 56px -14px rgba(15, 23, 42, 0.2), 0 6px 18px -6px rgba(8, 145, 178, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.94), inset 0 -0.5px 0 rgba(255, 255, 255, 0.48), inset 0 0 0 0.5px rgba(15, 23, 42, 0.1);
+  animation: mobileDrawerEnter 280ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  will-change: transform, opacity;
+}
+
+@keyframes mobileDrawerEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mobileScrimEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 [data-theme="dark"] .mobile-glass-drawer,
@@ -477,7 +501,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary-pill:active {
-  transform: translateY(0) scale(0.97);
+  transform: translateY(0) scale(0.94);
 }
 
 .btn-glass-pill {
@@ -510,7 +534,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-glass-pill:active {
-  transform: translateY(0) scale(0.97);
+  transform: translateY(0) scale(0.94);
 }
 
 /* Segmented Control (iOS 26 style — sem backdrop-filter aninhado) */
@@ -601,7 +625,7 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 .interactive-card:active {
-  transform: translateY(0) scale(0.985);
+  transform: translateY(0) scale(0.94);
 }
 
 .interactive-card[aria-pressed="true"],
@@ -641,20 +665,12 @@ input[type="search"]::-webkit-search-decoration {
 @media (max-width: 767px) {
   :root,
   [data-theme="light"] {
-    --ambient-layer:
-      radial-gradient(95vw 28vh at 50% 4%, rgba(6, 182, 212, 0.26), transparent 70%),
-      radial-gradient(82vw 34vh at 88% 34%, rgba(8, 145, 178, 0.18), transparent 72%),
-      radial-gradient(84vw 34vh at 12% 66%, rgba(34, 211, 238, 0.18), transparent 72%),
-      radial-gradient(92vw 26vh at 50% 96%, rgba(5, 150, 105, 0.14), transparent 72%);
+    --ambient-layer: radial-gradient(100vw 42vh at 50% 0%, rgba(6, 182, 212, 0.16), transparent 72%);
   }
 
   [data-theme="dark"],
   .dark {
-    --ambient-layer:
-      radial-gradient(96vw 30vh at 50% 4%, rgba(34, 211, 238, 0.26), transparent 68%),
-      radial-gradient(84vw 36vh at 88% 34%, rgba(6, 182, 212, 0.20), transparent 70%),
-      radial-gradient(86vw 36vh at 12% 66%, rgba(34, 211, 238, 0.18), transparent 70%),
-      radial-gradient(94vw 28vh at 50% 96%, rgba(52, 211, 153, 0.14), transparent 72%);
+    --ambient-layer: radial-gradient(100vw 42vh at 50% 0%, rgba(34, 211, 238, 0.16), transparent 72%);
   }
 
   .glass-navbar {
@@ -673,10 +689,6 @@ input[type="search"]::-webkit-search-decoration {
   @supports (backdrop-filter: url(#trd-lg-probe)) {
     .lg-surface[data-lg-engine="blink"][data-lg-kind="chrome"] {
       backdrop-filter: blur(15px) var(--lg-filter, saturate(205%)) saturate(205%);
-    }
-
-    .lg-surface[data-lg-engine="blink"][data-lg-kind="overlay"] {
-      backdrop-filter: blur(16px) var(--lg-filter, saturate(210%)) saturate(210%);
     }
   }
 
@@ -803,26 +815,8 @@ input[type="search"]::-webkit-search-decoration {
 }
 
 /* ============================================================
-   Subtle Hero Entrance & Glass Skeleton Loading
+   Glass Skeleton Loading
    ============================================================ */
-@keyframes heroEnter {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-enter {
-  animation: heroEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-.hero-enter-delayed {
-  animation: heroEnter 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
-}
 
 @keyframes skeletonPulse {
   0%, 100% {
@@ -837,6 +831,125 @@ input[type="search"]::-webkit-search-decoration {
   border-radius: 14px;
   background-color: var(--skeleton-base);
   animation: skeletonPulse 1.6s ease-in-out infinite;
+}
+
+/* ============================================================
+   Emil Kowalski Motion & Tactile Physics (100% Composite-Only GPU)
+   ============================================================ */
+.emil-press,
+[trdPressMotion] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.emil-press:active,
+[trdPressMotion]:active,
+.emil-press.is-pressed,
+[trdPressMotion].is-pressed {
+  transform: scale(0.94) translateZ(0) !important;
+  transition: transform 100ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hero Entrance & Console Switcher Off-Thread (GPU Compositor puro) */
+@keyframes heroFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(18px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+@keyframes heroPanelSwitch {
+  from {
+    opacity: 0;
+    transform: translateY(10px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.hero-enter {
+  animation: heroFadeSlide 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.sla-metric-item {
+  animation: heroFadeSlide 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.sla-metric-item:nth-child(1) {
+  animation-delay: 80ms;
+}
+
+.sla-metric-item:nth-child(2) {
+  animation-delay: 160ms;
+}
+
+.sla-metric-item:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.hero-frame-panel {
+  animation: heroPanelSwitch 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Scroll Motion Off-Thread: Mobile nasce 100% visível (Zero Blanking), Desktop anima progressivamente */
+.arch-service-card,
+.method-step-item,
+.portfolio-case-card {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+@media (max-width: 767px) {
+  .arch-service-card,
+  .method-step-item,
+  .portfolio-case-card,
+  .arch-service-card.reveal-pending,
+  .method-step-item.reveal-pending,
+  .portfolio-case-card.reveal-pending {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .arch-service-card,
+  .method-step-item,
+  .portfolio-case-card {
+    transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1), transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .arch-service-card.reveal-pending,
+  .method-step-item.reveal-pending,
+  .portfolio-case-card.reveal-pending {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96) translateZ(0);
+    will-change: transform, opacity;
+  }
+
+  .arch-service-card.is-revealed,
+  .method-step-item.is-revealed,
+  .portfolio-case-card.is-revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1) translateZ(0);
+    will-change: auto;
+  }
+}
+
+/* Native View Transitions API (Zero flash, 60-120fps smooth cross-fade) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ============================================================
@@ -876,5 +989,20 @@ input[type="search"]::-webkit-search-decoration {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  .arch-service-card,
+  .method-step-item,
+  .portfolio-case-card,
+  .arch-service-card.reveal-pending,
+  .method-step-item.reveal-pending,
+  .portfolio-case-card.reveal-pending {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }
