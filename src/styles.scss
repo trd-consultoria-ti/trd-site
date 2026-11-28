@@ -848,8 +848,257 @@ input[type="search"]::-webkit-search-decoration {
 [trdPressMotion]:active,
 .emil-press.is-pressed,
 [trdPressMotion].is-pressed {
-  transform: scale(0.94) translateZ(0) !important;
+  transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) scale(0.94) !important;
   transition: transform 100ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 1. Micro-Pulse de Confiabilidade no Status ("99.9% Uptime") */
+@keyframes statusPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+.status-beacon-green {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: #22c55e;
+  animation: statusPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 2. Rolling Numbers / Odometer Motion (100% Composite-Only, CLS = 0.0000, VRAM liberada no fim) */
+@keyframes odometerRoll {
+  from {
+    transform: translate3d(0, -80%, 0);
+  }
+  to {
+    transform: translate3d(0, 0%, 0);
+  }
+}
+
+.trd-odometer {
+  display: inline-flex;
+  align-items: baseline;
+  vertical-align: bottom;
+  line-height: 1.2;
+}
+
+.odometer-visual {
+  display: inline-flex;
+  align-items: baseline;
+  line-height: 1.2;
+}
+
+.odometer-static {
+  display: inline-block;
+  line-height: 1.2;
+  white-space: pre;
+}
+
+.odometer-digit {
+  display: inline-block;
+  height: 1.2em;
+  line-height: 1.2;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.odometer-ribbon {
+  display: flex;
+  flex-direction: column;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
+}
+
+.odometer-visual.is-rolling .odometer-ribbon {
+  animation: odometerRoll 620ms cubic-bezier(0.16, 1, 0.3, 1) var(--odometer-delay, 0ms) backwards;
+}
+
+.odometer-cell {
+  display: block;
+  height: 1.2em;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* 3 & 5. Spotlight Beam nas Bordas + Magnetic Hover (Desktop Only) */
+@media (hover: hover) and (pointer: fine) {
+  .arch-service-card {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .arch-service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+      rgba(6, 182, 212, 0.065),
+      transparent 76%
+    );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .arch-service-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.25px;
+    background: radial-gradient(
+      340px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+      rgba(14, 116, 144, 0.52),
+      rgba(255, 255, 255, 0.35) 42%,
+      transparent 74%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  [data-theme="dark"] .arch-service-card::before,
+  .dark .arch-service-card::before {
+    background: radial-gradient(
+      400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+      rgba(34, 211, 238, 0.08),
+      transparent 76%
+    );
+  }
+
+  [data-theme="dark"] .arch-service-card::after,
+  .dark .arch-service-card::after {
+    background: radial-gradient(
+      340px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+      rgba(34, 211, 238, 0.62),
+      rgba(255, 255, 255, 0.24) 40%,
+      transparent 74%
+    );
+  }
+
+  .arch-service-card:hover::before,
+  .arch-service-card:hover::after {
+    opacity: 1;
+  }
+
+  .btn-primary-pill {
+    transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0);
+    transition:
+      background-color 180ms ease,
+      transform 200ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 200ms ease;
+  }
+
+  .btn-primary-pill:hover {
+    transform: translate3d(var(--mag-x, 0px), calc(var(--mag-y, 0px) - 1px), 0);
+  }
+}
+
+/* 4. Pop Reativo & Resumo Deslizante no Simulador de Escopo (100% Composite-Only) */
+@keyframes scopePopBounceA {
+  0% {
+    transform: scale(0.96) translateZ(0);
+  }
+  55% {
+    transform: scale(1.02) translateZ(0);
+  }
+  100% {
+    transform: scale(1) translateZ(0);
+  }
+}
+
+@keyframes scopePopBounceB {
+  0% {
+    transform: scale(0.96) translateZ(0);
+  }
+  55% {
+    transform: scale(1.02) translateZ(0);
+  }
+  100% {
+    transform: scale(1) translateZ(0);
+  }
+}
+
+.scope-module-pop-a {
+  animation: scopePopBounceA 180ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.scope-module-pop-b {
+  animation: scopePopBounceB 180ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes scopeSummarySlideA {
+  from {
+    opacity: 0.32;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes scopeSummarySlideB {
+  from {
+    opacity: 0.32;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.scope-summary-slide-a {
+  animation: scopeSummarySlideA 220ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.scope-summary-slide-b {
+  animation: scopeSummarySlideB 220ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+/* 6. Smooth Accordion com CSS Grid Nativo (0fr -> 1fr, Zero scrollHeight JS) */
+.accordion-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accordion-wrapper[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.accordion-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.accordion-chevron {
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1), color 180ms ease;
+}
+
+.accordion-chevron.is-open {
+  transform: rotate(180deg);
+  color: var(--accent-cyan);
 }
 
 /* Hero Entrance & Console Switcher Off-Thread (GPU Compositor puro) */
@@ -977,6 +1226,11 @@ input[type="search"]::-webkit-search-decoration {
     background-image: none !important;
     border: 1.5px solid var(--glass-outline) !important;
   }
+
+  .arch-service-card::before,
+  .arch-service-card::after {
+    display: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -989,6 +1243,13 @@ input[type="search"]::-webkit-search-decoration {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  .odometer-ribbon {
+    animation: none !important;
+    transform: translate3d(0, 0, 0) !important;
+  }
+  .status-beacon-green {
+    animation: none !important;
   }
   .arch-service-card,
   .method-step-item,

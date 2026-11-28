@@ -3,13 +3,14 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { FormsModule } from '@angular/forms';
 import { ScopeModuleOption } from '../core/institutional.models';
 import { TrdLiquidGlassDirective } from '../core/liquid-glass';
+import { TrdMagneticDirective, TrdPressMotionDirective } from '../core/motion';
 
 type OperationalContext = 'expansao' | 'regulado' | 'legado';
 
 @Component({
   selector: 'app-scope-simulator',
   standalone: true,
-  imports: [FormsModule, TrdLiquidGlassDirective],
+  imports: [FormsModule, TrdLiquidGlassDirective, TrdPressMotionDirective, TrdMagneticDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div trdLiquidGlass="overlay" class="glass-panel-strong p-6 sm:p-9">
@@ -36,6 +37,8 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
                 (click)="toggleModule(mod.id)"
                 [attr.aria-pressed]="isSelected(mod.id)"
                 [class.is-selected]="isSelected(mod.id)"
+                [class.scope-module-pop-a]="isPopping(mod.id, false)"
+                [class.scope-module-pop-b]="isPopping(mod.id, true)"
                 [class.sm:col-span-2]="last"
                 class="interactive-card glass-subcard flex min-h-[56px] w-full flex-col items-start p-4 text-left"
               >
@@ -72,6 +75,7 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
                 <button
                   type="button"
                   role="radio"
+                  trdPressMotion
                   [attr.aria-checked]="context() === ctx.id"
                   [class.is-active]="context() === ctx.id"
                   (click)="setContext(ctx.id)"
@@ -116,7 +120,10 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
 
         <!-- Right column: Recommended Architecture, Operational Gains & Dispatch -->
         <div class="glass-subcard flex flex-col justify-between rounded-[24px] p-5 sm:p-6 lg:col-span-5">
-          <div>
+          <div
+            [class.scope-summary-slide-a]="summarySlide().active && !summarySlide().alt"
+            [class.scope-summary-slide-b]="summarySlide().active && summarySlide().alt"
+          >
             <div class="flex items-center justify-between gap-2">
               <span class="text-sm font-semibold text-ink">Síntese arquitetural recomendada</span>
               <span class="inline-flex items-center gap-1.5 rounded-full bg-[var(--status-emerald-soft)] px-3 py-1 text-xs font-semibold text-[var(--status-emerald)]">
@@ -172,6 +179,8 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
             <div class="flex flex-col gap-2.5 sm:flex-row lg:flex-col">
               <button
                 type="button"
+                trdPressMotion
+                trdMagnetic
                 (click)="dispatchBriefing('whatsapp')"
                 class="btn-primary-pill w-full whitespace-nowrap sm:flex-1 lg:w-full"
               >
@@ -183,6 +192,7 @@ type OperationalContext = 'expansao' | 'regulado' | 'legado';
 
               <button
                 type="button"
+                trdPressMotion
                 (click)="dispatchBriefing('email')"
                 class="btn-glass-pill w-full whitespace-nowrap sm:flex-1 lg:w-full"
               >
@@ -321,6 +331,8 @@ export class ScopeSimulatorComponent {
   readonly validationWarning = signal<string | null>(null);
   readonly confirmationChannel = signal<'whatsapp' | 'email' | null>(null);
   readonly copiedFeedback = signal<boolean>(false);
+  readonly poppedModule = signal<{ id: string; alt: boolean } | null>(null);
+  readonly summarySlide = signal<{ active: boolean; alt: boolean }>({ active: false, alt: false });
 
   readonly selectedModules = computed(() =>
     this.modules.filter((m) => this.selectedIds().includes(m.id))
@@ -389,17 +401,30 @@ export class ScopeSimulatorComponent {
     return this.selectedIds().includes(id);
   }
 
+  isPopping(id: string, alt: boolean): boolean {
+    const current = this.poppedModule();
+    return current !== null && current.id === id && current.alt === alt;
+  }
+
   toggleModule(id: string): void {
     this.confirmationChannel.set(null);
     this.validationWarning.set(null);
     this.selectedIds.update((current) =>
       current.includes(id) ? current.filter((item) => item !== id) : [...current, id]
     );
+    const prevPop = this.poppedModule();
+    this.poppedModule.set({
+      id,
+      alt: prevPop?.id === id ? !prevPop.alt : false,
+    });
+    this.summarySlide.update((prev) => ({ active: true, alt: !prev.alt }));
   }
 
   setContext(ctx: OperationalContext): void {
+    if (this.context() === ctx) return;
     this.confirmationChannel.set(null);
     this.context.set(ctx);
+    this.summarySlide.update((prev) => ({ active: true, alt: !prev.alt }));
   }
 
   onFieldEdit(field: 'name' | 'company', value: string): void {

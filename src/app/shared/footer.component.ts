@@ -136,8 +136,8 @@ import { TrdLogoComponent } from './trd-logo.component';
               Política de Privacidade
             </a>
             <span class="inline-flex items-center gap-2 text-secondary">
-              <span class="h-2 w-2 rounded-full bg-[var(--status-emerald)]" aria-hidden="true"></span>
-              Disponibilidade assistida <span class="metric-mono font-semibold text-ink">99.9%</span>
+              <span class="status-beacon-green shrink-0" aria-hidden="true"></span>
+              Disponibilidade assistida <span class="metric-mono font-semibold text-ink">99.9% Uptime</span>
             </span>
           </div>
         </div>

@@ -60,12 +60,12 @@ export class TrdPressMotionDirective {
     this.clearTimer();
     const node = this.el.nativeElement;
     
-    // Ativa GPU will-change somente na iminência do movimento (composite-only)
+    // Ativa GPU will-change somente na iminência do movimento (composite-only e compatível com magnetic hover)
     this.renderer.setStyle(node, 'will-change', 'transform');
     this.renderer.setStyle(
       node,
       'transform',
-      `scale(${this.pressScale() || 0.94}) translateZ(0)`
+      `translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) scale(${this.pressScale() || 0.94})`
     );
     this.renderer.setStyle(
       node,
@@ -83,7 +83,11 @@ export class TrdPressMotionDirective {
     this.isPressed = false;
 
     const node = this.el.nativeElement;
-    this.renderer.setStyle(node, 'transform', 'scale(1) translateZ(0)');
+    this.renderer.setStyle(
+      node,
+      'transform',
+      'translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0) scale(1)'
+    );
     this.renderer.setStyle(
       node,
       'transition',
@@ -91,8 +95,10 @@ export class TrdPressMotionDirective {
     );
 
     this.clearTimer();
-    // Libera a memória de GPU após amortecimento
+    // Libera estilos inline e memória de GPU após amortecimento para preservar hover/magnetic
     this.willChangeTimer = setTimeout(() => {
+      this.renderer.removeStyle(node, 'transform');
+      this.renderer.removeStyle(node, 'transition');
       this.renderer.setStyle(node, 'will-change', 'auto');
       this.willChangeTimer = null;
     }, 200);
