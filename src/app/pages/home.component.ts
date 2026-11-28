@@ -1,7 +1,16 @@
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { httpResource } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  PLATFORM_ID,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import gsap from 'gsap';
 import {
   InstitutionalPayload,
   LogoContrastMode,
@@ -10,6 +19,7 @@ import {
   ProcessStep,
 } from '../core/institutional.models';
 import { TrdLiquidGlassDirective } from '../core/liquid-glass';
+import { TrdPressMotionDirective } from '../core/motion';
 import { ThemeService } from '../core/theme.service';
 import { ScopeSimulatorComponent } from '../features/scope-simulator.component';
 
@@ -18,7 +28,7 @@ type HeroFrameView = 'hub' | 'sla';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, ScopeSimulatorComponent, TrdLiquidGlassDirective],
+  imports: [FormsModule, ScopeSimulatorComponent, TrdLiquidGlassDirective, TrdPressMotionDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- 1. HERO (1st screen, subtle load entrance, live interactive Liquid Glass app-frame) -->
@@ -44,6 +54,7 @@ type HeroFrameView = 'hub' | 'sla';
               <a
                 href="#arquitetura"
                 (click)="scrollToSection($event, 'arquitetura')"
+                trdPressMotion
                 class="btn-primary-pill w-full sm:w-auto"
               >
                 Mapear meu sistema
@@ -51,6 +62,7 @@ type HeroFrameView = 'hub' | 'sla';
               <a
                 href="#experiencia"
                 (click)="scrollToSection($event, 'experiencia')"
+                trdPressMotion
                 class="btn-glass-pill w-full sm:w-auto"
               >
                 Conhecer casos reais
@@ -908,8 +920,9 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
     </section>
   `,
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   private readonly doc = inject(DOCUMENT);
+  private readonly platformId = inject(PLATFORM_ID);
   readonly themeService = inject(ThemeService);
 
   readonly heroView = signal<HeroFrameView>('hub');
@@ -1099,6 +1112,29 @@ export class HomeComponent {
     const target = this.doc.getElementById(id);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const prefersReduced =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReduced) {
+        // Revelação tátil e refinada com GSAP, sem flashes e com 60-120fps garantidos
+        gsap.fromTo(
+          '.hero-enter',
+          { opacity: 0, y: 16 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.65,
+            ease: 'power3.out',
+            clearProps: 'transform',
+          }
+        );
+      }
     }
   }
 }
