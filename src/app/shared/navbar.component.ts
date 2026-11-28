@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { TrdLiquidGlassDirective } from '../core/liquid-glass';
-import { TrdPressMotionDirective } from '../core/motion';
+import { TrdMagneticDirective, TrdPressMotionDirective } from '../core/motion';
 import { ThemeService } from '../core/theme.service';
 import { TrdLogoComponent } from './trd-logo.component';
 
@@ -21,7 +21,13 @@ interface NavAnchor {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, TrdLogoComponent, TrdLiquidGlassDirective, TrdPressMotionDirective],
+  imports: [
+    RouterLink,
+    TrdLogoComponent,
+    TrdLiquidGlassDirective,
+    TrdPressMotionDirective,
+    TrdMagneticDirective,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     class: 'sticky top-0 z-50 block w-full',
@@ -32,7 +38,7 @@ interface NavAnchor {
       style="padding-top: max(0.75rem, env(safe-area-inset-top, 0px));"
     >
       <header trdLiquidGlass="chrome" class="glass-navbar mx-auto max-w-[1240px] rounded-full">
-        <div class="flex items-center justify-between gap-2 px-4 py-2 sm:gap-4 sm:px-6">
+        <div class="flex items-center justify-between gap-2 px-4 py-2 sm:gap-3 sm:px-6">
         <a
           routerLink="/"
           (click)="handleHomeClick($event)"
@@ -44,20 +50,28 @@ interface NavAnchor {
           <trd-logo [size]="31" />
         </a>
 
-        <nav class="hidden items-center gap-1 lg:flex" aria-label="Navegação institucional">
+        <nav class="hidden items-center gap-0.5 lg:flex xl:gap-1" aria-label="Navegação institucional">
           @for (item of navItems; track item.fragment) {
             <a
               [href]="'/#' + item.fragment"
               (click)="navigateToSection($event, item.fragment)"
               trdPressMotion
-              class="inline-flex min-h-[44px] items-center rounded-full px-3.5 text-[0.925rem] font-medium text-secondary transition-colors hover:bg-black/[0.04] hover:text-ink dark:hover:bg-white/[0.07]"
+              class="inline-flex min-h-[44px] items-center rounded-full px-2.5 text-sm font-medium text-secondary transition-colors hover:bg-black/[0.04] hover:text-ink dark:hover:bg-white/[0.07] xl:px-3.5 xl:text-[0.925rem]"
             >
               {{ item.label }}
             </a>
           }
         </nav>
 
-        <div class="flex items-center gap-2.5">
+        <div class="flex items-center gap-2 sm:gap-2.5">
+          <span
+            class="hidden items-center gap-2 rounded-full border border-[var(--glass-border)] bg-slate-900/[0.035] px-3 py-1.5 text-xs font-medium text-secondary dark:bg-white/[0.05] md:inline-flex"
+            title="Acordo de nível de serviço com disponibilidade assistida de 99.9% Uptime"
+          >
+            <span class="status-beacon-green shrink-0" aria-hidden="true"></span>
+            <span class="metric-mono font-semibold text-ink">99.9% Uptime</span>
+          </span>
+
           <button
             type="button"
             (click)="themeService.toggleTheme()"
@@ -88,6 +102,7 @@ interface NavAnchor {
             href="/#arquitetura"
             (click)="navigateToSection($event, 'arquitetura')"
             trdPressMotion
+            trdMagnetic
             class="btn-primary-pill hidden sm:inline-flex"
           >
             Agendar diagnóstico
@@ -129,6 +144,13 @@ interface NavAnchor {
           role="region"
           aria-label="Menu móvel institucional"
         >
+          <div class="mb-3 flex items-center justify-between rounded-2xl border border-[var(--glass-border)] bg-slate-900/[0.03] px-3.5 py-2 text-xs text-secondary dark:bg-white/[0.04]">
+            <span class="font-medium">Confiabilidade assistida</span>
+            <span class="inline-flex items-center gap-2 font-semibold text-ink">
+              <span class="status-beacon-green shrink-0" aria-hidden="true"></span>
+              <span class="metric-mono">99.9% Uptime</span>
+            </span>
+          </div>
           <nav class="flex flex-col gap-2">
             @for (item of navItems; track item.fragment) {
               <a
@@ -147,6 +169,7 @@ interface NavAnchor {
               href="/#arquitetura"
               (click)="navigateToSection($event, 'arquitetura')"
               trdPressMotion
+              trdMagnetic
               class="btn-primary-pill mt-2 w-full"
             >
               Agendar diagnóstico
@@ -208,11 +231,17 @@ export class NavbarComponent {
     }
   }
 
+  private getScrollBehavior(): ScrollBehavior {
+    return this.doc.defaultView?.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+      ? 'auto'
+      : 'smooth';
+  }
+
   handleHomeClick(event: MouseEvent): void {
     this.closeMobileMenu();
     if (this.router.url === '/' || this.router.url.startsWith('/#')) {
       event.preventDefault();
-      this.doc.defaultView?.scrollTo({ top: 0, behavior: 'smooth' });
+      this.doc.defaultView?.scrollTo({ top: 0, behavior: this.getScrollBehavior() });
     }
   }
 
@@ -223,7 +252,7 @@ export class NavbarComponent {
     const scrollTarget = () => {
       const el = this.doc.getElementById(fragment);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el.scrollIntoView({ behavior: this.getScrollBehavior(), block: 'start' });
       }
     };
 

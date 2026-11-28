@@ -136,8 +136,8 @@ import { TrdLogoComponent } from './trd-logo.component';
               Política de Privacidade
             </a>
             <span class="inline-flex items-center gap-2 text-secondary">
-              <span class="h-2 w-2 rounded-full bg-[var(--status-emerald)]" aria-hidden="true"></span>
-              Disponibilidade assistida <span class="metric-mono font-semibold text-ink">99.9%</span>
+              <span class="status-beacon-green shrink-0" aria-hidden="true"></span>
+              Disponibilidade assistida <span class="metric-mono font-semibold text-ink">99.9% Uptime</span>
             </span>
           </div>
         </div>
@@ -151,10 +151,15 @@ export class FooterComponent {
 
   goToFragment(event: MouseEvent, fragment: string): void {
     event.preventDefault();
+    const behavior: ScrollBehavior = this.doc.defaultView?.matchMedia?.(
+      '(prefers-reduced-motion: reduce)'
+    ).matches
+      ? 'auto'
+      : 'smooth';
     const scrollTarget = () => {
       const el = this.doc.getElementById(fragment);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        el.scrollIntoView({ behavior, block: 'start' });
       }
     };
 

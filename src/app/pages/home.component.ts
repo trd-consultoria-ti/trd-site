@@ -20,7 +20,12 @@ import {
   ProcessStep,
 } from '../core/institutional.models';
 import { TrdLiquidGlassDirective } from '../core/liquid-glass';
-import { TrdPressMotionDirective } from '../core/motion';
+import {
+  TrdMagneticDirective,
+  TrdOdometerComponent,
+  TrdPressMotionDirective,
+  TrdSpotlightCardDirective,
+} from '../core/motion';
 import { ThemeService } from '../core/theme.service';
 import { ScopeSimulatorComponent } from '../features/scope-simulator.component';
 
@@ -29,7 +34,15 @@ type HeroFrameView = 'hub' | 'sla';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, ScopeSimulatorComponent, TrdLiquidGlassDirective, TrdPressMotionDirective],
+  imports: [
+    FormsModule,
+    ScopeSimulatorComponent,
+    TrdLiquidGlassDirective,
+    TrdPressMotionDirective,
+    TrdMagneticDirective,
+    TrdSpotlightCardDirective,
+    TrdOdometerComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <!-- 1. HERO (1st screen, subtle load entrance, live interactive Liquid Glass app-frame) -->
@@ -56,6 +69,7 @@ type HeroFrameView = 'hub' | 'sla';
                 href="#arquitetura"
                 (click)="scrollToSection($event, 'arquitetura')"
                 trdPressMotion
+                trdMagnetic
                 class="btn-primary-pill w-full sm:w-auto"
               >
                 Mapear meu sistema
@@ -73,15 +87,21 @@ type HeroFrameView = 'hub' | 'sla';
             <dl class="mt-9 grid grid-cols-3 gap-4 border-t border-[var(--glass-outline)] pt-6">
               <div class="sla-metric-item">
                 <dt class="text-xs font-medium text-muted">Resposta crítica P1</dt>
-                <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">&lt; 2h</dd>
+                <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">
+                  <trd-odometer value="< 2h" [eager]="true" />
+                </dd>
               </div>
               <div class="sla-metric-item">
                 <dt class="text-xs font-medium text-muted">Titularidade do código</dt>
-                <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">100%</dd>
+                <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">
+                  <trd-odometer value="100%" [eager]="true" />
+                </dd>
               </div>
               <div class="sla-metric-item">
                 <dt class="text-xs font-medium text-muted">Disponibilidade alvo</dt>
-                <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">99.9%</dd>
+                <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">
+                  <trd-odometer value="99.9%" [eager]="true" />
+                </dd>
               </div>
             </dl>
           </div>
@@ -146,12 +166,16 @@ type HeroFrameView = 'hub' | 'sla';
                   <div class="grid grid-cols-3 gap-2.5">
                     <div class="glass-subcard p-3">
                       <span class="text-xs text-muted">Ordens ativas</span>
-                      <p class="metric-mono mt-1 text-base font-bold text-ink">148</p>
+                      <p class="metric-mono mt-1 text-base font-bold text-ink">
+                        <trd-odometer value="148" [eager]="true" />
+                      </p>
                       <span class="text-[0.7rem] font-medium text-[var(--status-emerald)]">Fluxo sincronizado</span>
                     </div>
                     <div class="glass-subcard p-3">
                       <span class="text-xs text-muted">Licenças externas</span>
-                      <p class="metric-mono mt-1 text-base font-bold text-ink">0</p>
+                      <p class="metric-mono mt-1 text-base font-bold text-ink">
+                        <trd-odometer value="0" [eager]="true" />
+                      </p>
                       <span class="text-[0.7rem] font-medium text-secondary">Lei 9.609/98</span>
                     </div>
                     <div class="glass-subcard p-3">
@@ -211,12 +235,16 @@ type HeroFrameView = 'hub' | 'sla';
                   <div class="grid grid-cols-3 gap-2.5">
                     <div class="glass-subcard p-3">
                       <span class="text-xs text-muted">Query crítica SQL</span>
-                      <p class="metric-mono mt-1 text-base font-bold text-[var(--status-emerald)]">14 ms</p>
+                      <p class="metric-mono mt-1 text-base font-bold text-[var(--status-emerald)]">
+                        <trd-odometer value="14 ms" [eager]="true" />
+                      </p>
                       <span class="text-[0.7rem] text-muted">Antes: <span class="metric-mono">4.821 ms</span></span>
                     </div>
                     <div class="glass-subcard p-3">
                       <span class="text-xs text-muted">Locks de banco</span>
-                      <p class="metric-mono mt-1 text-base font-bold text-ink">0</p>
+                      <p class="metric-mono mt-1 text-base font-bold text-ink">
+                        <trd-odometer value="0" [eager]="true" />
+                      </p>
                       <span class="text-[0.7rem] text-muted">Índice B-Tree ativo</span>
                     </div>
                     <div class="glass-subcard p-3">
@@ -262,7 +290,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
 
         <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
           <!-- Bento Card 1 (Wide 7 cols): 100% IP Ownership + Architectural Hub Diagram -->
-          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          <article trdLiquidGlass="card" trdSpotlightCard class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
             <div>
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-[var(--accent-cyan)]">
@@ -325,7 +353,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 2 (Compact 5 cols): Contrast vs Spreadsheets, Per-Seat SaaS, Freelancers -->
-          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <article trdLiquidGlass="card" trdSpotlightCard class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
             <div>
               <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-ink">
                 Comparativo estrutural
@@ -379,7 +407,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 3 (Compact 5 cols): Legal Safety, NDA & Damage Cap -->
-          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <article trdLiquidGlass="card" trdSpotlightCard class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
             <div>
               <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-ink">
                 Blindagem jurídica corporativa
@@ -409,7 +437,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 4 (Wide 7 cols): Direct Senior Execution & Principal Architect -->
-          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          <article trdLiquidGlass="card" trdSpotlightCard class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
             <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
               <img
                 src="assets/thiago-duarte.jpg"
@@ -615,6 +643,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             <button
               type="button"
               trdPressMotion
+              trdMagnetic
               (click)="reloadPortfolio()"
               class="btn-primary-pill mt-6"
             >
@@ -640,6 +669,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             <button
               type="button"
               trdPressMotion
+              trdMagnetic
               (click)="clearFilters()"
               class="btn-primary-pill mt-6"
             >
@@ -681,7 +711,9 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                   <div class="glass-subcard mt-4 p-3.5">
                     <div class="flex items-center justify-between gap-2">
                       <span class="text-xs font-semibold text-ink">Resultado de engenharia</span>
-                      <span class="metric-mono text-xs font-bold text-[var(--accent-cyan)]">{{ item.metricValue }}</span>
+                      <span class="metric-mono text-xs font-bold text-[var(--accent-cyan)]">
+                        <trd-odometer [value]="item.metricValue" />
+                      </span>
                     </div>
                     <p class="mt-1 text-xs leading-relaxed text-secondary">
                       {{ item.outcome }}
@@ -719,39 +751,89 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
         </div>
 
         <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
-          <!-- Step Selector -->
-          <div class="flex flex-col gap-3 lg:col-span-5" role="tablist" aria-label="Etapas do método de engenharia">
+          <!-- Step Selector (Smooth CSS Grid 0fr -> 1fr WAI-ARIA Disclosure Accordion) -->
+          <div class="flex flex-col gap-3 lg:col-span-5" role="region" aria-label="Etapas do método de engenharia">
             @for (step of processSteps; track step.id; let i = $index) {
-              <button
-                type="button"
-                role="tab"
-                trdPressMotion
-                [attr.aria-selected]="activeStepIndex() === i"
+              <div
+                class="method-step-item interactive-card glass-card flex w-full flex-col items-stretch p-4 text-left sm:p-5"
                 [class.is-selected]="activeStepIndex() === i"
-                (click)="activeStepIndex.set(i)"
-                class="method-step-item interactive-card glass-card flex min-h-[68px] w-full items-center gap-4 p-4 text-left sm:p-5"
               >
-                <span
-                  class="metric-mono inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-bold"
-                  [class.bg-[var(--accent-cyan)]]="activeStepIndex() === i"
-                  [class.text-[var(--accent-ink)]]="activeStepIndex() === i"
-                  [class.bg-[var(--bg-elevated)]]="activeStepIndex() !== i"
-                  [class.text-ink]="activeStepIndex() !== i"
+                <h3 class="m-0">
+                  <button
+                    type="button"
+                    trdPressMotion
+                    [id]="'method-trigger-' + step.id"
+                    [attr.aria-expanded]="activeStepIndex() === i"
+                    [attr.aria-controls]="'method-panel-' + step.id"
+                    (click)="selectStep(i)"
+                    class="flex min-h-[48px] w-full items-center justify-between gap-3 text-left"
+                  >
+                    <span class="flex min-w-0 items-center gap-4">
+                      <span
+                        class="metric-mono inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-bold"
+                        [class.bg-[var(--accent-cyan)]]="activeStepIndex() === i"
+                        [class.text-[var(--accent-ink)]]="activeStepIndex() === i"
+                        [class.bg-[var(--bg-elevated)]]="activeStepIndex() !== i"
+                        [class.text-ink]="activeStepIndex() !== i"
+                      >
+                        {{ step.index }}
+                      </span>
+                      <span class="block min-w-0">
+                        <span class="block text-base font-semibold text-ink sm:text-lg">{{ step.title }}</span>
+                        <span class="mt-0.5 block text-xs font-normal text-muted">{{ step.subtitle }}</span>
+                      </span>
+                    </span>
+                    <svg
+                      class="accordion-chevron h-4 w-4 shrink-0 text-muted"
+                      [class.is-open]="activeStepIndex() === i"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                  </button>
+                </h3>
+
+                <div
+                  class="accordion-wrapper"
+                  role="region"
+                  [id]="'method-panel-' + step.id"
+                  [attr.aria-labelledby]="'method-trigger-' + step.id"
+                  [attr.data-open]="activeStepIndex() === i"
+                  [attr.aria-hidden]="activeStepIndex() !== i"
+                  [attr.inert]="activeStepIndex() !== i ? '' : null"
                 >
-                  {{ step.index }}
-                </span>
-                <div>
-                  <h3 class="text-base font-semibold text-ink sm:text-lg">{{ step.title }}</h3>
-                  <p class="mt-0.5 text-xs text-muted">{{ step.subtitle }}</p>
+                  <div class="accordion-inner">
+                    <div class="mt-3.5 border-t border-[var(--glass-outline)] pt-3 text-xs leading-relaxed text-secondary">
+                      <p class="lg:hidden">{{ step.description }}</p>
+                      <div class="mt-2 flex flex-wrap items-center justify-between gap-2 lg:mt-0">
+                        <span class="metric-mono font-semibold text-[var(--accent-cyan)]">{{ step.artifactCode }}</span>
+                        <span class="font-medium text-ink">{{ step.checkpoint }}</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </button>
+              </div>
             }
           </div>
 
           <!-- Active Step Detail Panel -->
-          <div trdLiquidGlass="card" class="glass-panel-strong flex flex-col justify-between p-6 sm:p-8 lg:col-span-7" role="tabpanel">
+          <div
+            trdLiquidGlass="card"
+            class="glass-panel-strong flex flex-col justify-between p-6 sm:p-8 lg:col-span-7"
+            role="region"
+            [attr.aria-labelledby]="'method-trigger-' + processSteps[activeStepIndex()].id"
+          >
             @if (processSteps[activeStepIndex()]; as step) {
-              <div>
+              <div
+                [class.scope-summary-slide-a]="stepSlide().active && !stepSlide().alt"
+                [class.scope-summary-slide-b]="stepSlide().active && stepSlide().alt"
+              >
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-[var(--accent-cyan)]">
                     Etapa <span class="metric-mono">{{ step.index }}</span> de <span class="metric-mono">04</span>
@@ -929,6 +1011,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                 target="_blank"
                 rel="noopener"
                 trdPressMotion
+                trdMagnetic
                 class="btn-primary-pill w-full sm:w-auto"
               >
                 Conversar no WhatsApp
@@ -959,6 +1042,7 @@ export class HomeComponent implements AfterViewInit {
   readonly selectedCategory = signal<PortfolioCategory>('todos');
   readonly searchQuery = signal<string>('');
   readonly activeStepIndex = signal<number>(0);
+  readonly stepSlide = signal<{ active: boolean; alt: boolean }>({ active: false, alt: false });
 
   readonly apiEndpoint = signal<string>('/api/institutional.json');
   readonly portfolioResource = httpResource<InstitutionalPayload>(() => this.apiEndpoint());
@@ -999,6 +1083,12 @@ export class HomeComponent implements AfterViewInit {
   setHeroView(view: HeroFrameView): void {
     if (this.heroView() === view) return;
     this.heroView.set(view);
+  }
+
+  selectStep(index: number): void {
+    if (this.activeStepIndex() === index) return;
+    this.activeStepIndex.set(index);
+    this.stepSlide.update((prev) => ({ active: true, alt: !prev.alt }));
   }
 
   readonly categories: { id: PortfolioCategory; label: string }[] = [
@@ -1177,7 +1267,12 @@ export class HomeComponent implements AfterViewInit {
     event.preventDefault();
     const target = this.doc.getElementById(id);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const behavior: ScrollBehavior = this.doc.defaultView?.matchMedia?.(
+        '(prefers-reduced-motion: reduce)'
+      ).matches
+        ? 'auto'
+        : 'smooth';
+      target.scrollIntoView({ behavior, block: 'start' });
     }
   }
 
