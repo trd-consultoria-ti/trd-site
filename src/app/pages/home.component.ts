@@ -479,8 +479,20 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </a>
         </div>
 
-        <!-- Real Institutional Trajectory Logos on Transparent Glass (ZERO White Boxes!) -->
-        @if (portfolioResource.hasValue()) {
+        <!-- Real Institutional Trajectory Logos on Transparent Glass (Reserva estrita de layout para CLS = 0) -->
+        @if (portfolioResource.isLoading()) {
+          <div
+            class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7"
+            aria-hidden="true"
+          >
+            @for (slot of [1, 2, 3, 4, 5, 6, 7]; track slot) {
+              <div class="glass-card flex flex-col items-center justify-between gap-3 px-3 py-4 text-center">
+                <div class="skeleton-box h-11 w-full"></div>
+                <div class="skeleton-box h-4 w-20"></div>
+              </div>
+            }
+          </div>
+        } @else if (portfolioResource.hasValue()) {
           <div
             class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7"
             aria-label="Ecossistemas e instituições de referência técnica"
@@ -492,7 +504,9 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                     [src]="logo.src"
                     [alt]="logo.name"
                     [class]="logoClass(logo.contrastMode, logo.aspect)"
-                    loading="lazy"
+                    width="108"
+                    height="44"
+                    loading="eager"
                   />
                 </div>
                 <span class="text-xs font-medium leading-tight text-secondary">{{ logo.name }}</span>
@@ -1174,6 +1188,7 @@ export class HomeComponent implements AfterViewInit {
   }
 
   private prepareCardForReveal(card: HTMLElement): void {
+    if (this.isMobileViewport()) return;
     if (card.dataset['motionObserved']) return;
     card.dataset['motionObserved'] = 'true';
 
@@ -1189,6 +1204,14 @@ export class HomeComponent implements AfterViewInit {
 
     card.classList.add('reveal-pending');
     this.cardObserver?.observe(card);
+  }
+
+  private isMobileViewport(): boolean {
+    const win = this.doc.defaultView;
+    if (!win) return true;
+    return typeof win.matchMedia === 'function'
+      ? win.matchMedia('(max-width: 767px)').matches
+      : win.innerWidth < 768;
   }
 
   private sweepPassedCards(): void {
@@ -1210,6 +1233,9 @@ export class HomeComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
+
+    // Mobile (< 768px): 100% visível no primeiro ciclo de pintura, zero coupling com IntersectionObserver
+    if (this.isMobileViewport()) return;
 
     const win = this.doc.defaultView;
     const prefersReduced =

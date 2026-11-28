@@ -899,28 +899,50 @@ input[type="search"]::-webkit-search-decoration {
   animation: heroPanelSwitch 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Scroll Motion Off-Thread (Compositor Thread da GPU via CSS, CLS = 0, VRAM liberada após revelação) */
+/* Scroll Motion Off-Thread: Mobile nasce 100% visível (Zero Blanking), Desktop anima progressivamente */
 .arch-service-card,
 .method-step-item,
 .portfolio-case-card {
-  transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1), transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: auto;
-}
-
-.arch-service-card.reveal-pending,
-.method-step-item.reveal-pending,
-.portfolio-case-card.reveal-pending {
-  opacity: 0;
-  transform: translateY(28px) scale(0.96) translateZ(0);
-  will-change: transform, opacity;
-}
-
-.arch-service-card.is-revealed,
-.method-step-item.is-revealed,
-.portfolio-case-card.is-revealed {
   opacity: 1;
-  transform: translateY(0) scale(1) translateZ(0);
+  transform: none;
   will-change: auto;
+}
+
+@media (max-width: 767px) {
+  .arch-service-card,
+  .method-step-item,
+  .portfolio-case-card,
+  .arch-service-card.reveal-pending,
+  .method-step-item.reveal-pending,
+  .portfolio-case-card.reveal-pending {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .arch-service-card,
+  .method-step-item,
+  .portfolio-case-card {
+    transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1), transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .arch-service-card.reveal-pending,
+  .method-step-item.reveal-pending,
+  .portfolio-case-card.reveal-pending {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96) translateZ(0);
+    will-change: transform, opacity;
+  }
+
+  .arch-service-card.is-revealed,
+  .method-step-item.is-revealed,
+  .portfolio-case-card.is-revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1) translateZ(0);
+    will-change: auto;
+  }
 }
 
 /* Native View Transitions API (Zero flash, 60-120fps smooth cross-fade) */
