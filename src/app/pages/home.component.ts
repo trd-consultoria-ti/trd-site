@@ -70,15 +70,15 @@ type HeroFrameView = 'hub' | 'sla';
             </div>
 
             <dl class="mt-9 grid grid-cols-3 gap-4 border-t border-[var(--glass-outline)] pt-6">
-              <div>
+              <div class="sla-metric-item">
                 <dt class="text-xs font-medium text-muted">Resposta crítica P1</dt>
                 <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">&lt; 2h</dd>
               </div>
-              <div>
+              <div class="sla-metric-item">
                 <dt class="text-xs font-medium text-muted">Titularidade do código</dt>
                 <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">100%</dd>
               </div>
-              <div>
+              <div class="sla-metric-item">
                 <dt class="text-xs font-medium text-muted">Disponibilidade alvo</dt>
                 <dd class="metric-mono mt-1 text-lg font-bold text-ink sm:text-xl">99.9%</dd>
               </div>
@@ -106,6 +106,7 @@ type HeroFrameView = 'hub' | 'sla';
                   <button
                     type="button"
                     role="tab"
+                    trdPressMotion
                     [attr.aria-selected]="heroView() === 'hub'"
                     [class.is-active]="heroView() === 'hub'"
                     (click)="heroView.set('hub')"
@@ -116,6 +117,7 @@ type HeroFrameView = 'hub' | 'sla';
                   <button
                     type="button"
                     role="tab"
+                    trdPressMotion
                     [attr.aria-selected]="heroView() === 'sla'"
                     [class.is-active]="heroView() === 'sla'"
                     (click)="heroView.set('sla')"
@@ -162,6 +164,7 @@ type HeroFrameView = 'hub' | 'sla';
                     @for (flow of hubFlows; track flow.code; let idx = $index) {
                       <button
                         type="button"
+                        trdPressMotion
                         (click)="selectedFlowIndex.set(idx)"
                         [class.is-selected]="selectedFlowIndex() === idx"
                         class="interactive-card glass-subcard flex min-h-[48px] w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left"
@@ -258,7 +261,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
 
         <div class="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-12">
           <!-- Bento Card 1 (Wide 7 cols): 100% IP Ownership + Architectural Hub Diagram -->
-          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
             <div>
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-[var(--accent-cyan)]">
@@ -321,7 +324,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 2 (Compact 5 cols): Contrast vs Spreadsheets, Per-Seat SaaS, Freelancers -->
-          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
             <div>
               <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-ink">
                 Comparativo estrutural
@@ -375,7 +378,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 3 (Compact 5 cols): Legal Safety, NDA & Damage Cap -->
-          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
+          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-5">
             <div>
               <span class="glass-chip px-3.5 py-1 text-xs font-semibold text-ink">
                 Blindagem jurídica corporativa
@@ -405,7 +408,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           </article>
 
           <!-- Bento Card 4 (Wide 7 cols): Direct Senior Execution & Principal Architect -->
-          <article trdLiquidGlass="card" class="glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
+          <article trdLiquidGlass="card" class="arch-service-card glass-card flex flex-col justify-between p-6 sm:p-8 lg:col-span-7">
             <div class="flex flex-col gap-6 sm:flex-row sm:items-start">
               <img
                 src="assets/thiago-duarte.jpg"
@@ -468,6 +471,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             href="https://www.linkedin.com/in/thiagorduarte/"
             target="_blank"
             rel="noopener"
+            trdPressMotion
             class="btn-glass-pill self-start lg:self-auto"
           >
             Ver trajetória no LinkedIn
@@ -503,6 +507,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
               <button
                 type="button"
                 role="tab"
+                trdPressMotion
                 [attr.aria-selected]="selectedCategory() === cat.id"
                 [class.is-active]="selectedCategory() === cat.id"
                 (click)="selectedCategory.set(cat.id)"
@@ -539,6 +544,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             @if (searchQuery()) {
               <button
                 type="button"
+                trdPressMotion
                 (click)="searchQuery.set('')"
                 aria-label="Limpar texto da busca"
                 class="absolute right-0.5 top-1/2 inline-flex h-[44px] w-[44px] -translate-y-1/2 items-center justify-center rounded-full text-muted hover:text-ink"
@@ -593,6 +599,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             </p>
             <button
               type="button"
+              trdPressMotion
               (click)="reloadPortfolio()"
               class="btn-primary-pill mt-6"
             >
@@ -617,6 +624,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
             </p>
             <button
               type="button"
+              trdPressMotion
               (click)="clearFilters()"
               class="btn-primary-pill mt-6"
             >
@@ -628,7 +636,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
           <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-12">
             @for (item of filteredCases(); track item.id) {
               <article
-                [class]="'glass-card col-span-1 flex flex-col justify-between p-6 sm:p-7 md:col-span-12 ' + (isUnfiltered() ? item.gridSpan : 'md:col-span-6')"
+                [class]="'portfolio-case-card glass-card col-span-1 flex flex-col justify-between p-6 sm:p-7 md:col-span-12 ' + (isUnfiltered() ? item.gridSpan : 'md:col-span-6')"
               >
                 <div>
                   <div class="flex items-start justify-between gap-4">
@@ -702,10 +710,11 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
               <button
                 type="button"
                 role="tab"
+                trdPressMotion
                 [attr.aria-selected]="activeStepIndex() === i"
                 [class.is-selected]="activeStepIndex() === i"
                 (click)="activeStepIndex.set(i)"
-                class="interactive-card glass-card flex min-h-[68px] w-full items-center gap-4 p-4 text-left sm:p-5"
+                class="method-step-item interactive-card glass-card flex min-h-[68px] w-full items-center gap-4 p-4 text-left sm:p-5"
               >
                 <span
                   class="metric-mono inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-bold"
@@ -765,6 +774,7 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                 <a
                   href="#arquitetura"
                   (click)="scrollToSection($event, 'arquitetura')"
+                  trdPressMotion
                   class="btn-glass-pill"
                 >
                   Simular meu escopo
@@ -903,12 +913,14 @@ SLA P1 &lt; 2h | Hibernate Envers Audit: Verified</pre>
                 href="https://wa.me/5561999526374?text=Ol%C3%A1%20Thiago%2C%20estou%20no%20site%20da%20TRD%20Consultoria%20e%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20t%C3%A9cnico%20de%20sistema%20ou%20sustenta%C3%A7%C3%A3o."
                 target="_blank"
                 rel="noopener"
+                trdPressMotion
                 class="btn-primary-pill w-full sm:w-auto"
               >
                 Conversar no WhatsApp
               </a>
               <a
                 href="mailto:contato@trdconsultoria.com.br?subject=Diagn%C3%B3stico%20T%C3%A9cnico%20%7C%20TRD%20Consultoria"
+                trdPressMotion
                 class="btn-glass-pill w-full sm:w-auto"
               >
                 Enviar e-mail corporativo
@@ -1116,25 +1128,93 @@ export class HomeComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const prefersReduced =
-        typeof window !== 'undefined' &&
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!isPlatformBrowser(this.platformId)) return;
 
-      if (!prefersReduced) {
-        // Revelação tátil e refinada com GSAP, sem flashes e com 60-120fps garantidos
-        gsap.fromTo(
-          '.hero-enter',
-          { opacity: 0, y: 16 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.65,
-            ease: 'power3.out',
-            clearProps: 'transform',
-          }
-        );
+    const prefersReduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced) return;
+
+    // 1. Revelação inicial do Hero Copy
+    gsap.fromTo(
+      '.hero-enter',
+      { opacity: 0, y: 16 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.65,
+        ease: 'power3.out',
+        clearProps: 'transform',
       }
+    );
+
+    // 2. Métricas de SLA (< 2h, 100%, 99.9%): fade-in e subida em cascata escalonada
+    gsap.fromTo(
+      '.sla-metric-item',
+      { opacity: 0, y: 22 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        delay: 0.15,
+        ease: 'power3.out',
+        clearProps: 'transform',
+      }
+    );
+
+    // 3. Scroll Reveal via IntersectionObserver para seções de Arquitetura, Portfólio e Metodologia
+    if (typeof IntersectionObserver !== 'undefined') {
+      const observerOptions: IntersectionObserverInit = {
+        root: null,
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.1,
+      };
+
+      const observeAndStagger = (
+        containerSelector: string,
+        itemSelector: string,
+        yOffset = 25,
+        staggerDelay = 0.08
+      ) => {
+        const container = this.doc.querySelector(containerSelector);
+        if (!container) return;
+
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const items = container.querySelectorAll(itemSelector);
+              if (items.length > 0) {
+                gsap.fromTo(
+                  items,
+                  { opacity: 0, y: yOffset },
+                  {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.65,
+                    stagger: staggerDelay,
+                    ease: 'power3.out',
+                    clearProps: 'transform',
+                  }
+                );
+              }
+              obs.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        observer.observe(container);
+      };
+
+      // Cards de Arquitetura & Serviços (#beneficios): deslocamento sutil de 25px e stagger de 80ms
+      observeAndStagger('#beneficios', '.arch-service-card', 25, 0.08);
+
+      // Cards de Casos Reais / Portfólio (#experiencia)
+      observeAndStagger('#experiencia', '.portfolio-case-card', 25, 0.08);
+
+      // Etapas da Metodologia 01 a 04 (#como-funciona): revelação sequencial ao rolar
+      observeAndStagger('#como-funciona', '.method-step-item', 20, 0.09);
     }
   }
 }
