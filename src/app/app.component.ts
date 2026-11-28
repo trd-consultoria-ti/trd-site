@@ -12,9 +12,9 @@ import { NavbarComponent } from './shared/navbar.component';
   template: `
     <a class="skip-link" href="#main">Pular para o conteúdo principal</a>
     <div class="trd-ambient-backdrop" aria-hidden="true"></div>
-    <div class="relative z-[1] flex min-h-screen flex-col">
+    <div class="relative z-[1] flex min-h-[100dvh] w-full flex-col">
       <app-navbar />
-      <main id="main" class="flex-1">
+      <main id="main" class="flex flex-1 flex-col min-h-[100dvh] w-full">
         <router-outlet />
       </main>
       <app-footer />
