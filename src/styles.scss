@@ -690,10 +690,6 @@ input[type="search"]::-webkit-search-decoration {
     .lg-surface[data-lg-engine="blink"][data-lg-kind="chrome"] {
       backdrop-filter: blur(15px) var(--lg-filter, saturate(205%)) saturate(205%);
     }
-
-    .lg-surface[data-lg-engine="blink"][data-lg-kind="overlay"] {
-      backdrop-filter: blur(16px) var(--lg-filter, saturate(210%)) saturate(210%);
-    }
   }
 
   .glass-card,
@@ -856,13 +852,66 @@ input[type="search"]::-webkit-search-decoration {
   transition: transform 100ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Scroll Motion Off-Thread (Compositor Thread da GPU via CSS) */
+/* Hero Entrance & Console Switcher Off-Thread (GPU Compositor puro) */
+@keyframes heroFadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(18px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+@keyframes heroPanelSwitch {
+  from {
+    opacity: 0;
+    transform: translateY(10px) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) translateZ(0);
+  }
+}
+
+.hero-enter {
+  animation: heroFadeSlide 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.sla-metric-item {
+  animation: heroFadeSlide 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.sla-metric-item:nth-child(1) {
+  animation-delay: 80ms;
+}
+
+.sla-metric-item:nth-child(2) {
+  animation-delay: 160ms;
+}
+
+.sla-metric-item:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.hero-frame-panel {
+  animation: heroPanelSwitch 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Scroll Motion Off-Thread (Compositor Thread da GPU via CSS, CLS = 0, VRAM liberada após revelação) */
 .arch-service-card,
 .method-step-item,
 .portfolio-case-card {
+  transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1), transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: auto;
+}
+
+.arch-service-card.reveal-pending,
+.method-step-item.reveal-pending,
+.portfolio-case-card.reveal-pending {
   opacity: 0;
-  transform: translateY(32px) scale(0.96) translateZ(0);
-  transition: opacity 450ms cubic-bezier(0.16, 1, 0.3, 1), transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(28px) scale(0.96) translateZ(0);
   will-change: transform, opacity;
 }
 
@@ -871,6 +920,7 @@ input[type="search"]::-webkit-search-decoration {
 .portfolio-case-card.is-revealed {
   opacity: 1;
   transform: translateY(0) scale(1) translateZ(0);
+  will-change: auto;
 }
 
 /* Native View Transitions API (Zero flash, 60-120fps smooth cross-fade) */
@@ -920,9 +970,13 @@ input[type="search"]::-webkit-search-decoration {
   }
   .arch-service-card,
   .method-step-item,
-  .portfolio-case-card {
+  .portfolio-case-card,
+  .arch-service-card.reveal-pending,
+  .method-step-item.reveal-pending,
+  .portfolio-case-card.reveal-pending {
     opacity: 1 !important;
     transform: none !important;
+    will-change: auto !important;
   }
   ::view-transition-group(root),
   ::view-transition-old(root),

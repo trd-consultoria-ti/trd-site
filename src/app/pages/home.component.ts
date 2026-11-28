@@ -12,7 +12,6 @@ import {
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import gsap from 'gsap';
 import {
   InstitutionalPayload,
   LogoContrastMode,
@@ -952,6 +951,8 @@ export class HomeComponent implements AfterViewInit {
 
   private cardObserver: IntersectionObserver | null = null;
   private portfolioMutationObserver: MutationObserver | null = null;
+  private scrollListenerCleanup: (() => void) | null = null;
+  private scrollRaf = 0;
 
   constructor() {
     // Vínculo reativo para observar cards assíncronos do portfólio assim que chegarem ao DOM
@@ -963,7 +964,7 @@ export class HomeComponent implements AfterViewInit {
       if (hasData && isPlatformBrowser(this.platformId)) {
         setTimeout(() => {
           this.observePortfolioCards();
-        }, 80);
+        }, 60);
       }
     });
 
@@ -972,30 +973,18 @@ export class HomeComponent implements AfterViewInit {
       this.cardObserver = null;
       this.portfolioMutationObserver?.disconnect();
       this.portfolioMutationObserver = null;
+      this.scrollListenerCleanup?.();
+      this.scrollListenerCleanup = null;
+      if (this.scrollRaf) {
+        cancelAnimationFrame(this.scrollRaf);
+        this.scrollRaf = 0;
+      }
     });
   }
 
   setHeroView(view: HeroFrameView): void {
     if (this.heroView() === view) return;
     this.heroView.set(view);
-    if (isPlatformBrowser(this.platformId)) {
-      setTimeout(() => {
-        const panel = this.doc.querySelector('.hero-frame-panel');
-        if (panel) {
-          gsap.fromTo(
-            panel,
-            { opacity: 0, y: 12 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.35,
-              ease: 'power2.out',
-              clearProps: 'transform',
-            }
-          );
-        }
-      }, 15);
-    }
   }
 
   readonly categories: { id: PortfolioCategory; label: string }[] = [
@@ -1178,84 +1167,83 @@ export class HomeComponent implements AfterViewInit {
     }
   }
 
+  private revealCard(card: Element): void {
+    card.classList.remove('reveal-pending');
+    card.classList.add('is-revealed');
+    this.cardObserver?.unobserve(card);
+  }
+
+  private prepareCardForReveal(card: HTMLElement): void {
+    if (card.dataset['motionObserved']) return;
+    card.dataset['motionObserved'] = 'true';
+
+    const win = this.doc.defaultView;
+    const viewportHeight = win?.innerHeight ?? 800;
+    const rect = card.getBoundingClientRect();
+
+    // Já visível ou acima da dobra: mantém 100% visível sem ocultar (CLS = 0)
+    if (rect.top <= viewportHeight * 1.02) {
+      card.classList.add('is-revealed');
+      return;
+    }
+
+    card.classList.add('reveal-pending');
+    this.cardObserver?.observe(card);
+  }
+
+  private sweepPassedCards(): void {
+    const win = this.doc.defaultView;
+    const viewportHeight = win?.innerHeight ?? 800;
+    const pending = this.doc.querySelectorAll<HTMLElement>('.reveal-pending');
+    pending.forEach((card) => {
+      if (card.getBoundingClientRect().top <= viewportHeight + 60) {
+        this.revealCard(card);
+      }
+    });
+  }
+
   private observePortfolioCards(): void {
     if (!this.cardObserver) return;
     const cards = this.doc.querySelectorAll<HTMLElement>('.portfolio-case-card');
-    cards.forEach((card) => {
-      if (!card.dataset['motionObserved']) {
-        card.dataset['motionObserved'] = 'true';
-        this.cardObserver?.observe(card);
-      }
-    });
+    cards.forEach((card) => this.prepareCardForReveal(card));
   }
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
 
+    const win = this.doc.defaultView;
     const prefersReduced =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      typeof win !== 'undefined' &&
+      win !== null &&
+      typeof win.matchMedia === 'function' &&
+      win.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReduced) return;
 
-    // 1. Revelação inicial do Hero Copy
-    gsap.fromTo(
-      '.hero-enter',
-      { opacity: 0, y: 24 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.75,
-        ease: 'power3.out',
-        clearProps: 'transform',
-      }
-    );
-
-    // 2. Métricas de SLA (< 2h, 100%, 99.9%): fade-in e subida nítida em cascata escalonada
-    gsap.fromTo(
-      '.sla-metric-item',
-      { opacity: 0, y: 28, scale: 0.95 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        stagger: 0.14,
-        delay: 0.15,
-        ease: 'power3.out',
-        clearProps: 'transform',
-      }
-    );
-
-    // 3. Scroll Reveal Card a Card (disparo no momento exato em que cada card cruza a tela móvel)
+    // Scroll Reveal Off-Thread via IntersectionObserver + fallback passivo contra fast fling scroll
     if (typeof IntersectionObserver !== 'undefined') {
       this.cardObserver = new IntersectionObserver(
-        (entries, observer) => {
+        (entries) => {
+          const viewportHeight = this.doc.defaultView?.innerHeight ?? 800;
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-revealed');
-              observer.unobserve(entry.target);
+            if (entry.isIntersecting || entry.boundingClientRect.top <= viewportHeight) {
+              this.revealCard(entry.target);
             }
           });
         },
         {
           root: null,
-          rootMargin: '0px 0px -40px 0px',
-          threshold: 0.12,
+          rootMargin: '0px 0px -20px 0px',
+          threshold: 0.05,
         }
       );
 
-      // Observar cada card de Arquitetura & Serviços e cada etapa da Metodologia individualmente
       this.doc
         .querySelectorAll<HTMLElement>('.arch-service-card, .method-step-item')
-        .forEach((card) => {
-          this.cardObserver?.observe(card);
-        });
+        .forEach((card) => this.prepareCardForReveal(card));
 
-      // Observar imediatamente os cards do portfólio já renderizados
       this.observePortfolioCards();
 
-      // MutationObserver no container de experiência para capturar renderização tardia/assíncrona
       const expContainer = this.doc.getElementById('experiencia');
       if (expContainer && typeof MutationObserver !== 'undefined') {
         this.portfolioMutationObserver = new MutationObserver(() => {
@@ -1265,6 +1253,18 @@ export class HomeComponent implements AfterViewInit {
           childList: true,
           subtree: true,
         });
+      }
+
+      if (win) {
+        const onScroll = () => {
+          if (this.scrollRaf) return;
+          this.scrollRaf = requestAnimationFrame(() => {
+            this.scrollRaf = 0;
+            this.sweepPassedCards();
+          });
+        };
+        win.addEventListener('scroll', onScroll, { passive: true });
+        this.scrollListenerCleanup = () => win.removeEventListener('scroll', onScroll);
       }
     }
   }

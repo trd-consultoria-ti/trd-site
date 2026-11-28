@@ -58,6 +58,7 @@ export class LiquidGlassEngineService {
         this._reducedTransparency.set(v)
       );
       watchMedia('(prefers-contrast: more)', (v) => this._moreContrast.set(v));
+      watchMedia('(max-width: 767px)', () => {});
 
       const themeObserver = new MutationObserver(() => {
         this._themeTick.update((n) => n + 1);
@@ -72,7 +73,7 @@ export class LiquidGlassEngineService {
   }
 
   registerSurface(element: HTMLElement, kind: LiquidGlassSurfaceKind): () => void {
-    if (this.isMobileViewport() && kind === 'card') {
+    if (this.isMobileViewport() && (kind === 'card' || kind === 'overlay')) {
       element.setAttribute('data-lg-engine', 'layer0');
       return () => {};
     }
@@ -103,8 +104,9 @@ export class LiquidGlassEngineService {
   }
 
   private syncAllSurfaces(): void {
+    const mobile = this.isMobileViewport();
     const ranked = Array.from(this.surfaces.values())
-      .filter((s) => s.kind !== 'card' && this.isVisible(s.element))
+      .filter((s) => s.kind !== 'card' && !(mobile && s.kind === 'overlay') && this.isVisible(s.element))
       .sort((a, b) => b.priority - a.priority || b.id - a.id);
 
     const blinkAllowed = new Set<number>();
@@ -121,7 +123,7 @@ export class LiquidGlassEngineService {
     const { element } = entry;
     void this._themeTick();
 
-    if (this.isMobileViewport() && entry.kind === 'card') {
+    if (this.isMobileViewport() && (entry.kind === 'card' || entry.kind === 'overlay')) {
       element.setAttribute('data-lg-engine', 'layer0');
       element.removeAttribute('data-lg-rim');
       element.style.removeProperty('--lg-filter');
