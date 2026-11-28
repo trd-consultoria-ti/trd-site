@@ -60,8 +60,8 @@ export class TrdPressMotionDirective {
     this.clearTimer();
     const node = this.el.nativeElement;
     
-    // Ativa GPU will-change somente na iminência do movimento
-    this.renderer.setStyle(node, 'will-change', 'transform, filter');
+    // Ativa GPU will-change somente na iminência do movimento (composite-only)
+    this.renderer.setStyle(node, 'will-change', 'transform');
     this.renderer.setStyle(
       node,
       'transform',
@@ -70,7 +70,7 @@ export class TrdPressMotionDirective {
     this.renderer.setStyle(
       node,
       'transition',
-      'transform 100ms cubic-bezier(0.16, 1, 0.3, 1), filter 100ms ease'
+      'transform 100ms cubic-bezier(0.16, 1, 0.3, 1)'
     );
     this.isPressed = true;
   }
@@ -87,7 +87,7 @@ export class TrdPressMotionDirective {
     this.renderer.setStyle(
       node,
       'transition',
-      'transform 180ms cubic-bezier(0.16, 1, 0.3, 1), filter 180ms ease'
+      'transform 180ms cubic-bezier(0.16, 1, 0.3, 1)'
     );
 
     this.clearTimer();

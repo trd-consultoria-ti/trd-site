@@ -1233,18 +1233,7 @@ export class HomeComponent implements AfterViewInit {
         (entries, observer) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              gsap.fromTo(
-                entry.target,
-                { opacity: 0, y: 42, scale: 0.94 },
-                {
-                  opacity: 1,
-                  y: 0,
-                  scale: 1,
-                  duration: 0.7,
-                  ease: 'power3.out',
-                  clearProps: 'transform',
-                }
-              );
+              entry.target.classList.add('is-revealed');
               observer.unobserve(entry.target);
             }
           });
